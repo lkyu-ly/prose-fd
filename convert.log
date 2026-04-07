@@ -1,0 +1,2317 @@
+===========================================
+PyTorch to Paddle Convert Start ------>:
+===========================================
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/README.md --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/README.md
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/models/transformer_wrappers.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/transformer_wrappers.py
+[transformer_wrappers.py:5] remove 'import torch' 
+[transformer_wrappers.py:6] remove 'import torch.nn as nn' 
+[transformer_wrappers.py:7] remove 'from einops import rearrange' 
+[transformer_wrappers.py] add 'import paddle' in line 1
+[transformer_wrappers.py] add 'import einops' in line 2
+[transformer_wrappers.py] insert extra 2 lines finally
+[transformer_wrappers.py:1] Start convert torch.nn.Module to Paddle --> 
+[transformer_wrappers.py:1] [Success] Convert torch.nn.Module to Paddle
+[transformer_wrappers.py:47] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:47] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:47] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:47] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:47] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:47] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:48] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:48] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:48] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:48] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:48] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:48] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:49] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:49] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:49] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:49] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:49] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:49] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:50] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:50] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:50] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:50] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:50] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:50] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:51] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:51] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:51] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:51] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:51] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:51] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:81] Start convert Class Method: torch.Tensor.clone to Paddle --> 
+[transformer_wrappers.py:81] [Success] Convert Class Method: torch.Tensor.clone to Paddle
+[transformer_wrappers.py:83] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[transformer_wrappers.py:83] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[transformer_wrappers.py:116] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[transformer_wrappers.py:116] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[transformer_wrappers.py:117] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[transformer_wrappers.py:117] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[transformer_wrappers.py:1] Start convert torch.nn.Module to Paddle --> 
+[transformer_wrappers.py:1] [Success] Convert torch.nn.Module to Paddle
+[transformer_wrappers.py:149] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:149] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:149] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:149] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:149] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:149] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:150] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:150] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:150] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:150] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:150] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:150] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:151] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[transformer_wrappers.py:151] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[transformer_wrappers.py:151] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[transformer_wrappers.py:151] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[transformer_wrappers.py:151] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[transformer_wrappers.py:151] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[transformer_wrappers.py:177] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[transformer_wrappers.py:177] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[transformer_wrappers.py:199] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[transformer_wrappers.py:199] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[transformer_wrappers.py:200] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[transformer_wrappers.py:200] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/models/transformer_wrappers.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/transformer_wrappers.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/models/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/__init__.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/models/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/__init__.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/models/embedder.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/embedder.py
+[embedder.py:1] remove 'import torch' 
+[embedder.py:2] remove 'import torch.nn as nn' 
+[embedder.py:3] remove 'import torch.nn.functional as F' 
+[embedder.py:5] remove 'from einops import rearrange' 
+[embedder.py:6] remove 'from einops.layers.torch import Rearrange' 
+[embedder.py] add 'import paddle' in line 1
+[embedder.py] add 'import einops' in line 2
+[embedder.py] insert extra 2 lines finally
+[embedder.py:1] Start convert torch.Tensor to Paddle --> 
+[embedder.py:1] [Success] Convert torch.Tensor to Paddle
+[embedder.py:35] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:35] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:40] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[embedder.py:40] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[embedder.py:40] Start convert Class Method: torch.Tensor.permute to Paddle --> 
+[embedder.py:40] [Success] Convert Class Method: torch.Tensor.permute to Paddle
+[embedder.py:44] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[embedder.py:44] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[embedder.py:1] Start convert torch.Tensor to Paddle --> 
+[embedder.py:1] [Success] Convert torch.Tensor to Paddle
+[embedder.py:55] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:55] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:56] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:56] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:59] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[embedder.py:59] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[embedder.py:59] Start convert Class Method: torch.Tensor.permute to Paddle --> 
+[embedder.py:59] [Success] Convert Class Method: torch.Tensor.permute to Paddle
+[embedder.py:63] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[embedder.py:63] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[embedder.py:70] Start convert torch.nn.init.zeros_ to Paddle --> 
+[embedder.py:70] [Success] Convert torch.nn.init.zeros_ to Paddle
+[embedder.py:72] Start convert torch.nn.init.zeros_ to Paddle --> 
+[embedder.py:72] [Success] Convert torch.nn.init.zeros_ to Paddle
+[embedder.py:74] Start convert torch.nn.init.uniform_ to Paddle --> 
+[embedder.py:74] [Success] Convert torch.nn.init.uniform_ to Paddle
+[embedder.py:76] Start convert torch.nn.init.uniform_ to Paddle --> 
+[embedder.py:76] [Success] Convert torch.nn.init.uniform_ to Paddle
+[embedder.py:1] Start convert torch.nn.Module to Paddle --> 
+[embedder.py:1] [Success] Convert torch.nn.Module to Paddle
+[embedder.py:90] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[embedder.py:90] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[embedder.py:113] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:113] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:114] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:114] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:115] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:115] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:112] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:112] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:118] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:118] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:119] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:119] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:120] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:120] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:117] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:117] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:126] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:126] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:127] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:127] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:128] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:128] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:129] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:129] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:130] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:130] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:125] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:125] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:142] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:142] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:147] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[embedder.py:147] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[embedder.py:158] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:158] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:161] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[embedder.py:161] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[embedder.py:1] Start convert torch.nn.Module to Paddle --> 
+[embedder.py:1] [Success] Convert torch.nn.Module to Paddle
+[embedder.py:185] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[embedder.py:185] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[embedder.py:211] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:211] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:212] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:212] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:213] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:213] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:210] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:210] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:227] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:227] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:230] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:230] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:239] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:239] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:243] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:243] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:249] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:249] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:250] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:250] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:242] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:242] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:259] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:259] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:260] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:260] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:261] Start convert torch.nn.Linear to Paddle --> 
+[embedder.py:261] [Success] Convert torch.nn.Linear to Paddle
+[embedder.py:262] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:262] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:263] Start convert einops.layers.torch.Rearrange to Paddle --> 
+[embedder.py:263] [Success] Convert einops.layers.torch.Rearrange to Paddle
+[embedder.py:264] Start convert torch.nn.ConvTranspose2d to Paddle --> 
+[embedder.py:264] [Success] Convert torch.nn.ConvTranspose2d to Paddle
+[embedder.py:270] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:270] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:271] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:271] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:272] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:272] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:273] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:273] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:274] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:274] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:275] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:275] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:258] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:258] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:279] Start convert einops.layers.torch.Rearrange to Paddle --> 
+[embedder.py:279] [Success] Convert einops.layers.torch.Rearrange to Paddle
+[embedder.py:280] Start convert torch.nn.ConvTranspose2d to Paddle --> 
+[embedder.py:280] [Success] Convert torch.nn.ConvTranspose2d to Paddle
+[embedder.py:286] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:286] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:287] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:287] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:288] Start convert torch.nn.GELU to Paddle --> 
+[embedder.py:288] [Success] Convert torch.nn.GELU to Paddle
+[embedder.py:289] Start convert torch.nn.Conv2d to Paddle --> 
+[embedder.py:289] [Success] Convert torch.nn.Conv2d to Paddle
+[embedder.py:278] Start convert torch.nn.Sequential to Paddle --> 
+[embedder.py:278] [Success] Convert torch.nn.Sequential to Paddle
+[embedder.py:305] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:305] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:313] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:313] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:315] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[embedder.py:315] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[embedder.py:326] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:326] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:336] Start convert torch.device to Paddle --> 
+[embedder.py:336] [Success] Convert torch.device to Paddle
+[embedder.py:345] Start convert Class Method: torch.Tensor.to to Paddle --> 
+[embedder.py:345] [Success] Convert Class Method: torch.Tensor.to to Paddle
+[embedder.py:347] Start convert torch.randn to Paddle --> 
+[embedder.py:347] [Success] Convert torch.randn to Paddle
+[embedder.py:348] Start convert torch.randn to Paddle --> 
+[embedder.py:348] [Success] Convert torch.randn to Paddle
+[embedder.py:352] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:352] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:358] Start convert torch.randn to Paddle --> 
+[embedder.py:358] [Success] Convert torch.randn to Paddle
+[embedder.py:360] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[embedder.py:360] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[embedder.py:363] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[embedder.py:363] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[embedder.py:363] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[embedder.py:363] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[embedder.py:363] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[embedder.py:363] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/models/embedder.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/embedder.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/models/baselines.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/baselines.py
+[baselines.py:5] remove 'import torch' 
+[baselines.py:6] remove 'import torch.nn as nn' 
+[baselines.py:7] remove 'import torch.nn.functional as F' 
+[baselines.py] add 'import paddle' in line 1
+[baselines.py] insert extra 1 lines finally
+[baselines.py:20] Start convert torch.nn.GELU to Paddle --> 
+[baselines.py:20] [Success] Convert torch.nn.GELU to Paddle
+[baselines.py:21] Start convert torch.nn.Tanh to Paddle --> 
+[baselines.py:21] [Success] Convert torch.nn.Tanh to Paddle
+[baselines.py:22] Start convert torch.nn.Sigmoid to Paddle --> 
+[baselines.py:22] [Success] Convert torch.nn.Sigmoid to Paddle
+[baselines.py:23] Start convert torch.nn.ReLU to Paddle --> 
+[baselines.py:23] [Success] Convert torch.nn.ReLU to Paddle
+[baselines.py:24] Start convert torch.nn.LeakyReLU to Paddle --> 
+[baselines.py:24] [Success] Convert torch.nn.LeakyReLU to Paddle
+[baselines.py:25] Start convert torch.nn.Softplus to Paddle --> 
+[baselines.py:25] [Success] Convert torch.nn.Softplus to Paddle
+[baselines.py:26] Start convert torch.nn.ELU to Paddle --> 
+[baselines.py:26] [Success] Convert torch.nn.ELU to Paddle
+[baselines.py:27] Start convert torch.nn.SiLU to Paddle --> 
+[baselines.py:27] [Success] Convert torch.nn.SiLU to Paddle
+[baselines.py:1] Start convert torch.nn.Module to Paddle --> 
+[baselines.py:1] [Success] Convert torch.nn.Module to Paddle
+[baselines.py:70] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:70] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[baselines.py:70] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:70] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[baselines.py:72] Start convert Class Method: torch.Tensor.permute to Paddle --> 
+[baselines.py:72] [Success] Convert Class Method: torch.Tensor.permute to Paddle
+[baselines.py:73] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:73] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[baselines.py:75] Start convert Class Method: torch.Tensor.permute to Paddle --> 
+[baselines.py:75] [Success] Convert Class Method: torch.Tensor.permute to Paddle
+[baselines.py:1] Start convert torch.nn.Module to Paddle --> 
+[baselines.py:1] [Success] Convert torch.nn.Module to Paddle
+[baselines.py:93] Start convert torch.nn.MaxPool3d to Paddle --> 
+[baselines.py:93] [Success] Convert torch.nn.MaxPool3d to Paddle
+[baselines.py:95] Start convert torch.nn.MaxPool3d to Paddle --> 
+[baselines.py:95] [Success] Convert torch.nn.MaxPool3d to Paddle
+[baselines.py:97] Start convert torch.nn.MaxPool3d to Paddle --> 
+[baselines.py:97] [Success] Convert torch.nn.MaxPool3d to Paddle
+[baselines.py:101] Start convert torch.nn.ConvTranspose3d to Paddle --> 
+[baselines.py:101] [Success] Convert torch.nn.ConvTranspose3d to Paddle
+[baselines.py:103] Start convert torch.nn.ConvTranspose3d to Paddle --> 
+[baselines.py:103] [Success] Convert torch.nn.ConvTranspose3d to Paddle
+[baselines.py:105] Start convert torch.nn.ConvTranspose3d to Paddle --> 
+[baselines.py:105] [Success] Convert torch.nn.ConvTranspose3d to Paddle
+[baselines.py:108] Start convert torch.nn.Conv3d to Paddle --> 
+[baselines.py:108] [Success] Convert torch.nn.Conv3d to Paddle
+[baselines.py:132] Start convert Class Method: torch.Tensor.permute to Paddle --> 
+[baselines.py:132] [Success] Convert Class Method: torch.Tensor.permute to Paddle
+[baselines.py:133] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:133] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[baselines.py:134] Start convert torch.nn.functional.pad to Paddle --> 
+[baselines.py:134] [Success] Convert torch.nn.functional.pad to Paddle
+[baselines.py:143] Start convert torch.cat to Paddle --> 
+[baselines.py:143] [Success] Convert torch.cat to Paddle
+[baselines.py:147] Start convert torch.cat to Paddle --> 
+[baselines.py:147] [Success] Convert torch.cat to Paddle
+[baselines.py:151] Start convert torch.cat to Paddle --> 
+[baselines.py:151] [Success] Convert torch.cat to Paddle
+[baselines.py:156] Start convert Class Method: torch.Tensor.permute to Paddle --> 
+[baselines.py:156] [Success] Convert Class Method: torch.Tensor.permute to Paddle
+[baselines.py:158] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:158] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[baselines.py:169] Start convert torch.nn.Conv3d to Paddle --> 
+[baselines.py:169] [Success] Convert torch.nn.Conv3d to Paddle
+[baselines.py:177] Start convert torch.nn.BatchNorm3d to Paddle --> 
+[baselines.py:177] [Success] Convert torch.nn.BatchNorm3d to Paddle
+[baselines.py:181] Start convert torch.nn.Conv3d to Paddle --> 
+[baselines.py:181] [Success] Convert torch.nn.Conv3d to Paddle
+[baselines.py:189] Start convert torch.nn.BatchNorm3d to Paddle --> 
+[baselines.py:189] [Success] Convert torch.nn.BatchNorm3d to Paddle
+[baselines.py:164] Start convert torch.nn.Sequential to Paddle --> 
+[baselines.py:164] [Success] Convert torch.nn.Sequential to Paddle
+[baselines.py:1] Start convert torch.nn.Module to Paddle --> 
+[baselines.py:1] [Success] Convert torch.nn.Module to Paddle
+[baselines.py:212] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[baselines.py:212] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[baselines.py:212] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[baselines.py:212] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[baselines.py:212] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[baselines.py:212] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[baselines.py:213] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[baselines.py:213] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[baselines.py:213] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[baselines.py:213] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[baselines.py:213] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[baselines.py:213] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[baselines.py:239] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:239] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[baselines.py:240] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:240] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[baselines.py:269] Start convert torch.nn.Tanh to Paddle --> 
+[baselines.py:269] [Success] Convert torch.nn.Tanh to Paddle
+[baselines.py:1] Start convert torch.nn.Module to Paddle --> 
+[baselines.py:1] [Success] Convert torch.nn.Module to Paddle
+[baselines.py:281] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:281] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:282] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:282] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:1] Start convert torch.nn.Module to Paddle --> 
+[baselines.py:1] [Success] Convert torch.nn.Module to Paddle
+[baselines.py:298] Start convert torch.nn.ModuleList to Paddle --> 
+[baselines.py:298] [Success] Convert torch.nn.ModuleList to Paddle
+[baselines.py:305] Start convert torch.cat to Paddle --> 
+[baselines.py:305] [Success] Convert torch.cat to Paddle
+[baselines.py:1] Start convert torch.nn.Module to Paddle --> 
+[baselines.py:1] [Success] Convert torch.nn.Module to Paddle
+[baselines.py:318] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:318] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:319] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:319] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:320] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:320] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:321] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:321] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:322] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:322] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:1] Start convert torch.nn.Module to Paddle --> 
+[baselines.py:1] [Success] Convert torch.nn.Module to Paddle
+[baselines.py:350] Start convert torch.nn.ModuleList to Paddle --> 
+[baselines.py:350] [Success] Convert torch.nn.ModuleList to Paddle
+[baselines.py:353] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:353] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:354] Start convert torch.nn.GELU to Paddle --> 
+[baselines.py:354] [Success] Convert torch.nn.GELU to Paddle
+[baselines.py:355] Start convert torch.nn.Linear to Paddle --> 
+[baselines.py:355] [Success] Convert torch.nn.Linear to Paddle
+[baselines.py:352] Start convert torch.nn.Sequential to Paddle --> 
+[baselines.py:352] [Success] Convert torch.nn.Sequential to Paddle
+[baselines.py:1] Start convert torch.float32 to Paddle --> 
+[baselines.py:1] [Success] Convert torch.float32 to Paddle
+[baselines.py:359] Start convert torch.linspace to Paddle --> 
+[baselines.py:359] [Success] Convert torch.linspace to Paddle
+[baselines.py:1] Start convert torch.float32 to Paddle --> 
+[baselines.py:1] [Success] Convert torch.float32 to Paddle
+[baselines.py:360] Start convert torch.linspace to Paddle --> 
+[baselines.py:360] [Success] Convert torch.linspace to Paddle
+[baselines.py:1] Start convert torch.float32 to Paddle --> 
+[baselines.py:1] [Success] Convert torch.float32 to Paddle
+[baselines.py:361] Start convert torch.linspace to Paddle --> 
+[baselines.py:361] [Success] Convert torch.linspace to Paddle
+[baselines.py:362] Start convert Class Method: torch.Tensor.squeeze to Paddle --> 
+[baselines.py:362] [Success] Convert Class Method: torch.Tensor.squeeze to Paddle
+[baselines.py:362] Start convert Class Method: torch.Tensor.squeeze to Paddle --> 
+[baselines.py:362] [Success] Convert Class Method: torch.Tensor.squeeze to Paddle
+[baselines.py:362] Start convert Class Method: torch.Tensor.squeeze to Paddle --> 
+[baselines.py:362] [Success] Convert Class Method: torch.Tensor.squeeze to Paddle
+[baselines.py:362] Start convert torch.meshgrid to Paddle --> 
+[baselines.py:362] [Success] Convert torch.meshgrid to Paddle
+[baselines.py:364] Start convert torch.stack to Paddle --> 
+[baselines.py:364] [Success] Convert torch.stack to Paddle
+[baselines.py:364] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[baselines.py:364] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[baselines.py:365] Start convert Class Method: torch.nn.Module.register_buffer to Paddle --> 
+[baselines.py:365] [Success] Convert Class Method: torch.nn.Module.register_buffer to Paddle
+[baselines.py:382] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[baselines.py:382] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[baselines.py:385] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[baselines.py:385] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[baselines.py:390] Start convert Class Method: torch.Tensor.unsqueeze to Paddle --> 
+[baselines.py:390] [Success] Convert Class Method: torch.Tensor.unsqueeze to Paddle
+[baselines.py:390] Start convert Class Method: torch.Tensor.repeat to Paddle --> 
+[baselines.py:390] [Success] Convert Class Method: torch.Tensor.repeat to Paddle
+[baselines.py:395] Start convert torch.bmm to Paddle --> 
+[baselines.py:395] [Success] Convert torch.bmm to Paddle
+[baselines.py:399] Start convert torch.cat to Paddle --> 
+[baselines.py:399] [Success] Convert torch.cat to Paddle
+[baselines.py:402] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[baselines.py:402] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[baselines.py:403] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[baselines.py:403] [Success] Convert Class Method: torch.Tensor.size to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/models/baselines.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/baselines.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/models/attention_utils.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/attention_utils.py
+[attention_utils.py:7] remove 'import torch' 
+[attention_utils.py:8] remove 'import torch.nn as nn' 
+[attention_utils.py:9] remove 'import torch.nn.functional as F' 
+[attention_utils.py:11] remove 'from torch import Tensor' 
+[attention_utils.py] add 'import paddle' in line 1
+[attention_utils.py] insert extra 1 lines finally
+[attention_utils.py:1] Start convert torch.nn.Module to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.Module to Paddle
+[attention_utils.py:33] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:33] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:34] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:34] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:35] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:35] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:36] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:36] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:49] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:49] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:50] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:50] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:58] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[attention_utils.py:58] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[attention_utils.py:59] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[attention_utils.py:59] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[attention_utils.py:60] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[attention_utils.py:60] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[attention_utils.py:61] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[attention_utils.py:61] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[attention_utils.py:61] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[attention_utils.py:61] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[attention_utils.py:61] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[attention_utils.py:61] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[attention_utils.py:71] Start convert torch.nn.functional._none_or_dtype to Paddle --> 
+[attention_utils.py:71] [Not Support] convert torch.nn.functional._none_or_dtype to Paddle is not supported currently
+[attention_utils.py:73] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[attention_utils.py:73] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[attention_utils.py:68] Start convert torch.nn.functional._canonical_mask to Paddle --> 
+[attention_utils.py:68] [Not Support] convert torch.nn.functional._canonical_mask to Paddle is not supported currently
+[attention_utils.py:80] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[attention_utils.py:80] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[attention_utils.py:75] Start convert torch.nn.functional._canonical_mask to Paddle --> 
+[attention_utils.py:75] [Not Support] convert torch.nn.functional._canonical_mask to Paddle is not supported currently
+[attention_utils.py:84] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[attention_utils.py:84] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[attention_utils.py:87] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[attention_utils.py:87] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[attention_utils.py:88] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[attention_utils.py:88] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[attention_utils.py:88] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[attention_utils.py:88] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[attention_utils.py:96] Start convert torch.nn.functional.scaled_dot_product_attention to Paddle --> 
+[attention_utils.py:96] [Success] Convert torch.nn.functional.scaled_dot_product_attention to Paddle
+[attention_utils.py:100] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[attention_utils.py:100] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[attention_utils.py:100] Start convert Class Method: torch.Tensor.contiguous to Paddle --> 
+[attention_utils.py:100] [Success] Convert Class Method: torch.Tensor.contiguous to Paddle
+[attention_utils.py:100] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[attention_utils.py:100] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[attention_utils.py:1] Start convert torch.nn.TransformerEncoderLayer to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerEncoderLayer to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.functional.relu to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.functional.relu to Paddle
+[attention_utils.py:1] Start convert torch.nn.LayerNorm to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.LayerNorm to Paddle
+[attention_utils.py:1] Start convert torch.nn.TransformerEncoderLayer to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerEncoderLayer to Paddle
+[attention_utils.py:134] Start convert torch.nn.MultiheadAttention to Paddle --> 
+[attention_utils.py:134] [Success] Convert torch.nn.MultiheadAttention to Paddle
+[attention_utils.py:140] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:140] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:141] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:141] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:142] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:142] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:151] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:151] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:152] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:152] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:170] Start convert torch.nn.functional._none_or_dtype to Paddle --> 
+[attention_utils.py:170] [Not Support] convert torch.nn.functional._none_or_dtype to Paddle is not supported currently
+[attention_utils.py:172] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[attention_utils.py:172] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[attention_utils.py:167] Start convert torch.nn.functional._canonical_mask to Paddle --> 
+[attention_utils.py:167] [Not Support] convert torch.nn.functional._canonical_mask to Paddle is not supported currently
+[attention_utils.py:179] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[attention_utils.py:179] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[attention_utils.py:174] Start convert torch.nn.functional._canonical_mask to Paddle --> 
+[attention_utils.py:174] [Not Support] convert torch.nn.functional._canonical_mask to Paddle is not supported currently
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.Module to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.Module to Paddle
+[attention_utils.py:1] Start convert torch.nn.Module to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.Module to Paddle
+[attention_utils.py:236] Start convert torch._C._log_api_usage_once to Paddle --> 
+[attention_utils.py:236] [Not Support] convert torch._C._log_api_usage_once to Paddle is not supported currently
+[attention_utils.py:253] Start convert torch.nn.functional._none_or_dtype to Paddle --> 
+[attention_utils.py:253] [Not Support] convert torch.nn.functional._none_or_dtype to Paddle is not supported currently
+[attention_utils.py:255] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[attention_utils.py:255] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[attention_utils.py:250] Start convert torch.nn.functional._canonical_mask to Paddle --> 
+[attention_utils.py:250] [Not Support] convert torch.nn.functional._canonical_mask to Paddle is not supported currently
+[attention_utils.py:262] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[attention_utils.py:262] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[attention_utils.py:257] Start convert torch.nn.functional._canonical_mask to Paddle --> 
+[attention_utils.py:257] [Not Support] convert torch.nn.functional._canonical_mask to Paddle is not supported currently
+[attention_utils.py:1] Start convert torch.nn.TransformerDecoder to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerDecoder to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:346] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:346] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:353] Start convert torch.cat to Paddle --> 
+[attention_utils.py:353] [Success] Convert torch.cat to Paddle
+[attention_utils.py:356] Start convert torch.stack to Paddle --> 
+[attention_utils.py:356] [Success] Convert torch.stack to Paddle
+[attention_utils.py:356] Start convert torch.cat to Paddle --> 
+[attention_utils.py:356] [Success] Convert torch.cat to Paddle
+[attention_utils.py:358] Start convert torch.stack to Paddle --> 
+[attention_utils.py:358] [Success] Convert torch.stack to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.TransformerDecoderLayer to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerDecoderLayer to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:394] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:394] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:394] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[attention_utils.py:394] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[attention_utils.py:394] Start convert torch.nn.Transformer.generate_square_subsequent_mask to Paddle --> 
+[attention_utils.py:394] [Not Support] convert torch.nn.Transformer.generate_square_subsequent_mask to Paddle is not supported currently
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.TransformerEncoder to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerEncoder to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:506] Start convert torch.cat to Paddle --> 
+[attention_utils.py:506] [Success] Convert torch.cat to Paddle
+[attention_utils.py:509] Start convert torch.stack to Paddle --> 
+[attention_utils.py:509] [Success] Convert torch.stack to Paddle
+[attention_utils.py:509] Start convert torch.cat to Paddle --> 
+[attention_utils.py:509] [Success] Convert torch.cat to Paddle
+[attention_utils.py:511] Start convert torch.stack to Paddle --> 
+[attention_utils.py:511] [Success] Convert torch.stack to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.TransformerEncoderLayer to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerEncoderLayer to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:564] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:564] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:564] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[attention_utils.py:564] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[attention_utils.py:564] Start convert torch.nn.Transformer.generate_square_subsequent_mask to Paddle --> 
+[attention_utils.py:564] [Not Support] convert torch.nn.Transformer.generate_square_subsequent_mask to Paddle is not supported currently
+[attention_utils.py:590] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:590] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:590] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[attention_utils.py:590] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[attention_utils.py:590] Start convert torch.nn.Transformer.generate_square_subsequent_mask to Paddle --> 
+[attention_utils.py:590] [Not Support] convert torch.nn.Transformer.generate_square_subsequent_mask to Paddle is not supported currently
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.TransformerDecoderLayer to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerDecoderLayer to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.functional.relu to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.functional.relu to Paddle
+[attention_utils.py:1] Start convert torch.nn.LayerNorm to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.LayerNorm to Paddle
+[attention_utils.py:1] Start convert torch.nn.TransformerDecoderLayer to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.TransformerDecoderLayer to Paddle
+[attention_utils.py:654] Start convert torch.nn.MultiheadAttention to Paddle --> 
+[attention_utils.py:654] [Success] Convert torch.nn.MultiheadAttention to Paddle
+[attention_utils.py:660] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:660] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:661] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:661] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:662] Start convert torch.nn.Linear to Paddle --> 
+[attention_utils.py:662] [Success] Convert torch.nn.Linear to Paddle
+[attention_utils.py:671] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:671] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:672] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:672] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.Module to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.Module to Paddle
+[attention_utils.py:780] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:780] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:782] Start convert torch.arange to Paddle --> 
+[attention_utils.py:782] [Success] Convert torch.arange to Paddle
+[attention_utils.py:782] Start convert Class Method: torch.Tensor.unsqueeze to Paddle --> 
+[attention_utils.py:782] [Success] Convert Class Method: torch.Tensor.unsqueeze to Paddle
+[attention_utils.py:783] Start convert torch.arange to Paddle --> 
+[attention_utils.py:783] [Success] Convert torch.arange to Paddle
+[attention_utils.py:783] Start convert torch.exp to Paddle --> 
+[attention_utils.py:783] [Success] Convert torch.exp to Paddle
+[attention_utils.py:784] Start convert torch.zeros to Paddle --> 
+[attention_utils.py:784] [Success] Convert torch.zeros to Paddle
+[attention_utils.py:785] Start convert torch.sin to Paddle --> 
+[attention_utils.py:785] [Success] Convert torch.sin to Paddle
+[attention_utils.py:786] Start convert torch.cos to Paddle --> 
+[attention_utils.py:786] [Success] Convert torch.cos to Paddle
+[attention_utils.py:787] Start convert Class Method: torch.nn.Module.register_buffer to Paddle --> 
+[attention_utils.py:787] [Success] Convert Class Method: torch.nn.Module.register_buffer to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:797] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:797] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:797] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[attention_utils.py:797] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[attention_utils.py:799] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:799] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.nn.Module to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.Module to Paddle
+[attention_utils.py:807] Start convert torch.nn.Dropout to Paddle --> 
+[attention_utils.py:807] [Success] Convert torch.nn.Dropout to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:818] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:818] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:818] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:818] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:820] Start convert Class Method: torch.Tensor.long to Paddle --> 
+[attention_utils.py:820] [Success] Convert Class Method: torch.Tensor.long to Paddle
+[attention_utils.py:821] Start convert torch.arange to Paddle --> 
+[attention_utils.py:821] [Success] Convert torch.arange to Paddle
+[attention_utils.py:821] Start convert Class Method: torch.Tensor.unsqueeze to Paddle --> 
+[attention_utils.py:821] [Success] Convert Class Method: torch.Tensor.unsqueeze to Paddle
+[attention_utils.py:825] Start convert Class Method: torch.Tensor.expand_as to Paddle --> 
+[attention_utils.py:825] [Success] Convert Class Method: torch.Tensor.expand_as to Paddle
+[attention_utils.py:827] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[attention_utils.py:827] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[attention_utils.py:827] Start convert Class Method: torch.Tensor.expand_as to Paddle --> 
+[attention_utils.py:827] [Success] Convert Class Method: torch.Tensor.expand_as to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:834] Start convert torch.randn to Paddle --> 
+[attention_utils.py:834] [Success] Convert torch.randn to Paddle
+[attention_utils.py:834] Start convert torch.nn.Parameter to Paddle --> 
+[attention_utils.py:834] [Success] Convert torch.nn.Parameter to Paddle
+[attention_utils.py:837] Start convert torch.randn to Paddle --> 
+[attention_utils.py:837] [Success] Convert torch.randn to Paddle
+[attention_utils.py:837] Start convert torch.nn.Parameter to Paddle --> 
+[attention_utils.py:837] [Success] Convert torch.nn.Parameter to Paddle
+[attention_utils.py:839] Start convert torch.empty to Paddle --> 
+[attention_utils.py:839] [Success] Convert torch.empty to Paddle
+[attention_utils.py:839] Start convert Class Method: torch.Tensor.normal_ to Paddle --> 
+[attention_utils.py:839] [Success] Convert Class Method: torch.Tensor.normal_ to Paddle
+[attention_utils.py:839] Start convert torch.nn.Parameter to Paddle --> 
+[attention_utils.py:839] [Success] Convert torch.nn.Parameter to Paddle
+[attention_utils.py:859] Start convert Class Method: torch.Tensor.max to Paddle --> 
+When convert torch.Tensor.max, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[attention_utils.py] add 'import utils'
+[attention_utils.py:859] [Success] Convert Class Method: torch.Tensor.max to Paddle
+[attention_utils.py:859] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[attention_utils.py:859] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[attention_utils.py:861] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:861] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:862] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[attention_utils.py:862] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[attention_utils.py:862] Start convert torch.arange to Paddle --> 
+[attention_utils.py:862] [Success] Convert torch.arange to Paddle
+[attention_utils.py:862] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[attention_utils.py:862] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[attention_utils.py:862] Start convert Class Method: torch.Tensor.unsqueeze to Paddle --> 
+[attention_utils.py:862] [Success] Convert Class Method: torch.Tensor.unsqueeze to Paddle
+[attention_utils.py:866] Start convert torch.device to Paddle --> 
+[attention_utils.py:866] [Success] Convert torch.device to Paddle
+[attention_utils.py:871] Start convert torch.ones to Paddle --> 
+[attention_utils.py:871] [Success] Convert torch.ones to Paddle
+[attention_utils.py:872] Start convert torch.block_diag to Paddle --> 
+[attention_utils.py:872] [Success] Convert torch.block_diag to Paddle
+[attention_utils.py:872] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[attention_utils.py:872] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[attention_utils.py:1] Start convert torch.nn.functional.relu to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.functional.relu to Paddle
+[attention_utils.py:1] Start convert torch.nn.functional.gelu to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.functional.gelu to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:885] Start convert torch.nn.ModuleList to Paddle --> 
+[attention_utils.py:885] [Success] Convert torch.nn.ModuleList to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:892] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:892] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:1] Start convert torch.device to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.device to Paddle
+[attention_utils.py:1] Start convert torch.dtype to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.dtype to Paddle
+[attention_utils.py:912] Start convert torch.device to Paddle --> 
+[attention_utils.py:912] [Success] Convert torch.device to Paddle
+[attention_utils.py:1] Start convert torch.float32 to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.float32 to Paddle
+[attention_utils.py:916] Start convert torch.full to Paddle --> 
+[attention_utils.py:916] [Success] Convert torch.full to Paddle
+[attention_utils.py:915] Start convert torch.triu to Paddle --> 
+[attention_utils.py:915] [Success] Convert torch.triu to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:1] Start convert torch.Tensor to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.Tensor to Paddle
+[attention_utils.py:930] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:930] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:931] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[attention_utils.py:931] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[attention_utils.py:931] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[attention_utils.py:931] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[attention_utils.py:935] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:935] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:935] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:935] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:936] Start convert Class Method: torch.Tensor.all to Paddle --> 
+[attention_utils.py:936] [Success] Convert Class Method: torch.Tensor.all to Paddle
+[attention_utils.py:944] Start convert torch.nn.Embedding to Paddle --> 
+[attention_utils.py:944] [Success] Convert torch.nn.Embedding to Paddle
+[attention_utils.py:945] Start convert torch.nn.init.normal_ to Paddle --> 
+[attention_utils.py:945] [Success] Convert torch.nn.init.normal_ to Paddle
+[attention_utils.py:947] Start convert torch.nn.init.constant_ to Paddle --> 
+[attention_utils.py:947] [Success] Convert torch.nn.init.constant_ to Paddle
+[attention_utils.py:1] Start convert torch.nn.Module to Paddle --> 
+[attention_utils.py:1] [Success] Convert torch.nn.Module to Paddle
+[attention_utils.py:963] Start convert torch.ones to Paddle --> 
+[attention_utils.py:963] [Success] Convert torch.ones to Paddle
+[attention_utils.py:963] Start convert torch.nn.Parameter to Paddle --> 
+[attention_utils.py:963] [Success] Convert torch.nn.Parameter to Paddle
+[attention_utils.py:964] Start convert torch.zeros to Paddle --> 
+[attention_utils.py:964] [Success] Convert torch.zeros to Paddle
+[attention_utils.py:964] Start convert torch.nn.Parameter to Paddle --> 
+[attention_utils.py:964] [Success] Convert torch.nn.Parameter to Paddle
+[attention_utils.py:967] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[attention_utils.py:967] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[attention_utils.py:968] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[attention_utils.py:968] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[attention_utils.py:970] Start convert torch.mean to Paddle --> 
+[attention_utils.py:970] [Success] Convert torch.mean to Paddle
+[attention_utils.py:971] Start convert torch.var to Paddle --> 
+[attention_utils.py:971] [Success] Convert torch.var to Paddle
+[attention_utils.py:972] Start convert torch.sqrt to Paddle --> 
+[attention_utils.py:972] [Success] Convert torch.sqrt to Paddle
+[attention_utils.py:974] Start convert Class Method: torch.Tensor.view to Paddle --> 
+[attention_utils.py:974] [Success] Convert Class Method: torch.Tensor.view to Paddle
+[attention_utils.py] insert extra 3 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/models/attention_utils.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/attention_utils.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/models/build_model.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/build_model.py
+[build_model.py:2] remove 'import torch' 
+[build_model.py] add 'import paddle' in line 1
+[build_model.py] insert extra 1 lines finally
+[build_model.py:54] Start convert torch.load to Paddle --> 
+[build_model.py:54] [Success] Convert torch.load to Paddle
+[build_model.py:61] Start convert Class Method: torch.nn.Module.load_state_dict to Paddle --> 
+[build_model.py:61] [Success] Convert Class Method: torch.nn.Module.load_state_dict to Paddle
+[build_model.py:67] Start convert Class Method: torch.Tensor.numel to Paddle --> 
+[build_model.py:67] [Success] Convert Class Method: torch.Tensor.numel to Paddle
+[build_model.py:67] Start convert Class Method: torch.nn.Module.parameters to Paddle --> 
+[build_model.py:67] [Success] Convert Class Method: torch.nn.Module.parameters to Paddle
+[build_model.py:67] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[build_model.py:67] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[build_model.py:80] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[build_model.py:80] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[build_model.py:81] Start convert Class Method: torch.Tensor.values to Paddle --> 
+[build_model.py:81] [Success] Convert Class Method: torch.Tensor.values to Paddle
+[build_model.py:82] Start convert Class Method: torch.Tensor.cuda to Paddle --> 
+When convert torch.Tensor.cuda, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[build_model.py] add 'import utils'
+[build_model.py:82] [Success] Convert Class Method: torch.Tensor.cuda to Paddle
+[build_model.py:87] Start convert torch.compile to Paddle --> 
+[build_model.py:87] [Not Support] convert torch.compile to Paddle is not supported currently
+[build_model.py] insert extra 3 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/models/build_model.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/build_model.py
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/models/transformer.pyC --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/models/transformer.pyC
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/encoders.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/encoders.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/encoders.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/encoders.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/node_utils.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/node_utils.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/node_utils.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/node_utils.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/environment.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/environment.py
+[environment.py:1] remove 'import torch' 
+[environment.py] add 'import paddle' in line 1
+[environment.py] insert extra 1 lines finally
+[environment.py:65] Start convert torch.LongTensor to Paddle --> 
+[environment.py:65] [Success] Convert torch.LongTensor to Paddle
+[environment.py:67] Start convert torch.LongTensor to Paddle --> 
+[environment.py:67] [Success] Convert torch.LongTensor to Paddle
+[environment.py:215] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[environment.py:215]  Misidentify Class Method: torch.Tensor.split
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/environment.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/environment.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/__init__.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/__init__.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/generators.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/generators.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/symbol_utils/generators.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/symbol_utils/generators.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/utils/metrics.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/metrics.py
+[metrics.py:4] remove 'import torch' 
+[metrics.py] add 'import paddle' in line 1
+[metrics.py] insert extra 1 lines finally
+[metrics.py:12] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[metrics.py:12] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[metrics.py:12] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[metrics.py:12] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[metrics.py:12] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[metrics.py:12] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[metrics.py:12] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[metrics.py:12] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[metrics.py:15] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[metrics.py:15] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[metrics.py:15] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[metrics.py:15] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[metrics.py:24] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[metrics.py:24] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[metrics.py:24] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[metrics.py:24] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[metrics.py:24] Start convert Class Method: torch.Tensor.tolist to Paddle --> 
+[metrics.py:24] [Success] Convert Class Method: torch.Tensor.tolist to Paddle
+[metrics.py:26] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[metrics.py:26] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[metrics.py:26] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[metrics.py:26] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[metrics.py:31] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[metrics.py:31] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[metrics.py:31] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[metrics.py:31] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[metrics.py:31] Start convert torch.sqrt to Paddle --> 
+[metrics.py:31] [Success] Convert torch.sqrt to Paddle
+[metrics.py:31] Start convert Class Method: torch.Tensor.tolist to Paddle --> 
+[metrics.py:31] [Success] Convert Class Method: torch.Tensor.tolist to Paddle
+[metrics.py:33] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[metrics.py:33] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[metrics.py:33] Start convert torch.sqrt to Paddle --> 
+[metrics.py:33] [Success] Convert torch.sqrt to Paddle
+[metrics.py:33] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[metrics.py:33] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[metrics.py:56] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[metrics.py:56] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[metrics.py:67] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[metrics.py:67] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[metrics.py:86] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[metrics.py:86] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[metrics.py:86] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[metrics.py:86] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[metrics.py:86] Start convert torch.sqrt to Paddle --> 
+[metrics.py:86] [Success] Convert torch.sqrt to Paddle
+[metrics.py:87] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[metrics.py:87] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[metrics.py:87] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[metrics.py:87] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[metrics.py:87] Start convert torch.sqrt to Paddle --> 
+[metrics.py:87] [Success] Convert torch.sqrt to Paddle
+[metrics.py:88] Start convert torch.div to Paddle --> 
+[metrics.py:88] [Success] Convert torch.div to Paddle
+[metrics.py:88] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[metrics.py:88] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[metrics.py:88] Start convert Class Method: torch.Tensor.tolist to Paddle --> 
+[metrics.py:88] [Success] Convert Class Method: torch.Tensor.tolist to Paddle
+[metrics.py:109] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[metrics.py:109] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[metrics.py:120] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[metrics.py:120] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[metrics.py:139] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[metrics.py:139] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[metrics.py:139] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[metrics.py:139] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[metrics.py:139] Start convert torch.sqrt to Paddle --> 
+[metrics.py:139] [Success] Convert torch.sqrt to Paddle
+[metrics.py:140] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[metrics.py:140] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[metrics.py:140] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[metrics.py:140] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[metrics.py:140] Start convert torch.sqrt to Paddle --> 
+[metrics.py:140] [Success] Convert torch.sqrt to Paddle
+[metrics.py:141] Start convert torch.div to Paddle --> 
+[metrics.py:141] [Success] Convert torch.div to Paddle
+[metrics.py:141] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[metrics.py:141] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[metrics.py:141] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[metrics.py:141] [Success] Convert Class Method: torch.Tensor.item to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/utils/metrics.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/metrics.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/utils/plot.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/plot.py
+[plot.py:1] remove 'import os' 
+[plot.py] add 'import os' in line 1
+[plot.py] insert extra 1 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/utils/plot.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/plot.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/utils/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/__init__.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/utils/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/__init__.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/utils/misc.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/misc.py
+[misc.py:4] remove 'import os' 
+[misc.py:12] remove 'import torch' 
+[misc.py:14] remove 'import torch.distributed as dist' 
+[misc.py] add 'import paddle' in line 1
+[misc.py] add 'import os' in line 2
+[misc.py] insert extra 2 lines finally
+[misc.py:27] Start convert torch.manual_seed to Paddle --> 
+[misc.py:27] [Success] Convert torch.manual_seed to Paddle
+[misc.py:28] Start convert torch.cuda.manual_seed_all to Paddle --> 
+[misc.py:28] [Success] Convert torch.cuda.manual_seed_all to Paddle
+[misc.py:141] Start convert Class Method: torch.Tensor.cuda to Paddle --> 
+When convert torch.Tensor.cuda, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[misc.py] add 'import utils'
+[misc.py:141] [Success] Convert Class Method: torch.Tensor.cuda to Paddle
+[misc.py:143] Start convert Class Method: torch.Tensor.cuda to Paddle --> 
+When convert torch.Tensor.cuda, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[misc.py] add 'import utils'
+[misc.py:143] [Success] Convert Class Method: torch.Tensor.cuda to Paddle
+[misc.py:150] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[misc.py:150] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[misc.py:151] Start convert Class Method: torch.Tensor.cuda to Paddle --> 
+When convert torch.Tensor.cuda, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[misc.py] add 'import utils'
+[misc.py:151] [Success] Convert Class Method: torch.Tensor.cuda to Paddle
+[misc.py:153] Start convert torch.distributed.barrier to Paddle --> 
+[misc.py:153] [Success] Convert torch.distributed.barrier to Paddle
+[misc.py:1] Start convert torch.distributed.ReduceOp.SUM to Paddle --> 
+[misc.py:1] [Success] Convert torch.distributed.ReduceOp.SUM to Paddle
+[misc.py:154] Start convert torch.distributed.all_reduce to Paddle --> 
+[misc.py:154] [Success] Convert torch.distributed.all_reduce to Paddle
+[misc.py:156] Start convert Class Method: torch.Tensor.to to Paddle --> 
+[misc.py:156] [Success] Convert Class Method: torch.Tensor.to to Paddle
+[misc.py] insert extra 3 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/utils/misc.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/misc.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/utils/mode.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/mode.py
+[mode.py:1] remove 'import os' 
+[mode.py:2] remove 'import torch' 
+[mode.py] add 'import paddle' in line 1
+[mode.py] add 'import os' in line 2
+[mode.py] insert extra 2 lines finally
+[mode.py:17] Start convert os.environ.get to Paddle --> 
+[mode.py:17] [Success] Convert os.environ.get to Paddle
+[mode.py:25] Start convert os.environ.get to Paddle --> 
+[mode.py:25]  Misidentify os.environ.get
+[mode.py:67] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[mode.py:67] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[mode.py:68] Start convert torch.cuda.set_device to Paddle --> 
+[mode.py:68] [Success] Convert torch.cuda.set_device to Paddle
+[mode.py:81] Start convert torch.distributed.init_process_group to Paddle --> 
+[mode.py:81] [Success] Convert torch.distributed.init_process_group to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/utils/mode.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/mode.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/utils/logger.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/logger.py
+[logger.py:10] remove 'import os' 
+[logger.py] add 'import os' in line 1
+[logger.py] insert extra 1 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/utils/logger.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/utils/logger.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/trainer.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/trainer.py
+[trainer.py:1] remove 'import os' 
+[trainer.py:4] remove 'import torch' 
+[trainer.py:5] remove 'from torch import nn' 
+[trainer.py:6] remove 'from torch.nn.utils import clip_grad_norm_' 
+[trainer.py:7] remove 'import torch.nn.functional as F' 
+[trainer.py:8] remove 'from torch.optim.lr_scheduler import OneCycleLR' 
+[trainer.py:9] remove 'from torch.utils.data import DataLoader' 
+[trainer.py:10] remove 'from transformers import get_scheduler' 
+[trainer.py] add 'import paddle' in line 1
+[trainer.py] add 'import paddleformers' in line 2
+[trainer.py] add 'import os' in line 3
+[trainer.py] insert extra 3 lines finally
+[trainer.py:41] Start convert torch.nn.parallel.DistributedDataParallel to Paddle --> 
+[trainer.py:41] [Not Support] convert torch.nn.parallel.DistributedDataParallel to Paddle is not supported currently
+[trainer.py:55] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[trainer.py:55] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[trainer.py:55] Start convert torch.amp.GradScaler to Paddle --> 
+[trainer.py:55] [Not Support] convert torch.amp.GradScaler to Paddle is not supported currently
+[trainer.py:85] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[trainer.py:85] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[trainer.py:87] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[trainer.py:87] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[trainer.py:88] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[trainer.py:88] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[trainer.py:77] Start convert torch.utils.data.DataLoader to Paddle --> 
+[trainer.py:77] [Success] Convert torch.utils.data.DataLoader to Paddle
+[trainer.py:99] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[trainer.py:99] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[trainer.py:1] Start convert torch.float32 to Paddle --> 
+[trainer.py:1] [Success] Convert torch.float32 to Paddle
+[trainer.py:101] Start convert torch.linspace to Paddle --> 
+[trainer.py:101] [Success] Convert torch.linspace to Paddle
+[trainer.py:103] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[trainer.py:103] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[trainer.py:1] Start convert torch.float32 to Paddle --> 
+[trainer.py:1] [Success] Convert torch.float32 to Paddle
+[trainer.py:103] Start convert torch.linspace to Paddle --> 
+[trainer.py:103] [Success] Convert torch.linspace to Paddle
+[trainer.py:111] Start convert Class Method: torch.Tensor.values to Paddle --> 
+[trainer.py:111] [Success] Convert Class Method: torch.Tensor.values to Paddle
+[trainer.py:112] Start convert Class Method: torch.nn.Module.named_parameters to Paddle --> 
+[trainer.py:112] [Success] Convert Class Method: torch.nn.Module.named_parameters to Paddle
+[trainer.py:112] Start convert Class Attribute: torch.Tensor.requires_grad to Paddle --> 
+[trainer.py:112] [Success] Convert Class Attribute: torch.Tensor.requires_grad to Paddle, just remain the same
+[trainer.py:115] Start convert torch.numel to Paddle --> 
+[trainer.py:115] [Success] Convert torch.numel to Paddle
+[trainer.py:126] Start convert torch.optim.AdamW to Paddle --> 
+[trainer.py:126] [Not Support] convert torch.optim.AdamW to Paddle is not supported currently
+[trainer.py:146] Start convert torch.optim.lr_scheduler.OneCycleLR to Paddle --> 
+[trainer.py:146] [Success] Convert torch.optim.lr_scheduler.OneCycleLR to Paddle
+[trainer.py:173] Start convert transformers.get_scheduler to Paddle --> 
+[trainer.py:173] [Not Support] convert transformers.get_scheduler to Paddle is not supported currently
+[trainer.py:190] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[trainer.py:190] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[trainer.py:204] Start convert Class Method: torch.Tensor.backward to Paddle --> 
+[trainer.py:204] [Success] Convert Class Method: torch.Tensor.backward to Paddle
+[trainer.py:208] Start convert torch.nn.utils.clip_grad_norm_ to Paddle --> 
+[trainer.py:208] [Success] Convert torch.nn.utils.clip_grad_norm_ to Paddle
+[trainer.py:209] Start convert Class Method: torch.optim.Optimizer.step to Paddle --> 
+[trainer.py:209] [Success] Convert Class Method: torch.optim.Optimizer.step to Paddle
+[trainer.py:211] Start convert Class Method: torch.optim.Optimizer.step to Paddle --> 
+[trainer.py:211] [Success] Convert Class Method: torch.optim.Optimizer.step to Paddle
+[trainer.py:212] Start convert Class Method: torch.nn.Module.zero_grad to Paddle --> 
+[trainer.py:212] [Success] Convert Class Method: torch.nn.Module.zero_grad to Paddle
+[trainer.py:216] Start convert Class Method: torch.Tensor.backward to Paddle --> 
+[trainer.py:216] [Success] Convert Class Method: torch.Tensor.backward to Paddle
+[trainer.py:221] Start convert torch.nn.utils.clip_grad_norm_ to Paddle --> 
+[trainer.py:221] [Success] Convert torch.nn.utils.clip_grad_norm_ to Paddle
+[trainer.py:222] Start convert Class Method: torch.optim.Optimizer.step to Paddle --> 
+[trainer.py:222]  Misidentify Class Method: torch.optim.Optimizer.step
+[trainer.py:225] Start convert Class Method: torch.optim.Optimizer.step to Paddle --> 
+[trainer.py:225] [Success] Convert Class Method: torch.optim.Optimizer.step to Paddle
+[trainer.py:226] Start convert Class Method: torch.nn.Module.zero_grad to Paddle --> 
+[trainer.py:226] [Success] Convert Class Method: torch.nn.Module.zero_grad to Paddle
+[trainer.py:242] Start convert torch.cuda.max_memory_allocated to Paddle --> 
+[trainer.py:242] [Success] Convert torch.cuda.max_memory_allocated to Paddle
+[trainer.py:265] Start convert Class Method: torch.nn.Module.state_dict to Paddle --> 
+[trainer.py:265] [Success] Convert Class Method: torch.nn.Module.state_dict to Paddle
+[trainer.py:268] Start convert Class Method: torch.nn.Module.state_dict to Paddle --> 
+[trainer.py:268] [Success] Convert Class Method: torch.nn.Module.state_dict to Paddle
+[trainer.py:270] Start convert Class Method: torch.nn.Module.state_dict to Paddle --> 
+[trainer.py:270] [Success] Convert Class Method: torch.nn.Module.state_dict to Paddle
+[trainer.py:272] Start convert Class Method: torch.nn.Module.state_dict to Paddle --> 
+[trainer.py:272] [Success] Convert Class Method: torch.nn.Module.state_dict to Paddle
+[trainer.py:277] Start convert torch.save to Paddle --> 
+[trainer.py:277] [Success] Convert torch.save to Paddle
+[trainer.py:299] Start convert torch.load to Paddle --> 
+[trainer.py:299] [Success] Convert torch.load to Paddle
+[trainer.py:305] Start convert Class Method: torch.nn.Module.load_state_dict to Paddle --> 
+[trainer.py:305] [Success] Convert Class Method: torch.nn.Module.load_state_dict to Paddle
+[trainer.py:308] Start convert Class Method: torch.nn.Module.load_state_dict to Paddle --> 
+[trainer.py:308] [Success] Convert Class Method: torch.nn.Module.load_state_dict to Paddle
+[trainer.py:313] Start convert Class Method: torch.nn.Module.load_state_dict to Paddle --> 
+[trainer.py:313] [Success] Convert Class Method: torch.nn.Module.load_state_dict to Paddle
+[trainer.py:317] Start convert Class Method: torch.nn.Module.load_state_dict to Paddle --> 
+[trainer.py:317] [Success] Convert Class Method: torch.nn.Module.load_state_dict to Paddle
+[trainer.py:321] Start convert Class Method: torch.nn.Module.load_state_dict to Paddle --> 
+[trainer.py:321] [Success] Convert Class Method: torch.nn.Module.load_state_dict to Paddle
+[trainer.py:388] Start convert torch.linalg.vector_norm to Paddle --> 
+[trainer.py:388] [Success] Convert torch.linalg.vector_norm to Paddle
+[trainer.py:390] Start convert torch.abs to Paddle --> 
+[trainer.py:390] [Success] Convert torch.abs to Paddle
+[trainer.py:390] Start convert torch.max to Paddle --> 
+[trainer.py:390] [Success] Convert torch.max to Paddle
+[trainer.py:396] Start convert torch.nn.functional.mse_loss to Paddle --> 
+[trainer.py:396] [Success] Convert torch.nn.functional.mse_loss to Paddle
+[trainer.py:397] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[trainer.py:397] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[trainer.py:397] Start convert Class Method: torch.Tensor.expand_as to Paddle --> 
+[trainer.py:397] [Success] Convert Class Method: torch.Tensor.expand_as to Paddle
+[trainer.py:397] Start convert torch.count_nonzero to Paddle --> 
+[trainer.py:397] [Success] Convert torch.count_nonzero to Paddle
+[trainer.py:402] Start convert torch.nn.functional.mse_loss to Paddle --> 
+[trainer.py:402] [Success] Convert torch.nn.functional.mse_loss to Paddle
+[trainer.py:403] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[trainer.py:403] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[trainer.py:403] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[trainer.py:403] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[trainer.py:405] Start convert torch.linalg.vector_norm to Paddle --> 
+[trainer.py:405] [Success] Convert torch.linalg.vector_norm to Paddle
+[trainer.py:406] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[trainer.py:406] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[trainer.py:406] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[trainer.py:406] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[trainer.py:414] Start convert torch.mean to Paddle --> 
+[trainer.py:414] [Success] Convert torch.mean to Paddle
+[trainer.py:415] Start convert torch.std to Paddle --> 
+[trainer.py:415]  Misidentify torch.std
+[trainer.py:417] Start convert torch.amax to Paddle --> 
+[trainer.py:417] [Success] Convert torch.amax to Paddle
+[trainer.py:418] Start convert torch.amin to Paddle --> 
+[trainer.py:418] [Success] Convert torch.amin to Paddle
+[trainer.py:422] Start convert torch.mean to Paddle --> 
+[trainer.py:422] [Success] Convert torch.mean to Paddle
+[trainer.py:423] Start convert torch.std to Paddle --> 
+[trainer.py:423]  Misidentify torch.std
+[trainer.py:500] Start convert Class Method: torch.nn.Module.train to Paddle --> 
+[trainer.py:500] [Success] Convert Class Method: torch.nn.Module.train to Paddle
+[trainer.py:518] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[trainer.py:518] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[trainer.py:1] Start convert torch.bfloat16 to Paddle --> 
+[trainer.py:1] [Success] Convert torch.bfloat16 to Paddle
+[trainer.py:518] Start convert torch.amp.autocast to Paddle --> 
+[trainer.py:518] [Success] Convert torch.amp.autocast to Paddle
+[trainer.py:528] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[trainer.py:528] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[trainer.py] insert extra 2 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/trainer.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/trainer.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/dataset.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/dataset.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/dataset.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/dataset.py
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/scripts/baselines.sh --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/scripts/baselines.sh
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/scripts/prose-fd.sh --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/scripts/prose-fd.sh
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/data_utils/README.md --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/README.md
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/convert_cfdbench.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/convert_cfdbench.py
+[convert_cfdbench.py:8] remove 'import torch' 
+[convert_cfdbench.py:9] remove 'import torch.nn.functional as F' 
+[convert_cfdbench.py] add 'import paddle' in line 1
+[convert_cfdbench.py] insert extra 1 lines finally
+[convert_cfdbench.py:44] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:44] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[convert_cfdbench.py:45] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:45] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[convert_cfdbench.py:46] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:46] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[convert_cfdbench.py:81] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:81] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[convert_cfdbench.py:101] Start convert torch.from_numpy to Paddle --> 
+[convert_cfdbench.py:101] [Success] Convert torch.from_numpy to Paddle
+[convert_cfdbench.py:101] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[convert_cfdbench.py:101] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[convert_cfdbench.py:100] Start convert torch.nn.functional.interpolate to Paddle --> 
+[convert_cfdbench.py:100] [Success] Convert torch.nn.functional.interpolate to Paddle
+[convert_cfdbench.py:100] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[convert_cfdbench.py:100] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[convert_cfdbench.py:103] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:103] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[convert_cfdbench.py:103] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[convert_cfdbench.py:103] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[convert_cfdbench.py:114] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[convert_cfdbench.py:114] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[convert_cfdbench.py:115] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[convert_cfdbench.py:115] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[convert_cfdbench.py:116] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[convert_cfdbench.py:116] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[convert_cfdbench.py:118] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:118] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[convert_cfdbench.py:118] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:118] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[convert_cfdbench.py:118] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[convert_cfdbench.py:118] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/convert_cfdbench.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/convert_cfdbench.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/convert_com_ns.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/convert_com_ns.py
+[convert_com_ns.py:2] remove 'import os' 
+[convert_com_ns.py] add 'import os' in line 1
+[convert_com_ns.py] insert extra 1 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/convert_com_ns.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/convert_com_ns.py
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/data_utils/check_dataset.ipynb --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/check_dataset.ipynb
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/cylinder.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/cylinder.py
+[cylinder.py:6] remove 'import torch' 
+[cylinder.py:7] remove 'from torch import Tensor' 
+[cylinder.py] add 'import paddle' in line 1
+[cylinder.py] insert extra 1 lines finally
+[cylinder.py:49] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cylinder.py:49] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cylinder.py:50] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cylinder.py:50] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cylinder.py:51] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cylinder.py:51] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cylinder.py:52] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cylinder.py:52] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cylinder.py:1] Start convert torch.Tensor to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.Tensor to Paddle
+[cylinder.py:1] Start convert torch.Tensor to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.Tensor to Paddle
+[cylinder.py:144] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cylinder.py:144] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cylinder.py:1] Start convert torch.float32 to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.float32 to Paddle
+[cylinder.py:146] Start convert torch.tensor to Paddle --> 
+[cylinder.py:146] [Success] Convert torch.tensor to Paddle
+[cylinder.py:1] Start convert torch.float32 to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.float32 to Paddle
+[cylinder.py:151] Start convert torch.tensor to Paddle --> 
+[cylinder.py:151] [Success] Convert torch.tensor to Paddle
+[cylinder.py:156] Start convert torch.tensor to Paddle --> 
+[cylinder.py:156] [Success] Convert torch.tensor to Paddle
+[cylinder.py:185] Start convert torch.tensor to Paddle --> 
+[cylinder.py:185] [Success] Convert torch.tensor to Paddle
+[cylinder.py:185] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[cylinder.py:185] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[cylinder.py:257] Start convert torch.load to Paddle --> 
+[cylinder.py:257] [Success] Convert torch.load to Paddle
+[cylinder.py:258] Start convert torch.load to Paddle --> 
+[cylinder.py:258] [Success] Convert torch.load to Paddle
+[cylinder.py:259] Start convert torch.load to Paddle --> 
+[cylinder.py:259] [Success] Convert torch.load to Paddle
+[cylinder.py:260] Start convert torch.load to Paddle --> 
+[cylinder.py:260] [Success] Convert torch.load to Paddle
+[cylinder.py:261] Start convert torch.load to Paddle --> 
+[cylinder.py:261] [Success] Convert torch.load to Paddle
+[cylinder.py:1] Start convert torch.Tensor to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.Tensor to Paddle
+[cylinder.py:1] Start convert torch.Tensor to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.Tensor to Paddle
+[cylinder.py:1] Start convert torch.Tensor to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.Tensor to Paddle
+[cylinder.py:1] Start convert torch.float32 to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.float32 to Paddle
+[cylinder.py:288] Start convert torch.tensor to Paddle --> 
+[cylinder.py:288] [Success] Convert torch.tensor to Paddle
+[cylinder.py:1] Start convert torch.float32 to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.float32 to Paddle
+[cylinder.py:289] Start convert torch.tensor to Paddle --> 
+[cylinder.py:289] [Success] Convert torch.tensor to Paddle
+[cylinder.py:292] Start convert torch.sqrt to Paddle --> 
+[cylinder.py:292] [Success] Convert torch.sqrt to Paddle
+[cylinder.py:293] Start convert torch.sqrt to Paddle --> 
+[cylinder.py:293] [Success] Convert torch.sqrt to Paddle
+[cylinder.py:294] Start convert torch.abs to Paddle --> 
+[cylinder.py:294] [Success] Convert torch.abs to Paddle
+[cylinder.py:294] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[cylinder.py:294] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[cylinder.py:299] Start convert torch.isnan to Paddle --> 
+[cylinder.py:299] [Success] Convert torch.isnan to Paddle
+[cylinder.py:299] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[cylinder.py:299] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[cylinder.py:300] Start convert torch.isnan to Paddle --> 
+[cylinder.py:300] [Success] Convert torch.isnan to Paddle
+[cylinder.py:300] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[cylinder.py:300] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[cylinder.py:305] Start convert torch.stack to Paddle --> 
+[cylinder.py:305] [Success] Convert torch.stack to Paddle
+[cylinder.py:306] Start convert torch.stack to Paddle --> 
+[cylinder.py:306] [Success] Convert torch.stack to Paddle
+[cylinder.py:311] Start convert torch.save to Paddle --> 
+[cylinder.py:311] [Success] Convert torch.save to Paddle
+[cylinder.py:312] Start convert torch.save to Paddle --> 
+[cylinder.py:312] [Success] Convert torch.save to Paddle
+[cylinder.py:313] Start convert torch.save to Paddle --> 
+[cylinder.py:313] [Success] Convert torch.save to Paddle
+[cylinder.py:314] Start convert torch.save to Paddle --> 
+[cylinder.py:314] [Success] Convert torch.save to Paddle
+[cylinder.py:315] Start convert torch.save to Paddle --> 
+[cylinder.py:315] [Success] Convert torch.save to Paddle
+[cylinder.py:1] Start convert torch.float32 to Paddle --> 
+[cylinder.py:1] [Success] Convert torch.float32 to Paddle
+[cylinder.py:322] Start convert torch.tensor to Paddle --> 
+[cylinder.py:322] [Success] Convert torch.tensor to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/cylinder.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/cylinder.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/utils.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/utils.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/utils.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/utils.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/tube.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/tube.py
+[tube.py:6] remove 'import torch' 
+[tube.py:7] remove 'from torch import Tensor' 
+[tube.py] add 'import paddle' in line 1
+[tube.py] insert extra 1 lines finally
+[tube.py:1] Start convert torch.Tensor to Paddle --> 
+[tube.py:1] [Success] Convert torch.Tensor to Paddle
+[tube.py:1] Start convert torch.Tensor to Paddle --> 
+[tube.py:1] [Success] Convert torch.Tensor to Paddle
+[tube.py:111] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[tube.py:111] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[tube.py:1] Start convert torch.float32 to Paddle --> 
+[tube.py:1] [Success] Convert torch.float32 to Paddle
+[tube.py:113] Start convert torch.tensor to Paddle --> 
+[tube.py:113] [Success] Convert torch.tensor to Paddle
+[tube.py:1] Start convert torch.float32 to Paddle --> 
+[tube.py:1] [Success] Convert torch.float32 to Paddle
+[tube.py:118] Start convert torch.tensor to Paddle --> 
+[tube.py:118] [Success] Convert torch.tensor to Paddle
+[tube.py:123] Start convert torch.tensor to Paddle --> 
+[tube.py:123] [Success] Convert torch.tensor to Paddle
+[tube.py:152] Start convert torch.tensor to Paddle --> 
+[tube.py:152] [Success] Convert torch.tensor to Paddle
+[tube.py:152] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[tube.py:152] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[tube.py:1] Start convert torch.Tensor to Paddle --> 
+[tube.py:1] [Success] Convert torch.Tensor to Paddle
+[tube.py:1] Start convert torch.Tensor to Paddle --> 
+[tube.py:1] [Success] Convert torch.Tensor to Paddle
+[tube.py:1] Start convert torch.float32 to Paddle --> 
+[tube.py:1] [Success] Convert torch.float32 to Paddle
+[tube.py:242] Start convert torch.tensor to Paddle --> 
+[tube.py:242] [Success] Convert torch.tensor to Paddle
+[tube.py:1] Start convert torch.float32 to Paddle --> 
+[tube.py:1] [Success] Convert torch.float32 to Paddle
+[tube.py:243] Start convert torch.tensor to Paddle --> 
+[tube.py:243] [Success] Convert torch.tensor to Paddle
+[tube.py:246] Start convert torch.sqrt to Paddle --> 
+[tube.py:246] [Success] Convert torch.sqrt to Paddle
+[tube.py:247] Start convert torch.sqrt to Paddle --> 
+[tube.py:247] [Success] Convert torch.sqrt to Paddle
+[tube.py:248] Start convert torch.abs to Paddle --> 
+[tube.py:248] [Success] Convert torch.abs to Paddle
+[tube.py:248] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[tube.py:248] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[tube.py:253] Start convert torch.isnan to Paddle --> 
+[tube.py:253] [Success] Convert torch.isnan to Paddle
+[tube.py:253] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[tube.py:253] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[tube.py:254] Start convert torch.isnan to Paddle --> 
+[tube.py:254] [Success] Convert torch.isnan to Paddle
+[tube.py:254] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[tube.py:254] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[tube.py:258] Start convert torch.stack to Paddle --> 
+[tube.py:258] [Success] Convert torch.stack to Paddle
+[tube.py:259] Start convert torch.stack to Paddle --> 
+[tube.py:259] [Success] Convert torch.stack to Paddle
+[tube.py:1] Start convert torch.float32 to Paddle --> 
+[tube.py:1] [Success] Convert torch.float32 to Paddle
+[tube.py:267] Start convert torch.tensor to Paddle --> 
+[tube.py:267] [Success] Convert torch.tensor to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/tube.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/tube.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/save_data.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/save_data.py
+[save_data.py:5] remove 'import torch' 
+[save_data.py:6] remove 'import os' 
+[save_data.py:7] remove 'import torch.nn.functional as F' 
+[save_data.py] add 'import paddle' in line 1
+[save_data.py] add 'import os' in line 2
+[save_data.py] insert extra 2 lines finally
+[save_data.py:46] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:46] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[save_data.py:47] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:47] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[save_data.py:48] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:48] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[save_data.py:77] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:77] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[save_data.py:80] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:80] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[save_data.py:92] Start convert torch.from_numpy to Paddle --> 
+[save_data.py:92] [Success] Convert torch.from_numpy to Paddle
+[save_data.py:91] Start convert torch.nn.functional.interpolate to Paddle --> 
+[save_data.py:91] [Success] Convert torch.nn.functional.interpolate to Paddle
+[save_data.py:91] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[save_data.py:91] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[save_data.py:94] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:94] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[save_data.py:94] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[save_data.py:94] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[save_data.py:104] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[save_data.py:104] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[save_data.py:104] Start convert Class Method: torch.Tensor.transpose to Paddle --> 
+[save_data.py:104] [Success] Convert Class Method: torch.Tensor.transpose to Paddle
+[save_data.py:105] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:105] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[save_data.py:105] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[save_data.py:105] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/save_data.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/save_data.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/base.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/base.py
+[base.py:4] remove 'import torch' 
+[base.py:5] remove 'from torch import Tensor' 
+[base.py:7] remove 'from torch.utils.data import Dataset' 
+[base.py] add 'import paddle' in line 1
+[base.py] insert extra 1 lines finally
+[base.py:1] Start convert torch.utils.data.Dataset to Paddle --> 
+[base.py:1] [Success] Convert torch.utils.data.Dataset to Paddle
+[base.py:1] Start convert torch.utils.data.Dataset to Paddle --> 
+[base.py:1] [Success] Convert torch.utils.data.Dataset to Paddle
+[base.py:1] Start convert torch.Tensor to Paddle --> 
+[base.py:1] [Success] Convert torch.Tensor to Paddle
+[base.py:1] Start convert torch.Tensor to Paddle --> 
+[base.py:1] [Success] Convert torch.Tensor to Paddle
+[base.py:1] Start convert torch.Tensor to Paddle --> 
+[base.py:1] [Success] Convert torch.Tensor to Paddle
+[base.py:61] Start convert torch.FloatTensor to Paddle --> 
+[base.py:61] [Success] Convert torch.FloatTensor to Paddle
+[base.py:62] Start convert torch.FloatTensor to Paddle --> 
+[base.py:62] [Success] Convert torch.FloatTensor to Paddle
+[base.py:65] Start convert torch.FloatTensor to Paddle --> 
+[base.py:65] [Success] Convert torch.FloatTensor to Paddle
+[base.py:66] Start convert torch.stack to Paddle --> 
+[base.py:66] [Success] Convert torch.stack to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/base.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/base.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/__init__.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/__init__.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/cavity.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/cavity.py
+[cavity.py:6] remove 'import torch' 
+[cavity.py:7] remove 'from torch import Tensor' 
+[cavity.py] add 'import paddle' in line 1
+[cavity.py] insert extra 1 lines finally
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:125] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cavity.py:125] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cavity.py:1] Start convert torch.float32 to Paddle --> 
+[cavity.py:1] [Success] Convert torch.float32 to Paddle
+[cavity.py:127] Start convert torch.tensor to Paddle --> 
+[cavity.py:127] [Success] Convert torch.tensor to Paddle
+[cavity.py:1] Start convert torch.float32 to Paddle --> 
+[cavity.py:1] [Success] Convert torch.float32 to Paddle
+[cavity.py:133] Start convert torch.tensor to Paddle --> 
+[cavity.py:133] [Success] Convert torch.tensor to Paddle
+[cavity.py:138] Start convert torch.tensor to Paddle --> 
+[cavity.py:138] [Success] Convert torch.tensor to Paddle
+[cavity.py:172] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cavity.py:172] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cavity.py:173] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[cavity.py:173] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[cavity.py:181] Start convert torch.tensor to Paddle --> 
+[cavity.py:181] [Success] Convert torch.tensor to Paddle
+[cavity.py:181] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[cavity.py:181] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[cavity.py:185] Start convert Class Method: torch.Tensor.squeeze to Paddle --> 
+[cavity.py:185] [Success] Convert Class Method: torch.Tensor.squeeze to Paddle
+[cavity.py:185] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[cavity.py:185] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[cavity.py:186] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[cavity.py:186] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[cavity.py:193] Start convert torch.tensor to Paddle --> 
+[cavity.py:193] [Success] Convert torch.tensor to Paddle
+[cavity.py:193] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[cavity.py:193] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.float32 to Paddle --> 
+[cavity.py:1] [Success] Convert torch.float32 to Paddle
+[cavity.py:295] Start convert torch.tensor to Paddle --> 
+[cavity.py:295] [Success] Convert torch.tensor to Paddle
+[cavity.py:1] Start convert torch.float32 to Paddle --> 
+[cavity.py:1] [Success] Convert torch.float32 to Paddle
+[cavity.py:296] Start convert torch.tensor to Paddle --> 
+[cavity.py:296] [Success] Convert torch.tensor to Paddle
+[cavity.py:299] Start convert torch.sqrt to Paddle --> 
+[cavity.py:299] [Success] Convert torch.sqrt to Paddle
+[cavity.py:300] Start convert torch.sqrt to Paddle --> 
+[cavity.py:300] [Success] Convert torch.sqrt to Paddle
+[cavity.py:301] Start convert torch.abs to Paddle --> 
+[cavity.py:301] [Success] Convert torch.abs to Paddle
+[cavity.py:301] Start convert Class Method: torch.Tensor.mean to Paddle --> 
+[cavity.py:301] [Success] Convert Class Method: torch.Tensor.mean to Paddle
+[cavity.py:305] Start convert torch.isnan to Paddle --> 
+[cavity.py:305] [Success] Convert torch.isnan to Paddle
+[cavity.py:305] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[cavity.py:305] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[cavity.py:306] Start convert torch.isnan to Paddle --> 
+[cavity.py:306] [Success] Convert torch.isnan to Paddle
+[cavity.py:306] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[cavity.py:306] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[cavity.py:310] Start convert torch.stack to Paddle --> 
+[cavity.py:310] [Success] Convert torch.stack to Paddle
+[cavity.py:311] Start convert torch.stack to Paddle --> 
+[cavity.py:311] [Success] Convert torch.stack to Paddle
+[cavity.py:1] Start convert torch.float32 to Paddle --> 
+[cavity.py:1] [Success] Convert torch.float32 to Paddle
+[cavity.py:326] Start convert torch.tensor to Paddle --> 
+[cavity.py:326] [Success] Convert torch.tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+[cavity.py:1] Start convert torch.Tensor to Paddle --> 
+[cavity.py:1] [Success] Convert torch.Tensor to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/cavity.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/cavity.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/vis_data.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/vis_data.py
+[vis_data.py:3] remove 'import torch' 
+[vis_data.py] add 'import paddle' in line 1
+[vis_data.py] insert extra 1 lines finally
+[vis_data.py:20] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[vis_data.py:20] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[vis_data.py:27] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[vis_data.py:27] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[vis_data.py:31] Start convert Class Method: torch.Tensor.ravel to Paddle --> 
+[vis_data.py:31] [Success] Convert Class Method: torch.Tensor.ravel to Paddle
+[vis_data.py:31] Start convert Class Method: torch.Tensor.tolist to Paddle --> 
+[vis_data.py:31] [Success] Convert Class Method: torch.Tensor.tolist to Paddle
+[vis_data.py:38] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[vis_data.py:38] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[vis_data.py:41] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[vis_data.py:41] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/vis_data.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/vis_data.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/dam.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/dam.py
+[dam.py:35] remove 'import torch' 
+[dam.py:36] remove 'from torch import Tensor' 
+[dam.py] add 'import paddle' in line 1
+[dam.py] insert extra 1 lines finally
+[dam.py:1] Start convert torch.Tensor to Paddle --> 
+[dam.py:1] [Success] Convert torch.Tensor to Paddle
+[dam.py:1] Start convert torch.Tensor to Paddle --> 
+[dam.py:1] [Success] Convert torch.Tensor to Paddle
+[dam.py:162] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[dam.py:162] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[dam.py:1] Start convert torch.float32 to Paddle --> 
+[dam.py:1] [Success] Convert torch.float32 to Paddle
+[dam.py:164] Start convert torch.tensor to Paddle --> 
+[dam.py:164] [Success] Convert torch.tensor to Paddle
+[dam.py:1] Start convert torch.float32 to Paddle --> 
+[dam.py:1] [Success] Convert torch.float32 to Paddle
+[dam.py:169] Start convert torch.tensor to Paddle --> 
+[dam.py:169] [Success] Convert torch.tensor to Paddle
+[dam.py:174] Start convert torch.tensor to Paddle --> 
+[dam.py:174] [Success] Convert torch.tensor to Paddle
+[dam.py:204] Start convert torch.tensor to Paddle --> 
+[dam.py:204] [Success] Convert torch.tensor to Paddle
+[dam.py:204] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[dam.py:204] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[dam.py:1] Start convert torch.Tensor to Paddle --> 
+[dam.py:1] [Success] Convert torch.Tensor to Paddle
+[dam.py:1] Start convert torch.Tensor to Paddle --> 
+[dam.py:1] [Success] Convert torch.Tensor to Paddle
+[dam.py:1] Start convert torch.Tensor to Paddle --> 
+[dam.py:1] [Success] Convert torch.Tensor to Paddle
+[dam.py:1] Start convert torch.float32 to Paddle --> 
+[dam.py:1] [Success] Convert torch.float32 to Paddle
+[dam.py:280] Start convert torch.tensor to Paddle --> 
+[dam.py:280] [Success] Convert torch.tensor to Paddle
+[dam.py:1] Start convert torch.float32 to Paddle --> 
+[dam.py:1] [Success] Convert torch.float32 to Paddle
+[dam.py:281] Start convert torch.tensor to Paddle --> 
+[dam.py:281] [Success] Convert torch.tensor to Paddle
+[dam.py:283] Start convert torch.isnan to Paddle --> 
+[dam.py:283] [Success] Convert torch.isnan to Paddle
+[dam.py:283] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[dam.py:283] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[dam.py:284] Start convert torch.isnan to Paddle --> 
+[dam.py:284] [Success] Convert torch.isnan to Paddle
+[dam.py:284] Start convert Class Method: torch.Tensor.any to Paddle --> 
+[dam.py:284] [Success] Convert Class Method: torch.Tensor.any to Paddle
+[dam.py:288] Start convert torch.stack to Paddle --> 
+[dam.py:288] [Success] Convert torch.stack to Paddle
+[dam.py:289] Start convert torch.stack to Paddle --> 
+[dam.py:289] [Success] Convert torch.stack to Paddle
+[dam.py:1] Start convert torch.float32 to Paddle --> 
+[dam.py:1] [Success] Convert torch.float32 to Paddle
+[dam.py:298] Start convert torch.tensor to Paddle --> 
+[dam.py:298] [Success] Convert torch.tensor to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/cfdbench/dam.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/cfdbench/dam.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/__init__.py
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/__init__.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/__init__.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/all_datasets.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/all_datasets.py
+[all_datasets.py:1] remove 'import os' 
+[all_datasets.py:6] remove 'import torch' 
+[all_datasets.py:7] remove 'import torch.nn.functional as F' 
+[all_datasets.py:923] remove 'from torch.utils.data import DataLoader' 
+[all_datasets.py] add 'import paddle' in line 1
+[all_datasets.py] add 'import os' in line 2
+[all_datasets.py] insert extra 2 lines finally
+[all_datasets.py:45] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:45] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:46] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:46] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:49] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:49] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:51] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:51] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:81] Start convert torch.utils.data.get_worker_info to Paddle --> 
+[all_datasets.py:81] [Success] Convert torch.utils.data.get_worker_info to Paddle
+[all_datasets.py:95] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:95] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:98] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:98] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:123] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:123] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:181] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:181] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:191] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:191] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:192] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:192] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:192] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:192] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:193] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[all_datasets.py:193] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[all_datasets.py:205] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:205] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:211] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:211] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:211] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:211] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:215] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:215] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:217] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:217] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:218] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:218] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:218] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:218] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:218] Start convert torch.zeros to Paddle --> 
+[all_datasets.py:218] [Success] Convert torch.zeros to Paddle
+[all_datasets.py:226] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:226] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:226] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:226] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:264] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:264] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:274] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:274] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:275] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:275] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:275] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:275] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:276] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[all_datasets.py:276] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[all_datasets.py:288] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:288] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:297] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:297] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:297] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:297] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:299] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:299] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:301] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:301] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:302] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:302] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:302] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:302] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:302] Start convert torch.zeros to Paddle --> 
+[all_datasets.py:302] [Success] Convert torch.zeros to Paddle
+[all_datasets.py:310] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:310] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:310] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:310] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:347] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:347] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:359] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:359] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:360] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:360] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:360] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:360] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:361] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[all_datasets.py:361] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[all_datasets.py:377] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:377] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:390] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:390] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:390] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:390] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:392] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:392] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:394] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:394] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:395] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:395] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:395] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:395] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:395] Start convert torch.zeros to Paddle --> 
+[all_datasets.py:395] [Success] Convert torch.zeros to Paddle
+[all_datasets.py:403] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:403] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:403] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:403] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:472] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:472] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:495] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:495] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:496] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:496] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:496] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:496] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:497] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[all_datasets.py:497] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[all_datasets.py:514] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:514] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:531] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:531] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:531] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:531] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:535] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:535] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:537] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:537] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:538] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:538] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:538] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:538] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:538] Start convert torch.zeros to Paddle --> 
+[all_datasets.py:538] [Success] Convert torch.zeros to Paddle
+[all_datasets.py:546] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:546] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:546] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:546] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:597] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:597] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:611] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:611] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:612] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:612] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:612] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:612] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:613] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[all_datasets.py:613] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[all_datasets.py:647] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:647] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:663] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:663] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:663] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:663] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:667] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:667] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:669] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:669] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:670] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:670] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:670] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:670] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:670] Start convert torch.zeros to Paddle --> 
+[all_datasets.py:670] [Success] Convert torch.zeros to Paddle
+[all_datasets.py:678] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:678] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:678] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:678] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:730] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:730] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:744] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:744] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:745] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:745] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:745] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:745] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:746] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[all_datasets.py:746] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[all_datasets.py:779] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:779] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:795] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:795] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:795] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:795] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:799] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:799] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:801] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:801] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:802] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:802] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:802] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:802] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:802] Start convert torch.zeros to Paddle --> 
+[all_datasets.py:802] [Success] Convert torch.zeros to Paddle
+[all_datasets.py:810] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:810] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:810] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:810] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:855] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:855] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:866] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:866] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:867] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:867] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:867] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:867] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:868] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[all_datasets.py:868] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[all_datasets.py:894] Start convert Class Attribute: torch.Tensor.shape to Paddle --> 
+[all_datasets.py:894] [Success] Convert Class Attribute: torch.Tensor.shape to Paddle, just remain the same
+[all_datasets.py:902] Start convert torch.from_numpy to Paddle --> 
+[all_datasets.py:902] [Success] Convert torch.from_numpy to Paddle
+[all_datasets.py:902] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[all_datasets.py:902] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[all_datasets.py:906] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:906] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:908] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:908] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:909] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:909] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:909] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:909] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:909] Start convert torch.zeros to Paddle --> 
+[all_datasets.py:909] [Success] Convert torch.zeros to Paddle
+[all_datasets.py:1] Start convert torch.Tensor to Paddle --> 
+[all_datasets.py:1] [Success] Convert torch.Tensor to Paddle
+[all_datasets.py:934] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:934] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:934] Start convert Class Attribute: torch.Tensor.dtype to Paddle --> 
+[all_datasets.py:934] [Success] Convert Class Attribute: torch.Tensor.dtype to Paddle, just remain the same
+[all_datasets.py:937] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:937] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[all_datasets.py:973] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[all_datasets.py:973] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[all_datasets.py:969] Start convert torch.utils.data.DataLoader to Paddle --> 
+[all_datasets.py:969] [Success] Convert torch.utils.data.DataLoader to Paddle
+[all_datasets.py:980] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[all_datasets.py:980] [Success] Convert Class Method: torch.Tensor.size to Paddle
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/all_datasets.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/all_datasets.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/data_utils/collate.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/collate.py
+[collate.py:1] remove 'import torch' 
+[collate.py:2] remove 'import torch.nn.functional as F' 
+[collate.py:3] remove 'from torch.utils.data import default_collate' 
+[collate.py] add 'import paddle' in line 1
+[collate.py] insert extra 1 lines finally
+[collate.py:15] Start convert Class Method: torch.Tensor.max to Paddle --> 
+When convert torch.Tensor.max, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[collate.py] add 'import utils'
+[collate.py:15] [Success] Convert Class Method: torch.Tensor.max to Paddle
+[collate.py:15] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[collate.py:15] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[collate.py:17] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[collate.py:17] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[collate.py:20] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[collate.py:20] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[collate.py:20] Start convert torch.arange to Paddle --> 
+[collate.py:20] [Success] Convert torch.arange to Paddle
+[collate.py:20] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[collate.py:20] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[collate.py:20] Start convert Class Method: torch.Tensor.unsqueeze to Paddle --> 
+[collate.py:20] [Success] Convert Class Method: torch.Tensor.unsqueeze to Paddle
+[collate.py:22] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[collate.py:22] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[collate.py:22] Start convert torch.arange to Paddle --> 
+[collate.py:22] [Success] Convert torch.arange to Paddle
+[collate.py:22] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[collate.py:22] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[collate.py:23] Start convert Class Method: torch.Tensor.unsqueeze to Paddle --> 
+[collate.py:23] [Success] Convert Class Method: torch.Tensor.unsqueeze to Paddle
+[collate.py:37] Start convert Class Method: torch.Tensor.max to Paddle --> 
+When convert torch.Tensor.max, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[collate.py] add 'import utils'
+[collate.py:37] [Success] Convert Class Method: torch.Tensor.max to Paddle
+[collate.py:37] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[collate.py:37] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[collate.py:39] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[collate.py:39] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[collate.py:40] Start convert Class Attribute: torch.Tensor.device to Paddle --> 
+[collate.py:40] [Success] Convert Class Attribute: torch.Tensor.device to Paddle, just remain the same
+[collate.py:40] Start convert torch.arange to Paddle --> 
+[collate.py:40] [Success] Convert torch.arange to Paddle
+[collate.py:40] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[collate.py:40] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[collate.py:40] Start convert Class Method: torch.Tensor.unsqueeze to Paddle --> 
+[collate.py:40] [Success] Convert Class Method: torch.Tensor.unsqueeze to Paddle
+[collate.py:41] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[collate.py:41] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[collate.py:57] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[collate.py:57] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[collate.py:61] Start convert torch.nn.functional.pad to Paddle --> 
+[collate.py:61] [Success] Convert torch.nn.functional.pad to Paddle
+[collate.py:64] Start convert torch.LongTensor to Paddle --> 
+[collate.py:64] [Success] Convert torch.LongTensor to Paddle
+[collate.py:75] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[collate.py:75] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[collate.py:79] Start convert torch.nn.functional.pad to Paddle --> 
+[collate.py:79] [Success] Convert torch.nn.functional.pad to Paddle
+[collate.py:81] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[collate.py:81] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[collate.py:85] Start convert torch.nn.functional.pad to Paddle --> 
+[collate.py:85] [Success] Convert torch.nn.functional.pad to Paddle
+[collate.py:89] Start convert torch.LongTensor to Paddle --> 
+[collate.py:89] [Success] Convert torch.LongTensor to Paddle
+[collate.py:93] Start convert torch.LongTensor to Paddle --> 
+[collate.py:93] [Success] Convert torch.LongTensor to Paddle
+[collate.py:99] Start convert torch.utils.data.default_collate to Paddle --> 
+[collate.py:99] [Success] Convert torch.utils.data.default_collate to Paddle
+[collate.py:104] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[collate.py:104] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[collate.py:104] Start convert torch.LongTensor to Paddle --> 
+[collate.py:104] [Success] Convert torch.LongTensor to Paddle
+[collate.py:105] Start convert torch.nn.utils.rnn.pad_sequence to Paddle --> 
+[collate.py:105] [Not Support] convert torch.nn.utils.rnn.pad_sequence to Paddle is not supported currently
+[collate.py:108] Start convert Class Method: torch.Tensor.flip to Paddle --> 
+[collate.py:108] [Success] Convert Class Method: torch.Tensor.flip to Paddle
+[collate.py:109] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[collate.py:109] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[collate.py:109] Start convert torch.LongTensor to Paddle --> 
+[collate.py:109] [Success] Convert torch.LongTensor to Paddle
+[collate.py:110] Start convert torch.nn.utils.rnn.pad_sequence to Paddle --> 
+[collate.py:110] [Not Support] convert torch.nn.utils.rnn.pad_sequence to Paddle is not supported currently
+[collate.py:110] Start convert Class Method: torch.Tensor.flip to Paddle --> 
+[collate.py:110] [Success] Convert Class Method: torch.Tensor.flip to Paddle
+[collate.py:119] Start convert torch.utils.data.default_collate to Paddle --> 
+[collate.py:119] [Success] Convert torch.utils.data.default_collate to Paddle
+[collate.py:127] Start convert torch.LongTensor to Paddle --> 
+[collate.py:127] [Success] Convert torch.LongTensor to Paddle
+[collate.py:127] Start convert torch.LongTensor to Paddle --> 
+[collate.py:127] [Success] Convert torch.LongTensor to Paddle
+[collate.py:127] Start convert torch.LongTensor to Paddle --> 
+[collate.py:127] [Success] Convert torch.LongTensor to Paddle
+[collate.py] insert extra 3 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/data_utils/collate.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/data_utils/collate.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/main.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/main.py
+[main.py:1] remove 'import os' 
+[main.py:5] remove 'import torch' 
+[main.py:6] remove 'import torch.multiprocessing' 
+[main.py] add 'import paddle' in line 1
+[main.py] add 'import os' in line 2
+[main.py] insert extra 2 lines finally
+[main.py:19] Start convert torch.multiprocessing.set_sharing_strategy to Paddle --> 
+[main.py:19] [Not Support] convert torch.multiprocessing.set_sharing_strategy to Paddle is not supported currently
+[main.py:70] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[main.py:70] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[main.py:71] Start convert torch.cuda.is_available to Paddle --> 
+[main.py:71] [Success] Convert torch.cuda.is_available to Paddle
+[main.py:72] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[main.py:72] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[main.py:129] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[main.py:129] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[main.py:145] Start convert torch.cuda.max_memory_allocated to Paddle --> 
+[main.py:145] [Success] Convert torch.cuda.max_memory_allocated to Paddle
+[main.py:192] Start convert torch.cuda.max_memory_allocated to Paddle --> 
+[main.py:192] [Success] Convert torch.cuda.max_memory_allocated to Paddle
+[main.py:197] Start convert torch.distributed.destroy_process_group to Paddle --> 
+[main.py:197] [Not Support] convert torch.distributed.destroy_process_group to Paddle is not supported currently
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/main.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/main.py
+
+Start convert file: /home/lkyu/baidu/prose-fd/prose_fd/evaluate.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/evaluate.py
+[evaluate.py:1] remove 'import os' 
+[evaluate.py:6] remove 'import torch' 
+[evaluate.py:7] remove 'from torch.utils.data import DataLoader' 
+[evaluate.py:8] remove 'import torch.nn.functional as F' 
+[evaluate.py] add 'import paddle' in line 1
+[evaluate.py] add 'import os' in line 2
+[evaluate.py] insert extra 2 lines finally
+[evaluate.py:42] Start convert torch.ones to Paddle --> 
+[evaluate.py:42] [Success] Convert torch.ones to Paddle
+[evaluate.py:48] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[evaluate.py:48] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[evaluate.py:48] Start convert Class Method: torch.Tensor.reshape to Paddle --> 
+[evaluate.py:48] [Success] Convert Class Method: torch.Tensor.reshape to Paddle
+[evaluate.py:48] Start convert Class Method: torch.Tensor.contiguous to Paddle --> 
+[evaluate.py:48] [Success] Convert Class Method: torch.Tensor.contiguous to Paddle
+[evaluate.py:72] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:72] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:74] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:74] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:65] Start convert torch.utils.data.DataLoader to Paddle --> 
+[evaluate.py:65] [Success] Convert torch.utils.data.DataLoader to Paddle
+[evaluate.py:82] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:82]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:83] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:83] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:91] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:91] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:93] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[evaluate.py:93] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[evaluate.py:94] Start convert Class Method: torch.Tensor.cuda to Paddle --> 
+When convert torch.Tensor.cuda, write utils code to file: /home/lkyu/baidu/prose-fd/prose_fd_paddle/paddle_utils.py
+[evaluate.py] add 'import utils'
+[evaluate.py:94] [Success] Convert Class Method: torch.Tensor.cuda to Paddle
+[evaluate.py:105] Start convert Class Method: torch.nn.Module.eval to Paddle --> 
+[evaluate.py:105] [Success] Convert Class Method: torch.nn.Module.eval to Paddle
+[evaluate.py:145] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[evaluate.py:145] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[evaluate.py:1] Start convert torch.bfloat16 to Paddle --> 
+[evaluate.py:1] [Success] Convert torch.bfloat16 to Paddle
+[evaluate.py:144] Start convert torch.amp.autocast to Paddle --> 
+[evaluate.py:144] [Success] Convert torch.amp.autocast to Paddle
+[evaluate.py:172] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:172] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:173] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:173] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:173] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:173]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:173] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:173] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:178] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[evaluate.py:178] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[evaluate.py:195] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[evaluate.py:195] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[evaluate.py:195] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:195] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:196] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:196] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:197] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:197] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:201] Start convert Class Method: torch.Tensor.cpu to Paddle --> 
+[evaluate.py:201] [Success] Convert Class Method: torch.Tensor.cpu to Paddle
+[evaluate.py:201] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:201] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:203] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:203] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:205] Start convert Class Method: torch.Tensor.expand to Paddle --> 
+[evaluate.py:205] [Success] Convert Class Method: torch.Tensor.expand to Paddle
+[evaluate.py:205] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:205] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:219] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:219] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:219] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:219]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:219] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:219] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:230] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[evaluate.py:230] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[evaluate.py:230] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:230] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:231] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:231] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:232] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:232] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:234] Start convert Class Method: torch.Tensor.cpu to Paddle --> 
+[evaluate.py:234] [Success] Convert Class Method: torch.Tensor.cpu to Paddle
+[evaluate.py:234] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:234] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:235] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:235] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:235] Start convert Class Attribute: torch.Tensor.t to Paddle --> 
+[evaluate.py:235] [Success] Convert Class Attribute: torch.Tensor.t to Paddle, just remain the same
+[evaluate.py:235] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:235] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:251] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:251] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:251] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:251]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:251] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:251] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:292] Start convert torch.Tensor to Paddle --> 
+[evaluate.py:292] [Success] Convert torch.Tensor to Paddle
+[evaluate.py:294] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[evaluate.py:294] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[evaluate.py:320] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:320] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:320] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:320]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:320] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:320] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:99] Start convert torch.inference_mode to Paddle --> 
+[evaluate.py:99] [Success] Convert torch.inference_mode to Paddle
+[evaluate.py:358] Start convert Class Method: torch.nn.Module.eval to Paddle --> 
+[evaluate.py:358] [Success] Convert Class Method: torch.nn.Module.eval to Paddle
+[evaluate.py:393] Start convert Class Attribute: torch.Tensor.t to Paddle --> 
+[evaluate.py:393] [Success] Convert Class Attribute: torch.Tensor.t to Paddle, just remain the same
+[evaluate.py:405] Start convert torch.zeros_like to Paddle --> 
+[evaluate.py:405] [Success] Convert torch.zeros_like to Paddle
+[evaluate.py:410] Start convert Class Method: torch.Tensor.size to Paddle --> 
+[evaluate.py:410] [Success] Convert Class Method: torch.Tensor.size to Paddle
+[evaluate.py:416] Start convert Class Attribute: torch.Tensor.cpu to Paddle --> 
+[evaluate.py:416] [Success] Convert Class Attribute: torch.Tensor.cpu to Paddle, just remain the same
+[evaluate.py:1] Start convert torch.bfloat16 to Paddle --> 
+[evaluate.py:1] [Success] Convert torch.bfloat16 to Paddle
+[evaluate.py:415] Start convert torch.amp.autocast to Paddle --> 
+[evaluate.py:415] [Success] Convert torch.amp.autocast to Paddle
+[evaluate.py:451] Start convert Class Method: torch.Tensor.squeeze to Paddle --> 
+[evaluate.py:451] [Success] Convert Class Method: torch.Tensor.squeeze to Paddle
+[evaluate.py:455] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:455] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:456] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:456] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:456] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:456]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:456] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:456] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:461] Start convert Class Method: torch.Tensor.bool to Paddle --> 
+[evaluate.py:461] [Success] Convert Class Method: torch.Tensor.bool to Paddle
+[evaluate.py:478] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[evaluate.py:478] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[evaluate.py:478] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:478] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:479] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:479] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:480] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:480] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:484] Start convert Class Method: torch.Tensor.cpu to Paddle --> 
+[evaluate.py:484] [Success] Convert Class Method: torch.Tensor.cpu to Paddle
+[evaluate.py:484] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:484] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:485] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:485] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:485] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:485] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:498] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:498] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:498] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:498]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:498] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:498] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:509] Start convert Class Method: torch.Tensor.float to Paddle --> 
+[evaluate.py:509] [Success] Convert Class Method: torch.Tensor.float to Paddle
+[evaluate.py:509] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:509] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:510] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:510] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:511] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:511] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:513] Start convert Class Method: torch.Tensor.cpu to Paddle --> 
+[evaluate.py:513] [Success] Convert Class Method: torch.Tensor.cpu to Paddle
+[evaluate.py:513] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:513] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:514] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:514] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:514] Start convert Class Attribute: torch.Tensor.t to Paddle --> 
+[evaluate.py:514] [Success] Convert Class Attribute: torch.Tensor.t to Paddle, just remain the same
+[evaluate.py:514] Start convert Class Method: torch.Tensor.numpy to Paddle --> 
+[evaluate.py:514] [Success] Convert Class Method: torch.Tensor.numpy to Paddle
+[evaluate.py:530] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:530] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:530] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:530]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:530] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:530] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:569] Start convert torch.Tensor to Paddle --> 
+[evaluate.py:569] [Success] Convert torch.Tensor to Paddle
+[evaluate.py:571] Start convert Class Method: torch.Tensor.item to Paddle --> 
+[evaluate.py:571] [Success] Convert Class Method: torch.Tensor.item to Paddle
+[evaluate.py:597] Start convert Class Attribute: torch.Tensor.data to Paddle --> 
+[evaluate.py:597] [Success] Convert Class Attribute: torch.Tensor.data to Paddle, just remain the same
+[evaluate.py:597] Start convert Class Method: torch.Tensor.split to Paddle --> 
+[evaluate.py:597]  Misidentify Class Method: torch.Tensor.split
+[evaluate.py:597] Start convert Class Attribute: torch.Tensor.dim to Paddle --> 
+[evaluate.py:597] [Success] Convert Class Attribute: torch.Tensor.dim to Paddle, just remain the same
+[evaluate.py:352] Start convert torch.inference_mode to Paddle --> 
+[evaluate.py:352] [Success] Convert torch.inference_mode to Paddle
+[evaluate.py:639] Start convert torch.mean to Paddle --> 
+[evaluate.py:639] [Success] Convert torch.mean to Paddle
+[evaluate.py:640] Start convert torch.std to Paddle --> 
+[evaluate.py:640]  Misidentify torch.std
+[evaluate.py:642] Start convert torch.amax to Paddle --> 
+[evaluate.py:642] [Success] Convert torch.amax to Paddle
+[evaluate.py:643] Start convert torch.amin to Paddle --> 
+[evaluate.py:643] [Success] Convert torch.amin to Paddle
+[evaluate.py:661] Start convert torch.linalg.vector_norm to Paddle --> 
+[evaluate.py:661] [Success] Convert torch.linalg.vector_norm to Paddle
+[evaluate.py:663] Start convert torch.abs to Paddle --> 
+[evaluate.py:663] [Success] Convert torch.abs to Paddle
+[evaluate.py:663] Start convert torch.max to Paddle --> 
+[evaluate.py:663] [Success] Convert torch.max to Paddle
+[evaluate.py:669] Start convert torch.nn.functional.mse_loss to Paddle --> 
+[evaluate.py:669] [Success] Convert torch.nn.functional.mse_loss to Paddle
+[evaluate.py:670] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[evaluate.py:670] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[evaluate.py:670] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[evaluate.py:670] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[evaluate.py:671] Start convert Class Method: torch.Tensor.expand_as to Paddle --> 
+[evaluate.py:671] [Success] Convert Class Method: torch.Tensor.expand_as to Paddle
+[evaluate.py:671] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[evaluate.py:671] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[evaluate.py:670] Start convert torch.count_nonzero to Paddle --> 
+[evaluate.py:670] [Success] Convert torch.count_nonzero to Paddle
+[evaluate.py:678] Start convert torch.nn.functional.mse_loss to Paddle --> 
+[evaluate.py:678] [Success] Convert torch.nn.functional.mse_loss to Paddle
+[evaluate.py:679] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[evaluate.py:679] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[evaluate.py:679] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[evaluate.py:679] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[evaluate.py:681] Start convert torch.linalg.vector_norm to Paddle --> 
+[evaluate.py:681] [Success] Convert torch.linalg.vector_norm to Paddle
+[evaluate.py:682] Start convert Class Method: torch.Tensor.flatten to Paddle --> 
+[evaluate.py:682] [Success] Convert Class Method: torch.Tensor.flatten to Paddle
+[evaluate.py:682] Start convert Class Method: torch.Tensor.sum to Paddle --> 
+[evaluate.py:682] [Success] Convert Class Method: torch.Tensor.sum to Paddle
+[evaluate.py:683] Start convert Class Method: torch.Tensor.tolist to Paddle --> 
+[evaluate.py:683] [Success] Convert Class Method: torch.Tensor.tolist to Paddle
+[evaluate.py] insert extra 3 lines finally
+Finish convert /home/lkyu/baidu/prose-fd/prose_fd/evaluate.py --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/evaluate.py
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/model/deeponet.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/model/deeponet.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/model/fno.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/model/fno.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/model/vit.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/model/vit.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/model/prose_1to1.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/model/prose_1to1.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/model/prose_2to1.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/model/prose_2to1.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/model/unet.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/model/unet.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/data/fluids_sample.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/data/fluids_sample.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/data/fluids.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/data/fluids.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/main.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/main.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/optim/adamw.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/optim/adamw.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/optim/wsd.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/optim/wsd.yaml
+
+No need to convert, just Copy /home/lkyu/baidu/prose-fd/prose_fd/configs/symbol/symbol.yaml --> /home/lkyu/baidu/prose-fd/prose_fd_paddle/configs/symbol/symbol.yaml
+
+
+===========================================
+Convert Summary
+===========================================
+There are 990 Pytorch APIs in this Project:
+ 968  Pytorch APIs have been converted to Paddle successfully!
+ 22  Pytorch APIs are not supported to convert to Paddle currently!
+ Convert Rate is: 97.78%
+
+For these 22 Pytorch APIs that currently do not support to convert, which have been marked by >>> before the line, 
+please refer to [https://www.paddlepaddle.org.cn/documentation/docs/zh/develop/guides/model_convert/convert_from_pytorch/pytorch_api_mapping_cn.html] 
+and convert it by yourself manually. In addition, these APIs will be supported in future.
+
+Thank you to use Paddle Code Convert Tool. You can make any suggestions 
+to us by submitting issues to [https://github.com/PaddlePaddle/PaConvert].
+
