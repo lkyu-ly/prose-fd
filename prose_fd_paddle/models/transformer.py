@@ -2,9 +2,9 @@
 This file contains complete transformer encoder/decoder modules.
 """
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+import paddle
+import paddle.nn as nn
+import paddle.nn.functional as F
 from .attention_utils import (
     Embedding,
     SinusoidalPE,
@@ -17,11 +17,38 @@ from .attention_utils import (
     CustomTransformerEncoder,
     CustomTransformerEncoderLayer,
     GroupNorm,
+    _generate_square_subsequent_mask,
 )
 from logging import getLogger
 from functools import partial
 
 logger = getLogger()
+
+
+class PaddleRMSNorm(nn.Layer):
+    def __init__(self, hidden_size, eps=None, epsilon=1e-6, **kwargs):
+        super().__init__()
+        if eps is not None:
+            epsilon = eps
+        self.weight = self.create_parameter(
+            shape=[hidden_size],
+            default_initializer=nn.initializer.Constant(1.0),
+        )
+        self.epsilon = epsilon
+
+    def forward(self, x):
+        variance = paddle.mean(x * x, axis=-1, keepdim=True)
+        x = x * paddle.rsqrt(variance + self.epsilon)
+        return x * self.weight
+
+
+def resolve_norm(norm_name):
+    if norm_name == "group":
+        return partial(GroupNorm, 8)
+    if norm_name == "rms":
+        return getattr(nn, "RMSNorm", PaddleRMSNorm)
+    return nn.LayerNorm
+
 
 """
 Transformer Data modules
@@ -44,14 +71,7 @@ class TransformerDataEncoder(nn.Module):
             self.transformer_encoder = None
         else:
             if config.get("custom_encoder", 0):
-                match config.get("norm", "layer"):
-                    case "group":
-                        # NOTE: currently n_group fixed to be 8
-                        norm = partial(GroupNorm, 8)
-                    case "rms":
-                        norm = nn.RMSNorm
-                    case _:
-                        norm = nn.LayerNorm
+                norm = resolve_norm(config.get("norm", "layer"))
 
                 self.transformer_encoder = CustomTransformerEncoder(
                     CustomTransformerEncoderLayer(
@@ -71,8 +91,8 @@ class TransformerDataEncoder(nn.Module):
                     config=config,
                 )
             else:
-                self.transformer_encoder = nn.TransformerEncoder(
-                    nn.TransformerEncoderLayer(
+                self.transformer_encoder = CustomTransformerEncoder(
+                    CustomTransformerEncoderLayer(
                         d_model=config.dim_emb,
                         nhead=config.n_head,
                         dim_feedforward=config.dim_ffn,
@@ -80,9 +100,13 @@ class TransformerDataEncoder(nn.Module):
                         activation="gelu",
                         batch_first=True,
                         norm_first=config.norm_first,
+                        rotary=False,
+                        custom_attn=False,
+                        norm=nn.LayerNorm,
                     ),
                     num_layers=config.n_layer,
                     norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
+                    config=None,
                 )
 
         if config.positional_embedding is None:
@@ -127,8 +151,7 @@ class TransformerDataDecoder(nn.Module):
                     dim_feedforward=config.dim_ffn,
                     dropout=config.dropout,
                     activation="gelu",
-                    batch_first=False,
-                    norm_first=config.norm_first,
+                    normalize_before=config.norm_first,
                 ),
                 num_layers=config.n_layer,
                 norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
@@ -141,8 +164,7 @@ class TransformerDataDecoder(nn.Module):
                     dim_feedforward=config.dim_ffn,
                     dropout=config.dropout,
                     activation="gelu",
-                    batch_first=False,
-                    norm_first=config.norm_first,
+                    normalize_before=config.norm_first,
                 ),
                 num_layers=config.n_layer,
                 norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
@@ -191,19 +213,20 @@ class TransformerDataDecoder(nn.Module):
         if self.positional_embedding is not None:
             tgt = self.positional_embedding(tgt)  # (bs, output_len, dim)
 
-        tgt = tgt.transpose(0, 1)  # (output_len, bs, dim)
-        memory = memory.transpose(0, 1)  # (input_len, bs, dim)
-
         if self.config.kv_cache:
+            tgt = tgt.transpose(0, 1)  # (output_len, bs, dim)
+            memory = memory.transpose(0, 1)  # (input_len, bs, dim)
             tgt_mask = None  # (causal decoder handles this automatically)
+            decoded = self.transformer_decoder(
+                tgt=tgt, memory=memory, tgt_mask=tgt_mask
+            )  # (output_len, bs, dim)
+            tgt_output = self.post_proj(decoded).transpose(0, 1)  # (bs, output_len, output_dim)
         else:
-            tgt_mask = nn.Transformer.generate_square_subsequent_mask(tgt.size(0), tgt.device)
-
-        decoded = self.transformer_decoder(
-            tgt=tgt, memory=memory, tgt_mask=tgt_mask, memory_key_padding_mask=memory_key_padding_mask
-        )  # (output_len, bs, dim)
-
-        tgt_output = self.post_proj(decoded).transpose(0, 1)  # (bs, output_len, output_dim)
+            tgt_mask = _generate_square_subsequent_mask(tgt.size(1), dtype=tgt.dtype)
+            decoded = self.transformer_decoder(
+                tgt=tgt, memory=memory, tgt_mask=tgt_mask
+            )  # (bs, output_len, dim)
+            tgt_output = self.post_proj(decoded)  # (bs, output_len, output_dim)
 
         return tgt_output
 
@@ -234,7 +257,7 @@ class TransformerDataDecoder(nn.Module):
         bs = initial.size(0)
         query_dim = output_times.size(1)
         data_dim = initial.size(1) - query_dim
-        generated = torch.zeros(output_len, bs, data_dim, dtype=initial.dtype, device=initial.device)
+        generated = paddle.zeros([output_len, bs, data_dim], dtype=initial.dtype)
 
         cache = None
         tgt = pre_proj(initial)[None]  # (1, bs, dim)
@@ -244,19 +267,25 @@ class TransformerDataDecoder(nn.Module):
 
             if self.config.kv_cache:
                 decoded, cache = self.transformer_decoder(tgt=tgt, memory=encoded, cache=cache)  # (cur_len, bs, dim)
+                new_data = self.post_proj(decoded[-1])  # (bs, data_dim)
             else:
-                tgt_mask = nn.Transformer.generate_square_subsequent_mask(tgt.size(0), tgt.device)
-                decoded = self.transformer_decoder(tgt=tgt, memory=encoded, tgt_mask=tgt_mask)  # (cur_len, bs, dim)
-
-            new_data = self.post_proj(decoded[-1])  # (bs, data_dim)
+                tgt_batch = tgt.transpose([1, 0, 2])
+                encoded_batch = encoded.transpose([1, 0, 2])
+                tgt_mask = _generate_square_subsequent_mask(
+                    tgt_batch.size(1), dtype=tgt_batch.dtype
+                )
+                decoded = self.transformer_decoder(
+                    tgt=tgt_batch, memory=encoded_batch, tgt_mask=tgt_mask
+                )  # (bs, cur_len, dim)
+                new_data = self.post_proj(decoded[:, -1])  # (bs, data_dim)
 
             generated[cur_len - 1] = new_data
 
-            new_input = torch.cat(
+            new_input = paddle.cat(
                 [output_times[cur_len - 1][None].expand(bs, query_dim), new_data], dim=1
             )  # (bs, query_dim + data_dim)
 
-            tgt = torch.cat([tgt, pre_proj(new_input[None])], dim=0)  # (cur_len + 1, bs, dim)
+            tgt = paddle.cat([tgt, pre_proj(new_input[None])], axis=0)  # (cur_len + 1, bs, dim)
 
             cur_len += 1
 
@@ -300,8 +329,7 @@ class DataOperatorDecoder(nn.Module):
                     dim_feedforward=config.dim_ffn,
                     dropout=config.dropout,
                     activation="gelu",
-                    batch_first=True,
-                    norm_first=config.norm_first,
+                    normalize_before=config.norm_first,
                 ),
                 num_layers=config.n_layer,
                 norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
@@ -316,31 +344,25 @@ class DataOperatorDecoder(nn.Module):
         else:
             # cross attn + ffn
 
-            match config.get("norm", "layer"):
-                case "group":
-                    # NOTE: currently n_group fixed to be 8
-                    norm = partial(GroupNorm, 8)
-                case "rms":
-                    norm = nn.RMSNorm
-                case _:
-                    norm = nn.LayerNorm
+            norm = resolve_norm(config.get("norm", "layer"))
 
-            self.transformer_decoder = nn.TransformerDecoder(
-                OperatorDecoderLayer(
-                    d_model=config.dim_emb,
-                    nhead=config.n_head,
-                    dim_feedforward=config.dim_ffn,
-                    dropout=config.dropout,
-                    activation="gelu",
-                    batch_first=True,
-                    norm_first=config.norm_first,
-                    custom_attn=config.get("custom_attn", 0),
-                    norm=norm,
-                ),
-                num_layers=config.n_layer,
-                # norm=norm(config.dim_emb) if config.norm_first else None,
-                norm=norm(config.dim_emb) if (config.norm_first and config.final_ln) else None,
+            self.transformer_decoder = nn.LayerList(
+                [
+                    OperatorDecoderLayer(
+                        d_model=config.dim_emb,
+                        nhead=config.n_head,
+                        dim_feedforward=config.dim_ffn,
+                        dropout=config.dropout,
+                        activation="gelu",
+                        batch_first=True,
+                        norm_first=config.norm_first,
+                        custom_attn=config.get("custom_attn", 0),
+                        norm=norm,
+                    )
+                    for _ in range(config.n_layer)
+                ]
             )
+            self.decoder_norm = norm(config.dim_emb) if (config.norm_first and config.get("final_ln", True)) else None
 
     def get_query_emb(self, times):
         """
@@ -371,7 +393,25 @@ class DataOperatorDecoder(nn.Module):
         if tgt_mask is None and self.config.self_attn == 1:
             tgt_mask = self.self_attn_mask
 
-        x = self.transformer_decoder(query_emb, src, tgt_mask=tgt_mask, memory_key_padding_mask=src_key_padding_mask)
+        if self.config.self_attn > 0:
+            x = self.transformer_decoder(
+                query_emb.transpose([1, 0, 2]),
+                src.transpose([1, 0, 2]),
+                tgt_mask=tgt_mask,
+                memory_key_padding_mask=src_key_padding_mask,
+            ).transpose([1, 0, 2])
+        else:
+            decoded = query_emb
+            for layer in self.transformer_decoder:
+                decoded = layer(
+                    tgt=decoded,
+                    memory=src,
+                    tgt_mask=tgt_mask,
+                    memory_key_padding_mask=src_key_padding_mask,
+                )
+            if self.decoder_norm is not None:
+                decoded = self.decoder_norm(decoded)
+            x = decoded
 
         return x  # (bs, query_len, dim)
 
@@ -397,14 +437,7 @@ class TransformerSymbolEncoder(nn.Module):
             self.transformer_encoder = None
         else:
             if config.get("custom_encoder", 0):
-                match config.get("norm", "layer"):
-                    case "group":
-                        # NOTE: currently n_group fixed to be 8
-                        norm = partial(GroupNorm, 8)
-                    case "rms":
-                        norm = nn.RMSNorm
-                    case _:
-                        norm = nn.LayerNorm
+                norm = resolve_norm(config.get("norm", "layer"))
 
                 self.transformer_encoder = CustomTransformerEncoder(
                     CustomTransformerEncoderLayer(
@@ -424,8 +457,8 @@ class TransformerSymbolEncoder(nn.Module):
                     config=config,
                 )
             else:
-                self.transformer_encoder = nn.TransformerEncoder(
-                    nn.TransformerEncoderLayer(
+                self.transformer_encoder = CustomTransformerEncoder(
+                    CustomTransformerEncoderLayer(
                         d_model=config.dim_emb,
                         nhead=config.n_head,
                         dim_feedforward=config.dim_ffn,
@@ -433,9 +466,13 @@ class TransformerSymbolEncoder(nn.Module):
                         activation="gelu",
                         batch_first=True,
                         norm_first=config.norm_first,
+                        rotary=False,
+                        custom_attn=False,
+                        norm=nn.LayerNorm,
                     ),
                     num_layers=config.n_layer,
                     norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
+                    config=None,
                 )
 
         if config.positional_embedding is None:
@@ -495,8 +532,7 @@ class TransformerSymbolDecoder(nn.Module):
                     dim_feedforward=config.dim_ffn,
                     dropout=config.dropout,
                     activation="gelu",
-                    batch_first=False,
-                    norm_first=config.norm_first,
+                    normalize_before=config.norm_first,
                 ),
                 num_layers=config.n_layer,
                 norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
@@ -509,8 +545,7 @@ class TransformerSymbolDecoder(nn.Module):
                     dim_feedforward=config.dim_ffn,
                     dropout=config.dropout,
                     activation="gelu",
-                    batch_first=False,
-                    norm_first=config.norm_first,
+                    normalize_before=config.norm_first,
                 ),
                 num_layers=config.n_layer,
                 norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
@@ -577,24 +612,24 @@ class TransformerSymbolDecoder(nn.Module):
         if self.positional_embedding is not None:
             tgt = self.positional_embedding(tgt)  # (bs, output_len, dim)
 
-        tgt = tgt.transpose(0, 1)  # (output_len, bs, dim)
-        memory = memory.transpose(0, 1)  # (input_len, bs, dim)
-
         if self.config.kv_cache:
+            tgt = tgt.transpose(0, 1)  # (output_len, bs, dim)
+            memory = memory.transpose(0, 1)  # (input_len, bs, dim)
             tgt_mask = None  # (causal decoder handles this automatically)
+            decoded = self.transformer_decoder(
+                tgt=tgt,
+                memory=memory,
+                tgt_mask=tgt_mask,
+            )  # (output_len, bs, dim)
+            return decoded.transpose(0, 1)  # (bs, output_len, dim)
         else:
-            tgt_mask = nn.Transformer.generate_square_subsequent_mask(tgt.size(0), tgt.device)
-
-        decoded = self.transformer_decoder(
-            tgt=tgt,
-            memory=memory,
-            tgt_mask=tgt_mask,
-            tgt_key_padding_mask=tgt_key_padding_mask,
-            memory_key_padding_mask=memory_key_padding_mask,
-            tgt_is_causal=True,
-        )  # (output_len, bs, dim)
-
-        return decoded.transpose(0, 1)  # (bs, output_len, dim)
+            tgt_mask = _generate_square_subsequent_mask(tgt.size(1), dtype=tgt.dtype)
+            decoded = self.transformer_decoder(
+                tgt=tgt,
+                memory=memory,
+                tgt_mask=tgt_mask,
+            )  # (bs, output_len, dim)
+            return decoded
 
     def predict(self, output, pred_mask, y):
         """
@@ -607,7 +642,7 @@ class TransformerSymbolDecoder(nn.Module):
         x = output[pred_mask.unsqueeze(-1).expand_as(output)].view(-1, self.dim)
         assert (y == self.pad_index).sum().item() == 0
         scores = self.proj(x).view(-1, self.n_words)
-        loss = F.cross_entropy(scores.float(), y, reduction="mean")
+        loss = F.cross_entropy(scores.astype("float32"), y, reduction="mean")
         return scores, loss
 
     def generate(self, memory, memory_key_padding_mask=None, max_len=200, sample_temperature=None):
@@ -625,59 +660,69 @@ class TransformerSymbolDecoder(nn.Module):
 
         """
         bs = memory.size(0)
-        memory = memory.transpose(0, 1)  # (memory_len, bs, dim)
+        if self.config.kv_cache:
+            memory = memory.transpose(0, 1)  # (memory_len, bs, dim)
 
         # generated sentences
-        generated = torch.full((max_len, bs), self.pad_index, dtype=torch.long, device=memory.device)
-        generated[0].fill_(self.bos_index)
+        generated = paddle.full([max_len, bs], self.pad_index, dtype="int64")
+        generated[0] = paddle.full([bs], self.bos_index, dtype="int64")
 
         # current position / max lengths / length of generated sentences / unfinished sentences
         cache = None
         cur_len = 1
-        gen_len = torch.ones(bs, dtype=torch.long, device=memory.device)  # (bs, )
-        unfinished_sents = torch.ones(bs, dtype=torch.long, device=memory.device)  # (bs, )
+        gen_len = paddle.ones([bs], dtype="int64")  # (bs, )
+        unfinished_sents = paddle.ones([bs], dtype="int64")  # (bs, )
 
         # generation loop
         while cur_len < max_len:  # max length of generation
             tgt = generated[:cur_len]  # (cur_len, bs)
             tgt = self.word_embeddings(tgt)
-            if self.positional_embedding is not None:
-                tgt = self.positional_embedding(tgt, batch_first=False)  # (output_len, bs, dim)
+            if self.config.kv_cache:
+                if self.positional_embedding is not None:
+                    tgt = self.positional_embedding(tgt, batch_first=False)  # (output_len, bs, dim)
+            else:
+                tgt = tgt.transpose([1, 0, 2])  # (bs, cur_len, dim)
+                if self.positional_embedding is not None:
+                    tgt = self.positional_embedding(tgt, batch_first=True)
 
             if self.config.kv_cache:
                 decoded, cache = self.transformer_decoder(
-                    tgt=tgt, memory=memory, memory_key_padding_mask=memory_key_padding_mask, cache=cache
+                    tgt=tgt, memory=memory, cache=cache
                 )  # (cur_len, bs, dim)
+                scores = self.proj(decoded[-1])  # (bs, n_words)
             else:
-                tgt_mask = nn.Transformer.generate_square_subsequent_mask(tgt.size(0), tgt.device)
+                tgt_mask = _generate_square_subsequent_mask(tgt.size(1), dtype=tgt.dtype)
                 decoded = self.transformer_decoder(
-                    tgt=tgt, memory=memory, tgt_mask=tgt_mask, memory_key_padding_mask=memory_key_padding_mask
-                )  # (cur_len, bs, dim)
-
-            scores = self.proj(decoded[-1])  # (bs, n_words)
+                    tgt=tgt, memory=memory, tgt_mask=tgt_mask
+                )  # (bs, cur_len, dim)
+                scores = self.proj(decoded[:, -1])  # (bs, n_words)
 
             # select next words: sample or greedy
             if sample_temperature is None:
-                next_words = torch.topk(scores, 1)[1].squeeze(1)
+                next_words = paddle.topk(scores, 1, axis=1)[1].squeeze(1)
             else:
-                next_words = torch.multinomial(
-                    F.softmax(scores.float() / sample_temperature, dim=1), num_samples=1
+                next_words = paddle.multinomial(
+                    F.softmax(scores.astype("float32") / sample_temperature, axis=1), num_samples=1
                 ).squeeze(1)
             # assert next_words.size() == (bs,)
 
             # update generations / lengths / finished sentences / current length
             generated[cur_len] = next_words * unfinished_sents + self.pad_index * (1 - unfinished_sents)
-            gen_len.add_(unfinished_sents)
-            unfinished_sents.mul_(next_words.ne(self.eos_index).long())
+            gen_len = gen_len + unfinished_sents
+            unfinished_sents = unfinished_sents * (next_words != self.eos_index).astype("int64")
             cur_len = cur_len + 1
 
             # stop when there is a </s> in each sentence, or if we exceed the maximul length
-            if unfinished_sents.max() == 0:
+            if unfinished_sents.max().item() == 0:
                 break
 
         # add <EOS> to unfinished sentences
         if cur_len == max_len:
-            generated[-1].masked_fill_(unfinished_sents.bool(), self.eos_index)
+            generated[-1] = paddle.where(
+                unfinished_sents.astype("bool"),
+                paddle.full_like(generated[-1], self.eos_index),
+                generated[-1],
+            )
         generated = generated[:cur_len].transpose(0, 1)  # (bs, cur_len)
         return generated, gen_len
 
@@ -703,14 +748,7 @@ class TransformerFusion(nn.Module):
             self.transformer_encoder = None
         else:
             if config.get("custom_encoder", 0):
-                match config.get("norm", "layer"):
-                    case "group":
-                        # NOTE: currently n_group fixed to be 8
-                        norm = partial(GroupNorm, 8)
-                    case "rms":
-                        norm = nn.RMSNorm
-                    case _:
-                        norm = nn.LayerNorm
+                norm = resolve_norm(config.get("norm", "layer"))
 
                 self.transformer_encoder = CustomTransformerEncoder(
                     CustomTransformerEncoderLayer(
@@ -730,8 +768,8 @@ class TransformerFusion(nn.Module):
                     config=config,
                 )
             else:
-                self.transformer_encoder = nn.TransformerEncoder(
-                    nn.TransformerEncoderLayer(
+                self.transformer_encoder = CustomTransformerEncoder(
+                    CustomTransformerEncoderLayer(
                         d_model=config.dim_emb,
                         nhead=config.n_head,
                         dim_feedforward=config.dim_ffn,
@@ -739,9 +777,13 @@ class TransformerFusion(nn.Module):
                         activation="gelu",
                         batch_first=True,
                         norm_first=config.norm_first,
+                        rotary=False,
+                        custom_attn=False,
+                        norm=nn.LayerNorm,
                     ),
                     num_layers=config.n_layer,
                     norm=nn.LayerNorm(config.dim_emb) if config.norm_first else None,
+                    config=None,
                 )
 
         if config.type_embeddings:
@@ -760,21 +802,21 @@ class TransformerFusion(nn.Module):
         bs = x0.size(0)
 
         if self.type_embeddings is not None:
-            type0 = torch.zeros(1, 1, dtype=torch.long, device=x0.device)
-            type1 = torch.ones(1, 1, dtype=torch.long, device=x1.device)
-            x0 = x0 + self.type_embeddings(type0).expand_as(x0)
-            x1 = x1 + self.type_embeddings(type1).expand_as(x1)
+            type0 = paddle.zeros([1, 1], dtype="int64")
+            type1 = paddle.ones([1, 1], dtype="int64")
+            x0 = x0 + self.type_embeddings(type0).expand(x0.shape)
+            x1 = x1 + self.type_embeddings(type1).expand(x1.shape)
 
-        x = torch.cat([x0, x1], dim=1)  # (bs, slen0+slen1, dim)
+        x = paddle.cat([x0, x1], axis=1)  # (bs, slen0+slen1, dim)
 
         if key_padding_mask0 is None and key_padding_mask1 is None:
             fused_mask = None
         else:
             if key_padding_mask0 is None:
-                key_padding_mask0 = torch.zeros(bs, x0.size(1), dtype=torch.bool, device=x0.device)
+                key_padding_mask0 = paddle.zeros([bs, x0.size(1)], dtype="bool")
             if key_padding_mask1 is None:
-                key_padding_mask1 = torch.zeros(bs, x1.size(1), dtype=torch.bool, device=x1.device)
-            fused_mask = torch.cat([key_padding_mask0, key_padding_mask1], dim=1)  # (bs, slen0+slen1)
+                key_padding_mask1 = paddle.zeros([bs, x1.size(1)], dtype="bool")
+            fused_mask = paddle.cat([key_padding_mask0, key_padding_mask1], axis=1)  # (bs, slen0+slen1)
 
         if self.transformer_encoder is not None:
             x = self.transformer_encoder(x, src_key_padding_mask=fused_mask)

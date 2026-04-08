@@ -1,6 +1,7 @@
 import math
 
 import einops
+from einops.layers.paddle import Rearrange
 import paddle
 
 try:
@@ -237,7 +238,7 @@ class ConvEmbedder(paddle.nn.Module):
                 paddle.nn.GELU(),
                 paddle.compat.nn.Linear(in_features=self.dim, out_features=self.dim),
                 paddle.nn.GELU(),
-                einops.layers.paddle.Rearrange(
+                Rearrange(
                     "b (t h w) d -> (b t) d h w",
                     h=self.config.patch_num_output,
                     w=self.config.patch_num_output,
@@ -272,7 +273,7 @@ class ConvEmbedder(paddle.nn.Module):
             )
         else:
             self.post_proj = paddle.nn.Sequential(
-                einops.layers.paddle.Rearrange(
+                Rearrange(
                     "b (t h w) d -> (b t) d h w",
                     h=self.config.patch_num_output,
                     w=self.config.patch_num_output,
@@ -361,6 +362,6 @@ if __name__ == "__main__":
     print(f"data_output.size() = {data_output.size()!r}")
 
     def count_parameters(model):
-        return sum(p.size for p in model.parameters() if p.requires_grad)
+        return sum(p.numel() for p in model.parameters() if not p.stop_gradient)
 
     print(f"{count_parameters(embedder):,}")
