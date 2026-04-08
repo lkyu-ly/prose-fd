@@ -3,11 +3,18 @@ from logging import getLogger
 
 import numpy as np
 import paddle
-import paddleformers
-from dadaptation import DAdaptAdan
-from data_utils.collate import custom_collate
-from dataset import get_dataset
-from utils.misc import to_cuda
+try:
+    from .data_utils.collate import custom_collate
+    from .dataset import get_dataset
+    from .utils.dadapt_adan_paddle import DAdaptAdan
+    from .utils.lr_scheduler import build_lr_scheduler
+    from .utils.misc import to_cuda
+except ImportError:
+    from data_utils.collate import custom_collate
+    from dataset import get_dataset
+    from utils.dadapt_adan_paddle import DAdaptAdan
+    from utils.lr_scheduler import build_lr_scheduler
+    from utils.misc import to_cuda
 
 logger = getLogger()
 
@@ -24,18 +31,13 @@ class Trainer(object):
         self.inner_epoch = 0
         self.set_parameters()
         if params.multi_gpu:
-            logger.info("Using nn.parallel.DistributedDataParallel ...")
+            logger.info("Using paddle.DataParallel ...")
             for k in self.modules.keys():
->>>>>>                self.modules[k] = torch.nn.parallel.DistributedDataParallel(
-                    self.modules[k],
-                    device_ids=[params.local_rank],
-                    output_device=params.local_rank,
-                    broadcast_buffers=True,
-                )
+                self.modules[k] = paddle.DataParallel(self.modules[k])
         self.set_optimizer()
         self.scaler = None
         if params.amp:
->>>>>>            self.scaler = torch.amp.GradScaler("cpu" if params.cpu else "cuda")
+            self.scaler = paddle.amp.GradScaler(enable=True)
         self.metrics = []
         metrics = [m for m in params.validation_metrics.split(",") if m != ""]
         for m in metrics:
@@ -88,11 +90,11 @@ class Trainer(object):
         named_params = []
         for v in self.modules.values():
             named_params.extend(
-                [(k, p) for k, p in v.named_parameters() if p.requires_grad]
+                [(k, p) for k, p in v.named_parameters() if not p.stop_gradient]
             )
         self.parameters["model"] = [p for k, p in named_params]
         for k, v in self.parameters.items():
-            num = sum([p.size for p in v])
+            num = sum([p.numel() for p in v])
             logger.info(f"Found {num:,} parameters in {k}.")
             assert len(v) >= 1
 
@@ -101,35 +103,17 @@ class Trainer(object):
         Set optimizer.
         """
         params = self.params
-        if params.optim.type == "adamw":
->>>>>>            self.optimizer = torch.optim.AdamW(
-                self.parameters["model"],
-                lr=params.optim.lr,
-                weight_decay=params.optim.weight_decay,
-                eps=params.optim.get("eps", 1e-08),
-                amsgrad=params.optim.get("amsgrad", False),
-                betas=(0.9, params.optim.get("beta2", 0.999)),
-            )
-        elif params.optim.type == "adan":
-            self.optimizer = DAdaptAdan(
-                self.parameters["model"],
-                lr=1.0,
-                weight_decay=params.optim.weight_decay,
-                growth_rate=1.05,
-            )
-        else:
-            raise ValueError(f"Unknown optimizer type: {params.optim.type}")
+        self.scheduler = None
+        optimizer_lr = params.optim.lr if params.optim.type == "adamw" else 1.0
         if params.optim.scheduler_type:
             if params.optim.scheduler_type == "one_cycle":
-                tmp_lr = paddle.optimizer.lr.OneCycleLR(
+                self.scheduler = paddle.optimizer.lr.OneCycleLR(
                     max_learning_rate=params.optim.lr,
                     divide_factor=10000.0,
                     phase_pct=params.optim.warmup / params.optim.max_iters,
                     total_steps=params.n_steps_per_epoch * params.max_epoch,
                     end_learning_rate=params.optim.lr * 1.0 / (10000.0 * 10000.0),
                 )
-                self.optimizer.set_lr_scheduler(tmp_lr)
-                self.scheduler = tmp_lr
             else:
                 scheduler_args = {}
                 if params.optim.scheduler_type == "cosine_with_restarts":
@@ -143,21 +127,41 @@ class Trainer(object):
                     scheduler_args["num_decay_steps"] = int(
                         params.optim.max_iters * params.optim.decay
                     )
-                    scheduler_args["min_lr_ratio"] = params.optim.get("min_lr_ratio", 0)
+                    scheduler_args["min_lr_ratio"] = params.optim.get(
+                        "min_lr_ratio", 0
+                    )
                     scheduler_args["num_stable_steps"] = (
                         params.optim.max_iters
                         - params.optim.warmup
                         - scheduler_args["num_decay_steps"]
                     )
->>>>>>                self.scheduler = transformers.get_scheduler(
-                    name=params.optim.scheduler_type,
-                    optimizer=self.optimizer,
+                self.scheduler = build_lr_scheduler(
+                    scheduler_type=params.optim.scheduler_type,
+                    base_learning_rate=optimizer_lr,
                     num_warmup_steps=params.optim.warmup,
                     num_training_steps=params.optim.max_iters,
                     scheduler_specific_kwargs=scheduler_args,
                 )
+        learning_rate = self.scheduler if self.scheduler is not None else optimizer_lr
+        if params.optim.type == "adamw":
+            self.optimizer = paddle.optimizer.AdamW(
+                learning_rate=learning_rate,
+                parameters=self.parameters["model"],
+                weight_decay=params.optim.weight_decay,
+                epsilon=params.optim.get("eps", 1e-08),
+                amsgrad=params.optim.get("amsgrad", False),
+                beta1=0.9,
+                beta2=params.optim.get("beta2", 0.999),
+            )
+        elif params.optim.type == "adan":
+            self.optimizer = DAdaptAdan(
+                self.parameters["model"],
+                lr=learning_rate,
+                weight_decay=params.optim.weight_decay,
+                growth_rate=1.05,
+            )
         else:
-            self.scheduler = None
+            raise ValueError(f"Unknown optimizer type: {params.optim.type}")
         logger.info(
             f"Optimizer: {type(self.optimizer)}, scheduler: {type(self.scheduler)}"
         )
@@ -207,9 +211,7 @@ class Trainer(object):
         if self.n_total_iter % self.params.print_freq != 0:
             return
         s_iter = "%7i - " % self.n_total_iter
-        s_lr = " - LR: " + " / ".join(
-            "{:.4e}".format(group["lr"]) for group in self.optimizer.param_groups
-        )
+        s_lr = f" - LR: {self.optimizer.get_lr():.4e}"
         max_mem = paddle.cuda.max_memory_allocated() / 1024**2
         s_mem = " MEM: {:.2f} MB - ".format(max_mem)
         logger.info(s_iter + s_mem + s_lr)
@@ -379,7 +381,7 @@ class Trainer(object):
             eps = 1e-08
             if self.params.normalize == "meanvar":
                 mean = paddle.mean(data_input, axis=(1, 2, 3), keepdim=True)
->>>>>>                std = torch.std(data_input, axis=(1, 2, 3), keepdim=True) + eps
+                std = paddle.std(data_input, axis=(1, 2, 3), keepdim=True) + eps
             elif self.params.normalize == "range":
                 max = paddle.amax(data_input, dim=(1, 2, 3), keepdim=True)
                 min = paddle.amin(data_input, dim=(1, 2, 3), keepdim=True)
@@ -387,7 +389,7 @@ class Trainer(object):
                 std = (max - min) / 2 + eps
             elif self.params.normalize == "meanvar_c":
                 mean = paddle.mean(data_input, axis=(1, 2, 3, 4), keepdim=True)
->>>>>>                std = torch.std(data_input, axis=(1, 2, 3, 4), keepdim=True) + eps
+                std = paddle.std(data_input, axis=(1, 2, 3, 4), keepdim=True) + eps
             else:
                 raise ValueError(
                     f"Unknown normalization method: {self.params.normalize}"

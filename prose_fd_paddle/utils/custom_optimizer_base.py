@@ -21,7 +21,7 @@ class TorchStylePaddleOptimizer(paddle.optimizer.Optimizer):
 
     def __init__(self, params, lr, defaults):
         super().__init__(
-            learning_rate=float(lr),
+            learning_rate=lr,
             parameters=params,
             weight_decay=defaults.get("weight_decay", 0.0),
         )

@@ -41,15 +41,15 @@ class PROSE_2to1(paddle.nn.Module):
 
     def summary(self):
         s = "\n"
-        s += f"""	Embedder:        {sum([p.size for p in self.embedder.parameters() if p.requires_grad]):,}
+        s += f"""	Embedder:        {sum([p.numel() for p in self.embedder.parameters() if not p.stop_gradient]):,}
 """
-        s += f"""	Data Encoder:    {sum([p.size for p in self.data_encoder.parameters() if p.requires_grad]):,}
+        s += f"""	Data Encoder:    {sum([p.numel() for p in self.data_encoder.parameters() if not p.stop_gradient]):,}
 """
-        s += f"""	Symbol Encoder:  {sum([p.size for p in self.symbol_encoder.parameters() if p.requires_grad]):,}
+        s += f"""	Symbol Encoder:  {sum([p.numel() for p in self.symbol_encoder.parameters() if not p.stop_gradient]):,}
 """
-        s += f"""	Fusion:          {sum([p.size for p in self.fusion.parameters() if p.requires_grad]):,}
+        s += f"""	Fusion:          {sum([p.numel() for p in self.fusion.parameters() if not p.stop_gradient]):,}
 """
-        s += f"\tData Decoder:    {sum([p.size for p in self.data_decoder.parameters() if p.requires_grad]):,}"
+        s += f"\tData Decoder:    {sum([p.numel() for p in self.data_decoder.parameters() if not p.stop_gradient]):,}"
         return s
 
     def forward(self, mode, **kwargs):
@@ -141,11 +141,11 @@ class PROSE_1to1(paddle.nn.Module):
 
     def summary(self):
         s = "\n"
-        s += f"""	Embedder:        {sum([p.size for p in self.embedder.parameters() if p.requires_grad]):,}
+        s += f"""	Embedder:        {sum([p.numel() for p in self.embedder.parameters() if not p.stop_gradient]):,}
 """
-        s += f"""	Data Encoder:    {sum([p.size for p in self.data_encoder.parameters() if p.requires_grad]):,}
+        s += f"""	Data Encoder:    {sum([p.numel() for p in self.data_encoder.parameters() if not p.stop_gradient]):,}
 """
-        s += f"\tData Decoder:    {sum([p.size for p in self.data_decoder.parameters() if p.requires_grad]):,}"
+        s += f"\tData Decoder:    {sum([p.numel() for p in self.data_decoder.parameters() if not p.stop_gradient]):,}"
         return s
 
     def forward(self, mode, **kwargs):

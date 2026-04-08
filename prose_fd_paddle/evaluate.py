@@ -8,13 +8,20 @@ from logging import getLogger
 import numpy as np
 import paddle
 import wandb
-from data_utils.collate import custom_collate
-from dataset import get_dataset
 from paddle_utils import *
 from tabulate import tabulate
-from utils.metrics import compute_metrics
-from utils.misc import sync_tensor, to_cuda
-from utils.plot import plot_2d_pde, plot_2d_pde_formal
+try:
+    from .data_utils.collate import custom_collate
+    from .dataset import get_dataset
+    from .utils.metrics import compute_metrics
+    from .utils.misc import sync_tensor, to_cuda
+    from .utils.plot import plot_2d_pde, plot_2d_pde_formal
+except ImportError:
+    from data_utils.collate import custom_collate
+    from dataset import get_dataset
+    from utils.metrics import compute_metrics
+    from utils.misc import sync_tensor, to_cuda
+    from utils.plot import plot_2d_pde, plot_2d_pde_formal
 
 np.seterr(divide="raise", under="ignore", over="raise", invalid="raise")
 logger = getLogger()
@@ -583,7 +590,7 @@ class Evaluator(object):
             eps = 1e-06
             if self.params.normalize == "meanvar":
                 mean = paddle.mean(data_input, axis=(1, 2, 3), keepdim=True)
->>>>>>                std = torch.std(data_input, axis=(1, 2, 3), keepdim=True) + eps
+                std = paddle.std(data_input, axis=(1, 2, 3), keepdim=True) + eps
             elif self.params.normalize == "range":
                 max = paddle.amax(data_input, dim=(1, 2, 3), keepdim=True)
                 min = paddle.amin(data_input, dim=(1, 2, 3), keepdim=True)

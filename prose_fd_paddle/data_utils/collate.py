@@ -5,6 +5,24 @@ import paddle
 from paddle_utils import *
 
 
+def pad_sequence(sequences, batch_first=True, padding_value=0):
+    max_len = max(sequence.shape[0] for sequence in sequences)
+    batch_size = len(sequences)
+    out_shape = (
+        [batch_size, max_len, *sequences[0].shape[1:]]
+        if batch_first
+        else [max_len, batch_size, *sequences[0].shape[1:]]
+    )
+    padded = paddle.full(out_shape, padding_value, dtype=sequences[0].dtype)
+    for idx, sequence in enumerate(sequences):
+        length = sequence.shape[0]
+        if batch_first:
+            padded[idx, :length] = sequence
+        else:
+            padded[:length, idx] = sequence
+    return padded
+
+
 def get_padding_mask(lengths, max_len=None, pad_right=1):
     """
     Input:
@@ -105,13 +123,13 @@ def custom_collate(
                 if pad_right:
                     symbols = [d[k] for d in batch]
                     lengths = paddle.LongTensor([l.size(0) for l in symbols])
->>>>>>                    symbols_pad = torch.nn.utils.rnn.pad_sequence(
+                    symbols_pad = pad_sequence(
                         symbols, batch_first=True, padding_value=padding_idx
                     )
                 else:
                     symbols = [d[k].flip(axis=[0]) for d in batch]
                     lengths = paddle.LongTensor([l.size(0) for l in symbols])
->>>>>>                    symbols_pad = torch.nn.utils.rnn.pad_sequence(
+                    symbols_pad = pad_sequence(
                         symbols, batch_first=True, padding_value=padding_idx
                     ).flip(axis=[1])
                 res["symbol_mask"] = get_padding_mask(lengths, pad_right=pad_right)

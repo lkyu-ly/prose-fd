@@ -212,9 +212,9 @@ class ViT(paddle.nn.Module):
 
     def summary(self):
         s = "\n"
-        s += f"""	Embedder:        {sum([p.size for p in self.embedder.parameters() if p.requires_grad]):,}
+        s += f"""	Embedder:        {sum([p.numel() for p in self.embedder.parameters() if not p.stop_gradient]):,}
 """
-        s += f"\tEncoder:         {sum([p.size for p in self.encoder.parameters() if p.requires_grad]):,}"
+        s += f"\tEncoder:         {sum([p.numel() for p in self.encoder.parameters() if not p.stop_gradient]):,}"
         return s
 
     def forward(self, mode, **kwargs):

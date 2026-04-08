@@ -1,7 +1,11 @@
 from logging import getLogger
 
-import torchdata.datapipes as dp
-from data_utils import all_datasets as ds
+try:
+    from .data_utils import all_datasets as ds
+    from .utils.datapipe_compat import Multiplexer, SampleMultiplexer
+except ImportError:
+    from data_utils import all_datasets as ds
+    from utils.datapipe_compat import Multiplexer, SampleMultiplexer
 
 logger = getLogger()
 ALL_DATASETS = {
@@ -25,9 +29,9 @@ def get_dataset(params, symbol_env, split):
                 ds = ds.shuffle(buffer_size=ds.buffer_size)
             datasets[ds.cycle()] = params.data.sampler[t]
         if params.data.sampler.uniform:
-            return dp.iter.Multiplexer(*datasets)
+            return Multiplexer(*datasets)
         else:
-            return dp.iter.SampleMultiplexer(datasets)
+            return SampleMultiplexer(datasets)
     else:
         datasets = {}
         for t in types:

@@ -3,3 +3,9 @@ wandb/
 __pycache__/
 *.pyc
 dataset/
+
+.spec-workflow/
+CLAUDE.md
+/models/
+.claude/
+# tests/

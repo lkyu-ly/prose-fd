@@ -4,17 +4,25 @@ from pathlib import Path
 import hydra
 import numpy as np
 import paddle
-import utils
 import wandb
-from evaluate import Evaluator, metric_to_header
-from models.build_model import build_model
 from omegaconf import DictConfig, OmegaConf
-from symbol_utils.environment import SymbolicEnvironment
-from trainer import Trainer
-from utils.misc import initialize_exp, set_seed
-from utils.mode import init_distributed_mode
+try:
+    from . import utils
+    from .evaluate import Evaluator, metric_to_header
+    from .models.build_model import build_model
+    from .symbol_utils.environment import SymbolicEnvironment
+    from .trainer import Trainer
+    from .utils.misc import initialize_exp, set_seed
+    from .utils.mode import init_distributed_mode
+except ImportError:
+    import utils
+    from evaluate import Evaluator, metric_to_header
+    from models.build_model import build_model
+    from symbol_utils.environment import SymbolicEnvironment
+    from trainer import Trainer
+    from utils.misc import initialize_exp, set_seed
+    from utils.mode import init_distributed_mode
 
->>>>>>torch.multiprocessing.set_sharing_strategy("file_system")
 np.seterr(divide="raise", under="ignore", over="raise", invalid="raise")
 
 
@@ -172,7 +180,7 @@ def main(params: DictConfig):
     s_mem = " MEM: {:.2f} MB ".format(max_mem)
     logger.info(s_mem)
     if params.multi_gpu:
->>>>>>        torch.distributed.destroy_process_group()
+        paddle.distributed.destroy_process_group()
     if params.use_wandb:
         wandb.finish()
 

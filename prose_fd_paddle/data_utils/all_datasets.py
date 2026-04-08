@@ -6,7 +6,11 @@ from logging import getLogger
 import h5py
 import numpy as np
 import paddle
-import torchdata.datapipes as dp
+
+try:
+    from ..utils.datapipe_compat import IterDataPipe
+except ImportError:
+    from utils.datapipe_compat import IterDataPipe
 
 logger = getLogger()
 DatasetIdx = {
@@ -20,7 +24,7 @@ DatasetIdx = {
 }
 
 
-class myIterDp(dp.iter.IterDataPipe):
+class myIterDp(IterDataPipe):
     """
     Base class for all iterable datasets, and contains some shared helper methods.
     """

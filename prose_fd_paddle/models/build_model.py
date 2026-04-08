@@ -61,14 +61,11 @@ def build_model(params, model_config, data_config, symbol_env):
     for k, v in modules.items():
         logger.info(f"{k}: {v}")
     for k, v in modules.items():
-        s = f"Number of parameters ({k}): {sum([p.size for p in v.parameters() if p.requires_grad]):,}"
+        s = f"Number of parameters ({k}): {sum([p.numel() for p in v.parameters() if not p.stop_gradient]):,}"
         if hasattr(v, "summary"):
             s += v.summary()
         logger.info(s)
     if not params.cpu:
         for v in modules.values():
             v.cuda()
-    if params.compile:
-        for k, v in modules.items():
->>>>>>            modules[k] = torch.compile(v)
     return modules

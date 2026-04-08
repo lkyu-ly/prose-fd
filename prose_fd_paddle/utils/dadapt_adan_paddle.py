@@ -75,7 +75,7 @@ class DAdaptAdan(TorchStylePaddleOptimizer):
     ):
         if not 0.0 < d0:
             raise ValueError("Invalid d0 value: {}".format(d0))
-        if not 0.0 < lr:
+        if not isinstance(lr, paddle.optimizer.lr.LRScheduler) and not 0.0 < lr:
             raise ValueError("Invalid learning rate: {}".format(lr))
         if not 0.0 < eps:
             raise ValueError("Invalid epsilon value: {}".format(eps))
