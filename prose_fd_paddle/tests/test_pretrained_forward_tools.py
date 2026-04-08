@@ -66,3 +66,8 @@ def test_forward_input_contract_shapes_are_stable():
     assert output_times.shape == (1, 1, 1)
     assert symbol_input.shape == (1, 16)
     assert symbol_padding_mask.shape == (1, 16)
+
+
+def test_torch_forward_script_path_exists():
+    script = ROOT / "prose_fd" / "tools" / "forward_pretrained_torch.py"
+    assert script.is_file()
