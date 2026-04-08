@@ -5,15 +5,16 @@ import sys
 from pathlib import Path
 
 import numpy as np
-import torch
+import paddle
 from omegaconf import OmegaConf
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "prose_fd_paddle"))
 
-from prose_fd.models.build_model import build_model
-from prose_fd.symbol_utils.environment import SymbolicEnvironment
-CKPT_PATH = ROOT / "models" / "prose_fd_torch" / "prose_fd.pth"
+from prose_fd_paddle.models.build_model import build_model
+from prose_fd_paddle.symbol_utils.environment import SymbolicEnvironment
+CKPT_PATH = ROOT / "models" / "prose_fd_paddle" / "prose_fd_converted.pdparams"
 
 
 class Params:
@@ -31,18 +32,18 @@ def build_inputs(symbol_env):
     symbol_input = rng.integers(0, len(symbol_env.equation_word2id), size=(1, 16), dtype=np.int64)
     symbol_padding_mask = np.zeros((1, 16), dtype=bool)
     return {
-        "data_input": torch.from_numpy(data_input),
-        "input_times": torch.from_numpy(input_times),
-        "output_times": torch.from_numpy(output_times),
-        "symbol_input": torch.from_numpy(symbol_input),
-        "symbol_padding_mask": torch.from_numpy(symbol_padding_mask),
+        "data_input": paddle.to_tensor(data_input),
+        "input_times": paddle.to_tensor(input_times),
+        "output_times": paddle.to_tensor(output_times),
+        "symbol_input": paddle.to_tensor(symbol_input),
+        "symbol_padding_mask": paddle.to_tensor(symbol_padding_mask),
     }
 
 
 def main():
-    model_cfg = OmegaConf.load(ROOT / "prose_fd" / "configs" / "model" / "prose_2to1.yaml")
-    data_cfg = OmegaConf.load(ROOT / "prose_fd" / "configs" / "data" / "fluids.yaml")
-    symbol_cfg = OmegaConf.load(ROOT / "prose_fd" / "configs" / "symbol" / "symbol.yaml")
+    model_cfg = OmegaConf.load(ROOT / "prose_fd_paddle" / "configs" / "model" / "prose_2to1.yaml")
+    data_cfg = OmegaConf.load(ROOT / "prose_fd_paddle" / "configs" / "data" / "fluids.yaml")
+    symbol_cfg = OmegaConf.load(ROOT / "prose_fd_paddle" / "configs" / "symbol" / "symbol.yaml")
     OmegaConf.resolve(model_cfg)
     OmegaConf.resolve(data_cfg)
     OmegaConf.resolve(symbol_cfg)
@@ -51,11 +52,10 @@ def main():
     model = modules["model"]
     model.eval()
     model_input = build_inputs(symbol_env)
-    with torch.no_grad():
-        output = model("fwd", **model_input)
+    output = model("fwd", **model_input)
     result = {
         "shape": list(output.shape),
-        "values": output.cpu().numpy().tolist(),
+        "values": output.numpy().tolist(),
     }
     print(json.dumps(result))
 

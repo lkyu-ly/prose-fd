@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -71,3 +74,25 @@ def test_forward_input_contract_shapes_are_stable():
 def test_torch_forward_script_path_exists():
     script = ROOT / "prose_fd" / "tools" / "forward_pretrained_torch.py"
     assert script.is_file()
+
+
+def test_paddle_forward_script_path_exists():
+    script = ROOT / "prose_fd_paddle" / "tools" / "forward_pretrained_paddle.py"
+    assert script.is_file()
+
+
+def test_torch_and_paddle_forward_outputs_are_numerically_close():
+    torch_script = ROOT / "prose_fd" / "tools" / "forward_pretrained_torch.py"
+    paddle_script = ROOT / "prose_fd_paddle" / "tools" / "forward_pretrained_paddle.py"
+    python_bin = "/home/lkyu/miniconda3/envs/paddletorch/bin/python"
+
+    torch_out = subprocess.check_output([python_bin, str(torch_script)], text=True)
+    paddle_out = subprocess.check_output([python_bin, str(paddle_script)], text=True)
+
+    torch_values = np.array(json.loads(torch_out)["values"], dtype=np.float32)
+    paddle_values = np.array(json.loads(paddle_out)["values"], dtype=np.float32)
+    diff = np.abs(torch_values - paddle_values)
+
+    assert torch_values.shape == paddle_values.shape == (1, 1, 128, 128, 4)
+    assert diff.max() < 5e-3
+    assert diff.mean() < 1e-4

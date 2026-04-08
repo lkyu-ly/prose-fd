@@ -1,8 +1,4 @@
-import sys
-
-sys.path.append("/home/lkyu/baidu/prose-fd/prose_fd_paddle")
 import paddle
-from paddle_utils import *
 
 """
 This file contains attention layers and related utils. 
@@ -11,7 +7,12 @@ import copy
 import math
 from typing import Callable, Optional, Tuple, Union
 
-from rotary_embedding_torch import RotaryEmbedding
+try:
+    from ..utils.rotary_embedding_paddle import RotaryEmbedding
+except ImportError:
+    from utils.rotary_embedding_paddle import RotaryEmbedding
+
+Tensor = paddle.Tensor
 
 N_MAX_POSITIONS = 1024
 """
@@ -54,18 +55,17 @@ class MultiheadAttention(paddle.nn.Module):
         q = q.view(bs, seq_len, self.num_heads, self.head_dim)
         k = k.view(bs, k_len, self.num_heads, self.head_dim)
         v = v.view(bs, k_len, self.num_heads, self.head_dim)
-        q, k, v = q.transpose(1, 2), k.transpose(1, 2), v.transpose(1, 2)
         if rotary_emb is not None:
             q = rotary_emb.rotate_queries_or_keys(q)
             k = rotary_emb.rotate_queries_or_keys(k)
->>>>>>        key_padding_mask = torch.nn.functional._canonical_mask(
+        key_padding_mask = _canonical_mask(
             mask=key_padding_mask,
             mask_name="key_padding_mask",
->>>>>>            other_type=torch.nn.functional._none_or_dtype(attn_mask),
+            other_type=_none_or_dtype(attn_mask),
             other_name="attn_mask",
             target_type=query.dtype,
         )
->>>>>>        attn_mask = torch.nn.functional._canonical_mask(
+        attn_mask = _canonical_mask(
             mask=attn_mask,
             mask_name="attn_mask",
             other_type=None,
@@ -78,18 +78,19 @@ class MultiheadAttention(paddle.nn.Module):
                 bs,
                 k_len,
             ), f"expecting key_padding_mask shape of {bs, k_len}, but got {key_padding_mask.shape}"
+            # Paddle SDPA requires 4D attn_bias with 2nd-last dim == seq_len
             key_padding_mask = key_padding_mask.view(bs, 1, 1, k_len).expand(
-                -1, self.num_heads, -1, -1
+                -1, 1, seq_len, -1
             )
             if attn_mask is None:
                 attn_mask = key_padding_mask
             else:
                 attn_mask = attn_mask + key_padding_mask
         dropout_p = 0.0 if not self.training else self.dropout
-        output = paddle.compat.nn.functional.scaled_dot_product_attention(
+        output = paddle.nn.functional.scaled_dot_product_attention(
             q, k, v, attn_mask, dropout_p, is_causal
         )
-        output = output.transpose(1, 2).contiguous().view(bs, seq_len, -1)
+        output = output.reshape([bs, seq_len, -1])
         return self.out_proj(output), None
 
 
@@ -160,14 +161,14 @@ class CustomTransformerEncoderLayer(paddle.nn.TransformerEncoderLayer):
         is_causal: bool = False,
         rotary_emb=None,
     ) -> paddle.Tensor:
->>>>>>        src_key_padding_mask = torch.nn.functional._canonical_mask(
+        src_key_padding_mask = _canonical_mask(
             mask=src_key_padding_mask,
             mask_name="src_key_padding_mask",
->>>>>>            other_type=torch.nn.functional._none_or_dtype(src_mask),
+            other_type=_none_or_dtype(src_mask),
             other_name="src_mask",
             target_type=src.dtype,
         )
->>>>>>        src_mask = torch.nn.functional._canonical_mask(
+        src_mask = _canonical_mask(
             mask=src_mask,
             mask_name="src_mask",
             other_type=None,
@@ -229,6 +230,10 @@ class CustomTransformerEncoderLayer(paddle.nn.TransformerEncoderLayer):
             )[0]
         return self.dropout1(x)
 
+    def _ff_block(self, x: paddle.Tensor) -> paddle.Tensor:
+        x = self.linear2(self.dropout(self.activation(self.linear1(x))))
+        return self.dropout2(x)
+
 
 class CustomTransformerEncoder(paddle.nn.Module):
     """
@@ -246,7 +251,6 @@ class CustomTransformerEncoder(paddle.nn.Module):
         config=None,
     ) -> None:
         super().__init__()
->>>>>>        torch._C._log_api_usage_once(f"torch.nn.modules.{self.__class__.__name__}")
         self.layers = _get_clones(encoder_layer, num_layers)
         self.num_layers = num_layers
         self.norm = norm
@@ -265,14 +269,14 @@ class CustomTransformerEncoder(paddle.nn.Module):
         src_key_padding_mask=None,
         is_causal: Optional[bool] = None,
     ):
->>>>>>        src_key_padding_mask = torch.nn.functional._canonical_mask(
+        src_key_padding_mask = _canonical_mask(
             mask=src_key_padding_mask,
             mask_name="src_key_padding_mask",
->>>>>>            other_type=torch.nn.functional._none_or_dtype(mask),
+            other_type=_none_or_dtype(mask),
             other_name="mask",
             target_type=src.dtype,
         )
->>>>>>        mask = torch.nn.functional._canonical_mask(
+        mask = _canonical_mask(
             mask=mask,
             mask_name="mask",
             other_type=None,
@@ -396,12 +400,8 @@ class CausalTransformerDecoderLayer(paddle.nn.TransformerDecoderLayer):
             return super().forward(
                 tgt,
                 memory,
->>>>>>                tgt_mask=torch.nn.Transformer.generate_square_subsequent_mask(
-                    tgt.size(0), tgt.device
-                ),
+                tgt_mask=_generate_square_subsequent_mask(tgt.size(0), dtype=tgt.dtype),
                 memory_mask=memory_mask,
-                tgt_key_padding_mask=tgt_key_padding_mask,
-                memory_key_padding_mask=memory_key_padding_mask,
             )
         if self.norm_first:
             tgt_last_tok = tgt[-1:, :, :]
@@ -542,9 +542,7 @@ class CausalDecoderOnlyLayer(paddle.nn.TransformerEncoderLayer):
                     src,
                     src,
                     src,
->>>>>>                    attn_mask=torch.nn.Transformer.generate_square_subsequent_mask(
-                        src.size(0), src.device
-                    ),
+                    attn_mask=_generate_square_subsequent_mask(src.size(0), dtype=src.dtype),
                     key_padding_mask=src_key_padding_mask,
                     need_weights=False,
                     is_causal=True,
@@ -567,9 +565,7 @@ class CausalDecoderOnlyLayer(paddle.nn.TransformerEncoderLayer):
         else:
             if first:
                 src_last_tok = src
->>>>>>                src_mask = torch.nn.Transformer.generate_square_subsequent_mask(
-                    src.size(0), src.device
-                )
+                src_mask = _generate_square_subsequent_mask(src.size(0), dtype=src.dtype)
                 is_causal = True
             else:
                 src_last_tok = src[-1:, :, :]
@@ -772,9 +768,10 @@ class SinusoidalPE(paddle.nn.Module):
     ):
         super().__init__()
         self.dropout = paddle.nn.Dropout(p=dropout)
-        position = paddle.arange(max_len).unsqueeze(1)
+        position = paddle.arange(max_len, dtype=paddle.float32).unsqueeze(1)
         div_term = paddle.exp(
-            paddle.arange(0, d_model, 2) * (-math.log(10000.0) / d_model)
+            paddle.arange(0, d_model, 2, dtype=paddle.float32)
+            * (-math.log(10000.0) / d_model)
         )
         pe = paddle.zeros(max_len, 1, d_model)
         pe[:, 0, 0::2] = paddle.sin(position * div_term)
@@ -816,8 +813,7 @@ class LearnablePE(paddle.nn.Module):
         """
         seq_len = x.size(1) if batch_first else x.size(0)
         if positions is None:
-            positions = x.new(seq_len).long()
-            positions = paddle.arange(seq_len, out=positions).unsqueeze(0)
+            positions = paddle.arange(seq_len, dtype="int64").unsqueeze(0)
         pe = self.pe(positions)
         if batch_first:
             x = x + pe.expand_as(x)
@@ -828,12 +824,12 @@ class LearnablePE(paddle.nn.Module):
 
 def get_embeddings(size, type=None):
     if type is None:
-        patch_embeddings = paddle.nn.Parameter(paddle.randn(*size))
+        patch_embeddings = paddle.nn.Parameter(paddle.randn(size))
     elif type == "normalize":
         dim = size[-1]
-        patch_embeddings = paddle.nn.Parameter(dim**-0.5 * paddle.randn(*size))
+        patch_embeddings = paddle.nn.Parameter(dim**-0.5 * paddle.randn(size))
     elif type == "bert":
-        patch_embeddings = paddle.nn.Parameter(paddle.empty(*size).normal_(std=0.02))
+        patch_embeddings = paddle.nn.Parameter(0.02 * paddle.randn(size))
     else:
         raise ValueError(f"Unknown type for embedding: {type}")
     return patch_embeddings
@@ -853,20 +849,18 @@ def get_padding_mask(lengths, max_len=None):
         key_padding_mask:  BoolTensor (bs, max_len)    (positions with value True are padding)
     """
     if max_len is None:
-        max_len = lengths._max().item()
+        max_len = int(paddle.max(lengths).item())
     bs = lengths.size(0)
-    key_padding_mask = paddle.arange(max_len, device=lengths.device).expand(
-        bs, max_len
-    ) >= lengths.unsqueeze(1)
+    key_padding_mask = paddle.arange(max_len, dtype=lengths.dtype).expand([bs, max_len]) >= lengths.unsqueeze(1)
     return key_padding_mask
 
 
-def get_block_attn_mask(block_size: int, n_repeat: int, device=paddle.device("cpu")):
+def get_block_attn_mask(block_size: int, n_repeat: int, device=None):
     """
     Output:
         attn_mask: BoolTensor (block_size * n_repeat, block_size * n_repeat) block diagonal matrix with identity blocks
     """
-    blocks = [paddle.ones(block_size, block_size, device=device)] * n_repeat
+    blocks = [paddle.ones([block_size, block_size], dtype="float32")] * n_repeat
     return paddle.block_diag(inputs=blocks).bool()
 
 
@@ -883,7 +877,7 @@ def _get_clones(module, N):
 
 
 def _get_seq_len(src: paddle.Tensor, batch_first: bool) -> Optional[int]:
-    if src.is_nested:
+    if getattr(src, "is_nested", False):
         return None
     else:
         src_size = src.size()
@@ -896,19 +890,17 @@ def _get_seq_len(src: paddle.Tensor, batch_first: bool) -> Optional[int]:
 
 def _generate_square_subsequent_mask(
     sz: int,
-    device: Optional[paddle.device] = None,
+    device=None,
     dtype: Optional[paddle.dtype] = None,
 ) -> paddle.Tensor:
     """Generate a square causal mask for the sequence.
 
     The masked positions are filled with float('-inf'). Unmasked positions are filled with float(0.0).
     """
-    if device is None:
-        device = paddle.device("cpu")
     if dtype is None:
         dtype = paddle.float32
     return paddle.triu(
-        paddle.full((sz, sz), float("-inf"), dtype=dtype, device=device), diagonal=1
+        paddle.full((sz, sz), float("-inf"), dtype=dtype), diagonal=1
     )
 
 
@@ -970,3 +962,29 @@ class GroupNorm(paddle.nn.Module):
         return "{num_groups}, {num_channels}, eps={eps}, affine={affine}".format(
             **self.__dict__
         )
+
+
+def _none_or_dtype(mask: Optional[paddle.Tensor]):
+    if mask is None:
+        return None
+    return mask.dtype
+
+
+def _canonical_mask(
+    mask: Optional[paddle.Tensor],
+    mask_name: str,
+    other_type,
+    other_name: str,
+    target_type: paddle.dtype,
+    check_other: bool = True,
+):
+    del mask_name, other_type, other_name, check_other
+    if mask is None:
+        return None
+    if mask.dtype == paddle.bool:
+        zeros = paddle.zeros(mask.shape, dtype=target_type)
+        neg_inf = paddle.full(mask.shape, float("-inf"), dtype=target_type)
+        return paddle.where(mask, neg_inf, zeros)
+    if mask.dtype != target_type:
+        return paddle.cast(mask, target_type)
+    return mask
