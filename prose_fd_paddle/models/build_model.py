@@ -7,6 +7,11 @@ import paddle
 from paddle_utils import *
 from tabulate import tabulate
 
+try:
+    from ..utils.misc import get_runtime_device
+except ImportError:
+    from utils.misc import get_runtime_device
+
 from .baselines import FNO, DeepONet, UNet, ViT
 from .transformer_wrappers import PROSE_1to1, PROSE_2to1
 
@@ -67,5 +72,5 @@ def build_model(params, model_config, data_config, symbol_env):
         logger.info(s)
     if not params.cpu:
         for v in modules.values():
-            v.cuda()
+            v.to(get_runtime_device())
     return modules

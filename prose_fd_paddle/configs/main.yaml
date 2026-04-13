@@ -1,6 +1,6 @@
 defaults:
   - data: fluids
-  - model: prose_2to1_S
+  - model: prose_2to1
   - optim: adamw
   - symbol: symbol
   - _self_
@@ -105,6 +105,8 @@ dump_path: null
 eval_dump_path: null
 
 ## CPU / Multi-GPU / Multi-Nodes
+device: null
+runtime_device: null
 cpu: 0
 world_size: ???
 global_rank: ???

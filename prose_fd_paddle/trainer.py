@@ -8,13 +8,13 @@ try:
     from .dataset import get_dataset
     from .utils.dadapt_adan_paddle import DAdaptAdan
     from .utils.lr_scheduler import build_lr_scheduler
-    from .utils.misc import to_cuda
+    from .utils.misc import get_amp_device_type, max_memory_allocated_mb, to_cuda
 except ImportError:
     from data_utils.collate import custom_collate
     from dataset import get_dataset
     from utils.dadapt_adan_paddle import DAdaptAdan
     from utils.lr_scheduler import build_lr_scheduler
-    from utils.misc import to_cuda
+    from utils.misc import get_amp_device_type, max_memory_allocated_mb, to_cuda
 
 logger = getLogger()
 
@@ -212,8 +212,8 @@ class Trainer(object):
             return
         s_iter = "%7i - " % self.n_total_iter
         s_lr = f" - LR: {self.optimizer.get_lr():.4e}"
-        max_mem = paddle.cuda.max_memory_allocated() / 1024**2
-        s_mem = " MEM: {:.2f} MB - ".format(max_mem)
+        max_mem = max_memory_allocated_mb()
+        s_mem = "" if max_mem is None else " MEM: {:.2f} MB - ".format(max_mem)
         logger.info(s_iter + s_mem + s_lr)
 
     def save_checkpoint(self, name, include_optimizer=True):
@@ -235,7 +235,11 @@ class Trainer(object):
         if include_optimizer:
             data["optimizer"] = self.optimizer.state_dict()
             if self.scaler is not None:
-                data["scaler"] = self.scaler.state_dict()
+                scaler_state = self.scaler.state_dict()
+                if scaler_state:
+                    data["scaler"] = scaler_state
+                else:
+                    logger.info("Skipping empty gradient scaler state when saving checkpoint.")
             if self.scheduler is not None:
                 data["scheduler"] = self.scheduler.state_dict()
             logger.warning(f"Saving model and optimizer parameters ...")
@@ -274,12 +278,15 @@ class Trainer(object):
             v.stop_gradient = not requires_grad
         logger.warning("Reloading checkpoint optimizer ...")
         self.optimizer.load_state_dict(data["optimizer"])
-        if "scaler" in data and self.scaler is not None:
+        scaler_state = data.get("scaler")
+        if self.scaler is not None and scaler_state:
             logger.warning("Reloading gradient scaler ...")
-            self.scaler.load_state_dict(data["scaler"])
+            self.scaler.load_state_dict(scaler_state)
+        elif self.scaler is not None and "scaler" in data:
+            logger.warning("Skipping empty gradient scaler state from checkpoint.")
         if "scheduler" in data and self.scheduler is not None:
             logger.warning("Reloading scheduler...")
-            self.scheduler.load_state_dict(data["scheduler"])
+            self.scheduler.set_state_dict(data["scheduler"])
         self.epoch = data["epoch"] + 1
         self.n_total_iter = data["n_total_iter"]
         self.dataloader_count = data["dataloader_count"]
@@ -451,7 +458,7 @@ class Trainer(object):
             data_output:  (bs, output_len, x_num, x_num, data_dim)
         """
         with paddle.amp.autocast(
-            "cpu" if params.cpu else "cuda",
+            get_amp_device_type(),
             enabled=bool(params.amp),
             dtype=paddle.bfloat16,
         ):

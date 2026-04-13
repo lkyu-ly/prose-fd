@@ -4,6 +4,34 @@ import socket
 import paddle
 
 
+def resolve_runtime_device(params) -> str:
+    if params.cpu:
+        paddle.set_device("cpu")
+        return paddle.device.get_device()
+
+    requested = getattr(params, "device", None)
+    if requested:
+        paddle.set_device(requested)
+        return paddle.device.get_device()
+
+    if params.multi_gpu:
+        paddle.set_device(f"gpu:{params.local_rank}")
+        return paddle.device.get_device()
+
+    custom_types = paddle.device.get_all_custom_device_type()
+    if custom_types:
+        paddle.set_device(f"{custom_types[0]}:0")
+        return paddle.device.get_device()
+
+    device_types = paddle.device.get_all_device_type()
+    if "gpu" in device_types:
+        paddle.set_device("gpu:0")
+        return paddle.device.get_device()
+
+    paddle.set_device("cpu")
+    return paddle.device.get_device()
+
+
 def init_distributed_mode(params):
     """
     Handle single and multi-GPU / multi-node.
@@ -25,7 +53,6 @@ def init_distributed_mode(params):
         params.local_rank = 0
         params.n_nodes = 1
         params.node_id = 0
-        params.local_rank = 0
         params.global_rank = 0
         params.world_size = 1
         params.n_gpu_per_node = 1
@@ -36,6 +63,9 @@ def init_distributed_mode(params):
     params.is_master = params.node_id == 0 and params.local_rank == 0
     params.multi_node = params.n_nodes > 1
     params.multi_gpu = params.world_size > 1
+
+    params.runtime_device = resolve_runtime_device(params)
+
     if params.multi_gpu:
         PREFIX = "%i - " % params.global_rank
         print(PREFIX + "Number of nodes: %i" % params.n_nodes)
@@ -48,8 +78,5 @@ def init_distributed_mode(params):
         print(PREFIX + "Multi-node     : %s" % str(params.multi_node))
         print(PREFIX + "Multi-GPU      : %s" % str(params.multi_gpu))
         print(PREFIX + "Hostname       : %s" % socket.gethostname())
-    if not params.cpu:
-        paddle.cuda.set_device(params.local_rank)
-    if params.multi_gpu:
-        print("Initializing PyTorch distributed ...")
+        print(f"Initializing Paddle distributed on {params.runtime_device} ...")
         paddle.distributed.init_parallel_env()

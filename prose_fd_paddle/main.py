@@ -55,9 +55,7 @@ def main(params: DictConfig):
         if params.eval_single_file and params.exp_id:
             params.exp_id = params.exp_id + "_file"
     init_distributed_mode(params)
-    if not params.cpu:
-        assert paddle.cuda.is_available()
-    utils.misc.CUDA = not params.cpu
+    utils.misc.set_runtime_device(params.runtime_device)
     if params.optim.type in ["adamw", "adan"]:
         if params.optim.warmup is not None and params.optim.warmup < 1:
             params.optim.warmup = max(
@@ -119,9 +117,9 @@ def main(params: DictConfig):
         for metric in evaluator.validation_metrics:
             s += " | {} = {:.6f}".format(metric_to_header[metric], stats[metric])
         logger.info(s)
-        max_mem = paddle.cuda.max_memory_allocated() / 1024**2
-        s_mem = " MEM: {:.2f} MB ".format(max_mem)
-        logger.info(s_mem)
+        max_mem = utils.misc.max_memory_allocated_mb()
+        if max_mem is not None:
+            logger.info(" MEM: {:.2f} MB ".format(max_mem))
         exit()
     while trainer.epoch < params.max_epoch:
         logger.info(f"============ Starting epoch {trainer.epoch} ... ============")
@@ -176,9 +174,9 @@ def main(params: DictConfig):
             wandb.log(wandb_log)
         trainer.save_best_model(stats)
         trainer.end_epoch()
-    max_mem = paddle.cuda.max_memory_allocated() / 1024**2
-    s_mem = " MEM: {:.2f} MB ".format(max_mem)
-    logger.info(s_mem)
+    max_mem = utils.misc.max_memory_allocated_mb()
+    if max_mem is not None:
+        logger.info(" MEM: {:.2f} MB ".format(max_mem))
     if params.multi_gpu:
         paddle.distributed.destroy_process_group()
     if params.use_wandb:

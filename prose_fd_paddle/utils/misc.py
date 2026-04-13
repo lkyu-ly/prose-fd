@@ -18,15 +18,59 @@ from paddle_utils import *
 from .logger import create_logger
 
 DUMP_PATH = "checkpoint"
-CUDA = True
+RUNTIME_DEVICE = "cpu"
 
 
 def set_seed(seed_value):
     """Set seed for reproducibility."""
     random.seed(seed_value)
     np.random.seed(seed_value)
-    paddle.manual_seed(seed_value)
-    paddle.cuda.manual_seed_all(seed_value)
+    paddle.seed(seed_value)
+
+
+def set_runtime_device(device: str):
+    global RUNTIME_DEVICE
+    RUNTIME_DEVICE = device
+
+
+def get_runtime_device() -> str:
+    return RUNTIME_DEVICE
+
+
+def get_amp_device_type() -> str:
+    """Derive paddle.amp.autocast device_type from RUNTIME_DEVICE."""
+    return RUNTIME_DEVICE.split(":")[0]
+
+
+def max_memory_allocated_mb():
+    if RUNTIME_DEVICE.startswith("gpu"):
+        return paddle.device.cuda.max_memory_allocated() / 1024**2
+    return None
+
+
+def to_device(*args, use_cpu=False, device: str | None = None):
+    target = "cpu" if use_cpu else (device or RUNTIME_DEVICE)
+    moved = [None if x is None else x.to(target) for x in args]
+    if len(args) == 1:
+        return moved[0]
+    return moved
+
+
+def to_cuda(*args, use_cpu=False):
+    return to_device(*args, use_cpu=use_cpu)
+
+
+def sync_tensor(t):
+    """
+    Synchronize a tensor across processes
+    """
+    if not paddle.distributed.is_initialized():
+        return t
+    source_place = t.place
+    t_sync = t.to(RUNTIME_DEVICE)
+    paddle.distributed.barrier()
+    paddle.distributed.all_reduce(t_sync, op=paddle.distributed.ReduceOp.SUM)
+    return t_sync.to(source_place)
 
 
 def load_json(filename):
@@ -109,29 +153,3 @@ def get_dump_path(params):
     params.dump_path = os.path.join(sweep_path, params.exp_id)
     if not os.path.isdir(params.dump_path):
         subprocess.Popen("mkdir -p %s" % params.dump_path, shell=True).wait()
-
-
-def to_cuda(*args, use_cpu=False):
-    """
-    Move tensors to CUDA.
-    """
-    if not CUDA or use_cpu:
-        if len(args) == 1:
-            return args[0]
-        else:
-            return args
-    if len(args) == 1:
-        return None if args[0] is None else args[0].cuda()
-    else:
-        return [(None if x is None else x.cuda()) for x in args]
-
-
-def sync_tensor(t):
-    """
-    Synchronize a tensor across processes
-    """
-    device = t.device
-    t_sync = t.cuda()
-    paddle.distributed.barrier()
-    paddle.distributed.all_reduce(tensor=t_sync, op=paddle.distributed.ReduceOp.SUM)
-    return t_sync.to(device)

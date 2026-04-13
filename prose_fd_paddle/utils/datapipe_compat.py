@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-import itertools
 import random
-from collections.abc import Iterable, Iterator
+from collections.abc import Iterable
+
+import paddle
 
 
-class IterDataPipe:
+class IterDataPipe(paddle.io.IterableDataset):
     def __iter__(self):
         raise NotImplementedError
+
+    def __len__(self):
+        raise TypeError(f"{type(self).__name__} is an iterable dataset")
 
     def shuffle(self, buffer_size: int, seed: int | None = None):
         return ShuffledIterDataPipe(self, buffer_size=buffer_size, seed=seed)
@@ -18,6 +22,7 @@ class IterDataPipe:
 
 class ShuffledIterDataPipe(IterDataPipe):
     def __init__(self, datapipe: Iterable, buffer_size: int, seed: int | None = None):
+        super().__init__()
         self.datapipe = datapipe
         self.buffer_size = buffer_size
         self.seed = seed
@@ -42,6 +47,7 @@ class ShuffledIterDataPipe(IterDataPipe):
 
 class CycledIterDataPipe(IterDataPipe):
     def __init__(self, datapipe: Iterable):
+        super().__init__()
         self.datapipe = datapipe
 
     def __iter__(self):
@@ -56,6 +62,7 @@ class CycledIterDataPipe(IterDataPipe):
 
 class Multiplexer(IterDataPipe):
     def __init__(self, *datapipes: Iterable):
+        super().__init__()
         self.datapipes = datapipes
 
     def __iter__(self):
@@ -73,6 +80,7 @@ class Multiplexer(IterDataPipe):
 
 class SampleMultiplexer(IterDataPipe):
     def __init__(self, datapipes_to_weights: dict[Iterable, float], seed: int | None = None):
+        super().__init__()
         self.datapipes_to_weights = datapipes_to_weights
         self.seed = seed
 

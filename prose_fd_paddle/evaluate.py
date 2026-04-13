@@ -14,13 +14,13 @@ try:
     from .data_utils.collate import custom_collate
     from .dataset import get_dataset
     from .utils.metrics import compute_metrics
-    from .utils.misc import sync_tensor, to_cuda
+    from .utils.misc import get_amp_device_type, sync_tensor, to_cuda
     from .utils.plot import plot_2d_pde, plot_2d_pde_formal
 except ImportError:
     from data_utils.collate import custom_collate
     from dataset import get_dataset
     from utils.metrics import compute_metrics
-    from utils.misc import sync_tensor, to_cuda
+    from utils.misc import get_amp_device_type, sync_tensor, to_cuda
     from utils.plot import plot_2d_pde, plot_2d_pde_formal
 
 np.seterr(divide="raise", under="ignore", over="raise", invalid="raise")
@@ -97,7 +97,7 @@ class Evaluator(object):
                 patch_size, patch_num, boundary_width=1
             )[None, None, :, :, None]
             if not self.params.cpu:
-                self.boundary_mask = self.boundary_mask.cuda()
+                self.boundary_mask = to_cuda(self.boundary_mask)
         else:
             self.validation_metrics.remove("_l2_error_int")
             self.boundary_mask = None
@@ -141,7 +141,7 @@ class Evaluator(object):
                     if "times" in model_input:
                         model_input["times"] = model_input["times"][:, :14]
                 with paddle.amp.autocast(
-                    "cpu" if params.cpu else "cuda",
+                    get_amp_device_type(),
                     enabled=bool(params.amp),
                     dtype=paddle.bfloat16,
                 ):
@@ -619,9 +619,11 @@ class Evaluator(object):
             loss = paddle.nn.functional.mse_loss(
                 input=data_output, label=data_label, reduction="none"
             )
-            loss = (loss * data_mask).flatten(1).sum(1) / paddle.count_nonzero(
+            mask_float = data_mask.cast(loss.dtype)
+            nonzero_count = paddle.count_nonzero(
                 x=data_mask.expand_as(loss).flatten(1), axis=1
-            )
+            ).cast(loss.dtype)
+            loss = (loss * mask_float).flatten(1).sum(1) / nonzero_count
         else:
             eps = 1e-08
             if self.params.square_loss:
