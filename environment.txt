@@ -1,0 +1,33 @@
+# PROSE-FD: prose_fd_paddle direct dependencies
+# Generated from source import analysis (2026-04-13)
+# Install: pip install -r environment.txt
+
+# ========== Core ==========
+paddlepaddle>=2.6
+numpy
+
+# ========== Configuration ==========
+hydra-core
+omegaconf
+
+# ========== Data ==========
+h5py
+
+# ========== Model ==========
+einops
+neuraloperator
+
+# ========== Experiment Tracking ==========
+wandb
+
+# ========== Evaluation / Visualization ==========
+scipy
+matplotlib
+tabulate
+tqdm
+
+# ========== Tools (optional) ==========
+# torch              # only needed by tools/convert_torch_ckpt_to_paddle.py
+
+# ========== Testing (optional) ==========
+# pytest
