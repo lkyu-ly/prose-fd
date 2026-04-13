@@ -4,6 +4,21 @@ import socket
 import paddle
 
 
+def _resolve_requested_device(requested: str) -> str:
+    if not requested.startswith("gpu:"):
+        return requested
+
+    device_types = paddle.device.get_all_device_type()
+    if "gpu" in device_types:
+        return requested
+
+    custom_types = paddle.device.get_all_custom_device_type()
+    if len(custom_types) == 1:
+        return f"{custom_types[0]}:{requested.split(':', 1)[1]}"
+
+    return requested
+
+
 def resolve_runtime_device(params) -> str:
     if params.cpu:
         paddle.set_device("cpu")
@@ -11,6 +26,7 @@ def resolve_runtime_device(params) -> str:
 
     requested = getattr(params, "device", None)
     if requested:
+        requested = _resolve_requested_device(requested)
         paddle.set_device(requested)
         return paddle.device.get_device()
 

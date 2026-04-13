@@ -1,10 +1,6 @@
-import sys
-
-sys.path.append("/home/lkyu/baidu/prose-fd/prose_fd_paddle")
 from logging import getLogger
 
 import paddle
-from paddle_utils import *
 from tabulate import tabulate
 
 try:
@@ -12,10 +8,20 @@ try:
 except ImportError:
     from utils.misc import get_runtime_device
 
-from .baselines import FNO, DeepONet, UNet, ViT
+try:
+    from ..paddle_utils import *
+except ImportError:
+    from paddle_utils import *
+
 from .transformer_wrappers import PROSE_1to1, PROSE_2to1
 
 logger = getLogger()
+
+_UNPORTED_BASELINE_MODELS = frozenset({"fno", "vit", "unet", "deeponet"})
+_UNPORTED_BASELINE_ERROR = (
+    "Paddle side currently only supports prose_1to1 / prose_2to1. "
+    "Baseline models are not ported to avoid torch/neuralop dependencies."
+)
 
 
 def build_model(params, model_config, data_config, symbol_env):
@@ -37,18 +43,12 @@ def build_model(params, model_config, data_config, symbol_env):
             data_config.max_output_dimension,
             data_config.t_num - params.input_len,
         )
-    elif name == "fno":
-        modules["model"] = FNO(model_config, data_config.max_output_dimension)
-    elif name == "vit":
-        modules["model"] = ViT(
-            model_config, data_config.x_num, data_config.max_output_dimension
-        )
-    elif name == "unet":
-        modules["model"] = UNet(model_config, data_config.max_output_dimension)
-    elif name == "deeponet":
-        modules["model"] = DeepONet(model_config, data_config, params.input_len)
+    elif name in _UNPORTED_BASELINE_MODELS:
+        raise NotImplementedError(_UNPORTED_BASELINE_ERROR)
     else:
-        assert False, f"Model {name} hasn't been implemented"
+        raise NotImplementedError(
+            "Paddle side currently only supports prose_1to1 / prose_2to1."
+        )
     if params.reload_model:
         logger.info(f"Reloading modules from {params.reload_model} ...")
         reloaded = paddle.load(path=str(params.reload_model))
