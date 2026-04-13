@@ -5,7 +5,11 @@ import random
 import numpy as np
 import torch
 import torch.nn.functional as F
-import torchdata.datapipes as dp
+try:
+    import torchdata.datapipes as dp
+    BaseIterDataPipe = dp.iter.IterDataPipe
+except ImportError:
+    from utils.datapipe_compat import IterDataPipe as BaseIterDataPipe
 
 from logging import getLogger
 
@@ -22,7 +26,7 @@ DatasetIdx = {
 }
 
 
-class myIterDp(dp.iter.IterDataPipe):
+class myIterDp(BaseIterDataPipe):
     """
     Base class for all iterable datasets, and contains some shared helper methods.
     """

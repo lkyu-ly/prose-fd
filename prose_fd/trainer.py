@@ -11,7 +11,6 @@ from transformers import get_scheduler
 from utils.misc import to_cuda
 from dataset import get_dataset
 from data_utils.collate import custom_collate
-from dadaptation import DAdaptAdan
 
 logger = getLogger()
 
@@ -60,7 +59,7 @@ class Trainer(object):
         for m in metrics:
             m = (m, False) if m[0] == "_" else (m, True)
             self.metrics.append(m)
-        self.best_metrics = {metric: (-np.infty if biggest else np.infty) for (metric, biggest) in self.metrics}
+        self.best_metrics = {metric: (-np.inf if biggest else np.inf) for (metric, biggest) in self.metrics}
 
         # training statistics
         self.epoch = 0
@@ -132,6 +131,8 @@ class Trainer(object):
                 betas=(0.9, params.optim.get("beta2", 0.999)),
             )
         elif params.optim.type == "adan":
+            from dadaptation import DAdaptAdan
+
             self.optimizer = DAdaptAdan(
                 self.parameters["model"],
                 lr=1.0,

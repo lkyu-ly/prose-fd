@@ -10,9 +10,19 @@ import torch.nn.functional as F
 from typing import Optional, Union, Callable, Tuple
 from torch import Tensor
 
-from rotary_embedding_torch import RotaryEmbedding
-
 N_MAX_POSITIONS = 1024  # maximum input sequence length
+
+
+def _build_rotary_embedding(dim):
+    try:
+        from rotary_embedding_torch import RotaryEmbedding
+    except ImportError as exc:
+        raise ImportError(
+            "rotary_embedding_torch is required when config.rotary is enabled. "
+            "Install rotary_embedding_torch or set config.rotary=0."
+        ) from exc
+
+    return RotaryEmbedding(dim=dim)
 
 """
 --------------- Attention Variants ---------------
@@ -240,7 +250,7 @@ class CustomTransformerEncoder(nn.Module):
         self.mask_check = mask_check
 
         if config is not None and config.rotary:
-            self.rotary_emb = RotaryEmbedding(dim=config.dim_emb // config.n_head // 2)
+            self.rotary_emb = _build_rotary_embedding(config.dim_emb // config.n_head // 2)
             self.rotary = True
         else:
             self.rotary_emb = None

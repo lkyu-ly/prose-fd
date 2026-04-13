@@ -106,6 +106,7 @@ eval_dump_path: null
 
 ## CPU / Multi-GPU / Multi-Nodes
 cpu: 0
+device: ???
 world_size: ???
 global_rank: ???
 local_rank: ???

@@ -1,6 +1,10 @@
-import torchdata.datapipes as dp
+try:
+    import torchdata.datapipes as dp
+except ImportError:
+    dp = None
 from data_utils import all_datasets as ds
 from logging import getLogger
+from utils.datapipe_compat import Multiplexer, SampleMultiplexer
 
 logger = getLogger()
 
@@ -30,9 +34,13 @@ def get_dataset(params, symbol_env, split):
             # datasets[ds] = params.data.sampler[t]
 
         if params.data.sampler.uniform:
-            return dp.iter.Multiplexer(*datasets)
+            if dp is not None:
+                return dp.iter.Multiplexer(*datasets)
+            return Multiplexer(*datasets)
         else:
-            return dp.iter.SampleMultiplexer(datasets)
+            if dp is not None and hasattr(dp.iter, "SampleMultiplexer"):
+                return dp.iter.SampleMultiplexer(datasets)
+            return SampleMultiplexer(datasets)
     else:
 
         datasets = {}

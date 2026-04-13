@@ -3,7 +3,6 @@ import torch
 from tabulate import tabulate
 
 from .transformer_wrappers import PROSE_1to1, PROSE_2to1
-from .baselines import FNO, UNet, ViT, DeepONet
 
 logger = getLogger()
 
@@ -34,15 +33,23 @@ def build_model(params, model_config, data_config, symbol_env):
         )
 
     elif name == "fno":
+        from .baselines import FNO
+
         modules["model"] = FNO(model_config, data_config.max_output_dimension)
 
     elif name == "vit":
+        from .baselines import ViT
+
         modules["model"] = ViT(model_config, data_config.x_num, data_config.max_output_dimension)
 
     elif name == "unet":
+        from .baselines import UNet
+
         modules["model"] = UNet(model_config, data_config.max_output_dimension)
 
     elif name == "deeponet":
+        from .baselines import DeepONet
+
         modules["model"] = DeepONet(model_config, data_config, params.input_len)
 
     else:
