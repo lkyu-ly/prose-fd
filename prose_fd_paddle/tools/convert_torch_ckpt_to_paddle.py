@@ -43,22 +43,47 @@ def maybe_convert_array(name: str, array: np.ndarray, target_shape: tuple[int, .
     raise ValueError(f"Shape mismatch for {name}: src={array.shape}, dst={target_shape}")
 
 
-def build_paddle_model():
-    model_cfg = OmegaConf.load(ROOT / "prose_fd_paddle" / "configs" / "model" / "prose_2to1.yaml")
-    data_cfg = OmegaConf.load(ROOT / "prose_fd_paddle" / "configs" / "data" / "fluids.yaml")
-    symbol_cfg = OmegaConf.load(ROOT / "prose_fd_paddle" / "configs" / "symbol" / "symbol.yaml")
+def build_paddle_model(
+    *,
+    data_config: Path | None = None,
+    model_config: Path | None = None,
+    symbol_config: Path | None = None,
+    input_len: int = 10,
+):
+    model_cfg = OmegaConf.load(model_config or ROOT / "prose_fd_paddle" / "configs" / "model" / "prose_2to1.yaml")
+    data_cfg = OmegaConf.load(data_config or ROOT / "prose_fd_paddle" / "configs" / "data" / "fluids.yaml")
+    symbol_cfg = OmegaConf.load(symbol_config or ROOT / "prose_fd_paddle" / "configs" / "symbol" / "symbol.yaml")
     OmegaConf.resolve(model_cfg)
     OmegaConf.resolve(data_cfg)
     OmegaConf.resolve(symbol_cfg)
     symbol_env = SymbolicEnvironment(symbol_cfg)
-    model = PROSE_2to1(model_cfg, symbol_env, data_cfg.x_num, data_cfg.max_output_dimension, data_cfg.t_num - 10)
+    model = PROSE_2to1(
+        model_cfg,
+        symbol_env,
+        data_cfg.x_num,
+        data_cfg.max_output_dimension,
+        data_cfg.t_num - input_len,
+    )
     return model
 
 
-def convert_checkpoint(torch_ckpt: Path, paddle_ckpt: Path):
+def convert_checkpoint(
+    torch_ckpt: Path,
+    paddle_ckpt: Path,
+    *,
+    data_config: Path | None = None,
+    model_config: Path | None = None,
+    symbol_config: Path | None = None,
+    input_len: int = 10,
+):
     torch_payload = torch.load(torch_ckpt, map_location="cpu")
     torch_state = {clean_torch_key(k): v.detach().cpu().numpy() for k, v in torch_payload["model"].items()}
-    paddle_model = build_paddle_model()
+    paddle_model = build_paddle_model(
+        data_config=data_config,
+        model_config=model_config,
+        symbol_config=symbol_config,
+        input_len=input_len,
+    )
     paddle_state = paddle_model.state_dict()
     converted = {}
     missing = []
@@ -76,9 +101,20 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--torch-ckpt", type=Path, default=ROOT / "models" / "prose_fd_torch" / "prose_fd.pth")
     parser.add_argument("--paddle-ckpt", type=Path, default=ROOT / "models" / "prose_fd_paddle" / "prose_fd_converted.pdparams")
+    parser.add_argument("--data-config", type=Path, default=None)
+    parser.add_argument("--model-config", type=Path, default=None)
+    parser.add_argument("--symbol-config", type=Path, default=None)
+    parser.add_argument("--input-len", type=int, default=10)
     args = parser.parse_args()
     args.paddle_ckpt.parent.mkdir(parents=True, exist_ok=True)
-    convert_checkpoint(args.torch_ckpt, args.paddle_ckpt)
+    convert_checkpoint(
+        args.torch_ckpt,
+        args.paddle_ckpt,
+        data_config=args.data_config,
+        model_config=args.model_config,
+        symbol_config=args.symbol_config,
+        input_len=args.input_len,
+    )
     print(args.paddle_ckpt)
 
 
