@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 from types import SimpleNamespace
 
 import paddle
@@ -9,6 +10,7 @@ from prose_fd_paddle.models.transformer import (
     TransformerDataEncoder,
     TransformerFusion,
 )
+from prose_fd_paddle.models.transformer_wrappers import PROSE_1to1, PROSE_2to1
 
 
 class Config(SimpleNamespace):
@@ -87,3 +89,23 @@ def test_transformer_fusion_forward_concatenates_mask():
         [False, False, True, False, True],
         [False, True, True, False, False],
     ]
+
+
+def test_prose_forward_signatures_use_explicit_tensor_parameters():
+    expected = (
+        "self",
+        "mode",
+        "data_input",
+        "input_times",
+        "output_times",
+        "symbol_input",
+        "symbol_padding_mask",
+    )
+
+    for model_class in (PROSE_1to1, PROSE_2to1):
+        parameters = inspect.signature(model_class.forward).parameters
+        assert tuple(parameters) == expected
+        assert all(
+            parameter.kind is not inspect.Parameter.VAR_KEYWORD
+            for parameter in parameters.values()
+        )

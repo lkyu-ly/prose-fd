@@ -131,7 +131,14 @@ def test_prose_2to1_can_run_forward_on_local_sw64_batch():
         "symbol_padding_mask": batch["symbol_mask"],
     }
     with paddle.no_grad():
-        output = model("fwd", **model_input)
+        output = model(
+            "fwd",
+            model_input["data_input"],
+            model_input["input_times"],
+            model_input["output_times"],
+            model_input["symbol_input"],
+            model_input["symbol_padding_mask"],
+        )
 
     assert tuple(output.shape) == (1, 10, 64, 64, 4)
 

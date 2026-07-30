@@ -145,7 +145,14 @@ class Evaluator(object):
                     enabled=bool(params.amp),
                     dtype=paddle.bfloat16,
                 ):
-                    data_output = model("generate", **model_input)
+                    data_output = model(
+                        "generate",
+                        model_input["data_input"],
+                        model_input["input_times"],
+                        model_input["output_times"],
+                        model_input.get("symbol_input"),
+                        model_input.get("symbol_padding_mask"),
+                    )
                 if self.params.normalize:
                     if self.params.denormalize_for_loss:
                         data_output = data_output * d["std"] + d["mean"]
@@ -391,11 +398,11 @@ class Evaluator(object):
                     ):
                         data_output = model(
                             "generate",
-                            data_input=data_input,
-                            input_times=input_times,
-                            output_times=output_times,
-                            symbol_input=symbol_input,
-                            symbol_padding_mask=symbol_mask,
+                            data_input,
+                            input_times,
+                            output_times,
+                            symbol_input,
+                            symbol_mask,
                         )
                         data_output = data_output * data_mask
                     if i == 0:
