@@ -1,0 +1,1050 @@
+[2026-11-08 14:05:12,903] [    INFO] utils.py:148 - Note: NumExpr detected 12 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+INFO - 11/08/26 06:05:13 - 0:00:00 - ============ Initialized logger ============
+INFO - 11/08/26 06:05:13 - 0:00:00 - The experiment will be stored in /home/lkyu/prose_fd_cinn_acceptance/acc/cinn
+                                     
+INFO - 11/08/26 06:05:13 - 0:00:00 - Running command: python main.py 'use_wandb=0' 'data=shallow_water_minimal' 'data.x_num=128' 'data.shallow_water.x_num=128' 'data.shallow_water.data_path=/home/lkyu/baidu/PDEBench/pdebench/data_download/data/2D/shallow-water/2D_rdb_NA_NA.h5' 'model=prose_2to1' 'optim=adamw' 'amp=0' 'device=gpu:0' 'base_seed=123' 'reload_model=/home/lkyu/baidu/prose-fd/models/prose_fd_paddle/prose_fd_converted.pdparams' 'max_epoch=1' 'n_steps_per_epoch=500' 'batch_size=2' 'num_workers=0' 'num_workers_eval=0' 'log_periodic=1' 'log_eval_plots=-1' 'eval_size=20' 'dump_path=/home/lkyu/prose_fd_cinn_acceptance' 'exp_name=acc' 'exp_id=cinn'
+
+INFO - 11/08/26 06:05:13 - 0:00:00 - vocabulary: 1027 float words, 1126 equation words
+W1108 06:05:14.025362 220509 gpu_resources.cc:116] Please NOTE: device: 0, GPU Compute Capability: 8.9, Driver API Version: 13.4, Runtime API Version: 13.0
+W1108 06:05:14.026674 220509 dynamic_loader.cc:423] The third-party dynamic library (libcuda.so) that Paddle depends on is not configured correctly. (error code is libcuda.so: cannot open shared object file: No such file or directory)
+  Suggestions:
+  1. Check if the third-party dynamic library (e.g. CUDA, CUDNN) is installed correctly and its version is matched with paddlepaddle you installed.
+  2. Configure third-party dynamic library environment variables as follows:
+  - Linux: set LD_LIBRARY_PATH by `export LD_LIBRARY_PATH=...`
+  - Windows: set PATH by `set PATH=XXX;%PATH%`
+  - Mac: set  DYLD_LIBRARY_PATH by `export DYLD_LIBRARY_PATH=...` [Note: After Mac OS 10.11, using the DYLD_LIBRARY_PATH is impossible unless System Integrity Protection (SIP) is disabled.]
+INFO - 11/08/26 06:05:14 - 0:00:00 - Reloading modules from /home/lkyu/baidu/prose-fd/models/prose_fd_paddle/prose_fd_converted.pdparams ...
+INFO - 11/08/26 06:05:14 - 0:00:01 - model: PROSE_2to1(
+                                       (embedder): ConvEmbedder(
+                                         (conv_proj): Sequential(
+                                           (0): Conv2D(4, 1024, kernel_size=[16, 16], stride=[16, 16], data_format=NCHW)
+                                           (1): GELU(approximate=False)
+                                           (2): Conv2D(1024, 1024, kernel_size=[1, 1], data_format=NCHW)
+                                         )
+                                         (post_proj): Sequential(
+                                           (0): PatchTokensToGrid()
+                                           (1): Conv2DTranspose(1024, 32, kernel_size=[8, 8], stride=[8, 8], data_format=NCHW)
+                                           (2): GELU(approximate=False)
+                                           (3): Conv2D(32, 32, kernel_size=[1, 1], data_format=NCHW)
+                                           (4): GELU(approximate=False)
+                                           (5): Conv2D(32, 4, kernel_size=[1, 1], data_format=NCHW)
+                                         )
+                                       )
+                                       (data_encoder): TransformerDataEncoder(
+                                         (transformer_encoder): CustomTransformerEncoder(
+                                           (layers): LayerList(
+                                             (0): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (1): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                           )
+                                           (norm): PaddleRMSNorm()
+                                         )
+                                       )
+                                       (symbol_encoder): TransformerSymbolEncoder(
+                                         (transformer_encoder): CustomTransformerEncoder(
+                                           (layers): LayerList(
+                                             (0): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                           )
+                                           (norm): PaddleRMSNorm()
+                                         )
+                                         (positional_embedding): SinusoidalPE(
+                                           (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                         )
+                                         (word_embeddings): Embedding(1130, 1024, padding_idx=105, sparse=False, scale_grad_by_freq=False)
+                                       )
+                                       (fusion): TransformerFusion(
+                                         (transformer_encoder): CustomTransformerEncoder(
+                                           (layers): LayerList(
+                                             (0): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (1): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (2): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (3): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (4): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (5): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (6): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                             (7): CustomTransformerEncoderLayer(
+                                               (self_attn): MultiheadAttention(
+                                                 (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                                 (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                               )
+                                               (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                               (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                               (norm1): PaddleRMSNorm()
+                                               (norm2): PaddleRMSNorm()
+                                               (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                               (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             )
+                                           )
+                                           (norm): PaddleRMSNorm()
+                                         )
+                                         (type_embeddings): Embedding(2, 1024, sparse=False, scale_grad_by_freq=False)
+                                       )
+                                       (data_decoder): DataOperatorDecoder(
+                                         (transformer_decoder): LayerList(
+                                           (0): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                           (1): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                           (2): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                           (3): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                           (4): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                           (5): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                           (6): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                           (7): OperatorDecoderLayer(
+                                             (multihead_attn): MultiheadAttention(
+                                               (linear_q): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_k): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (linear_v): Linear(in_features=1024, out_features=1024, bias=True)
+                                               (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+                                             )
+                                             (linear1): Linear(in_features=1024, out_features=2048, bias=True)
+                                             (dropout): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (linear2): Linear(in_features=2048, out_features=1024, bias=True)
+                                             (norm1): PaddleRMSNorm()
+                                             (norm2): PaddleRMSNorm()
+                                             (dropout1): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                             (dropout2): Dropout(p=0, axis=None, mode=upscale_in_train, inplace=False)
+                                           )
+                                         )
+                                         (decoder_norm): PaddleRMSNorm()
+                                       )
+                                     )
+INFO - 11/08/26 06:05:14 - 0:00:01 - Number of parameters (model): 165,267,652
+                                     	Embedder:        4,273,348
+                                     	Data Encoder:    16,796,672
+                                     	Symbol Encoder:  9,555,968
+                                     	Fusion:          67,185,664
+                                     	Data Decoder:    67,456,000
+INFO - 11/08/26 06:05:14 - 0:00:01 - Wrapping model with paddle.jit.to_static (CINN) ...
+INFO - 11/08/26 06:05:14 - 0:00:01 - Found 165,267,652 parameters in model.
+INFO - 11/08/26 06:05:14 - 0:00:01 - Optimizer: <class 'paddle.optimizer.adamw.AdamW'>, scheduler: <class 'paddle.optimizer.lr.LambdaDecay'>
+WARNING - 11/08/26 06:05:14 - 0:00:01 - Checkpoint path does not exist, /home/lkyu/prose_fd_cinn_acceptance/acc/cinn/checkpoint.pth
+INFO - 11/08/26 06:05:15 - 0:00:01 - ============ Starting epoch 0 ... ============
+W1108 06:05:15.468152 220509 eager_utils.cc:3618] Paddle static graph(PIR) not support input out tensor for now!!!!!
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:261: UserWarning: Tensor do not have 'place' interface for pir graph mode, try not to use it. None will be returned.
+  warnings.warn(
+WARNING - 11/08/26 06:05:17 - 0:00:03 - input provided by inputs has no use
+W1108 06:05:18.989794 220509 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+I1108 06:05:19.045092 220509 add_cinn_pass.cc:334] Compiling subgraph with CINN backend ...
+W1108 06:05:19.155356 220509 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+W1108 06:05:19.162282 220509 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+W1108 06:05:52.697345 220509 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+I1108 06:06:42.806716 220509 pir_interpreter.cc:1605] New Executor is Running ...
+I1108 06:06:42.822783 220509 pir_interpreter.cc:1629] pir interpreter is running by multi-thread mode ...
+W1108 06:06:43.445003 220509 dygraph_functions.cc:125540] Got different data type, run type promotion automatically, this may cause data type been changed.
+INFO - 11/08/26 06:06:44 - 0:01:30 - Epoch 0 | step 1 | data loss = 0.00027529
+INFO - 11/08/26 06:06:44 - 0:01:31 - Epoch 0 | step 2 | data loss = 0.00026331
+INFO - 11/08/26 06:06:45 - 0:01:31 - Epoch 0 | step 3 | data loss = 0.00023946
+INFO - 11/08/26 06:06:45 - 0:01:32 - Epoch 0 | step 4 | data loss = 0.00027750
+INFO - 11/08/26 06:06:46 - 0:01:32 - Epoch 0 | step 5 | data loss = 0.00021156
+INFO - 11/08/26 06:06:46 - 0:01:33 - Epoch 0 | step 6 | data loss = 0.00040529
+INFO - 11/08/26 06:06:47 - 0:01:33 - Epoch 0 | step 7 | data loss = 0.00060120
+INFO - 11/08/26 06:06:47 - 0:01:34 - Epoch 0 | step 8 | data loss = 0.00071864
+INFO - 11/08/26 06:06:47 - 0:01:34 - Epoch 0 | step 9 | data loss = 0.00306033
+INFO - 11/08/26 06:06:48 - 0:01:35 - Epoch 0 | step 10 | data loss = 0.00094296
+INFO - 11/08/26 06:06:48 - 0:01:35 - Epoch 0 | step 11 | data loss = 0.00250243
+INFO - 11/08/26 06:06:49 - 0:01:36 - Epoch 0 | step 12 | data loss = 0.00245984
+INFO - 11/08/26 06:06:49 - 0:01:36 - Epoch 0 | step 13 | data loss = 0.00662134
+INFO - 11/08/26 06:06:50 - 0:01:37 - Epoch 0 | step 14 | data loss = 0.00513386
+INFO - 11/08/26 06:06:50 - 0:01:37 - Epoch 0 | step 15 | data loss = 0.00603515
+INFO - 11/08/26 06:06:51 - 0:01:38 - Epoch 0 | step 16 | data loss = 0.00537456
+INFO - 11/08/26 06:06:51 - 0:01:38 - Epoch 0 | step 17 | data loss = 0.03542407
+INFO - 11/08/26 06:06:52 - 0:01:39 - Epoch 0 | step 18 | data loss = 0.00351428
+INFO - 11/08/26 06:06:52 - 0:01:39 - Epoch 0 | step 19 | data loss = 0.00696068
+INFO - 11/08/26 06:06:53 - 0:01:40 - Epoch 0 | step 20 | data loss = 0.01083146
+INFO - 11/08/26 06:06:53 - 0:01:40 - Epoch 0 | step 21 | data loss = 0.01268252
+INFO - 11/08/26 06:06:54 - 0:01:40 - Epoch 0 | step 22 | data loss = 0.01154941
+INFO - 11/08/26 06:06:54 - 0:01:41 - Epoch 0 | step 23 | data loss = 0.00815975
+INFO - 11/08/26 06:06:55 - 0:01:41 - Epoch 0 | step 24 | data loss = 0.07816335
+INFO - 11/08/26 06:06:55 - 0:01:42 - Epoch 0 | step 25 | data loss = 0.01449761
+INFO - 11/08/26 06:06:56 - 0:01:42 - Epoch 0 | step 26 | data loss = 0.03618705
+INFO - 11/08/26 06:06:56 - 0:01:43 - Epoch 0 | step 27 | data loss = 0.01972694
+INFO - 11/08/26 06:06:57 - 0:01:43 - Epoch 0 | step 28 | data loss = 0.02764498
+INFO - 11/08/26 06:06:57 - 0:01:44 - Epoch 0 | step 29 | data loss = 0.03748475
+INFO - 11/08/26 06:06:58 - 0:01:44 - Epoch 0 | step 30 | data loss = 0.04893818
+INFO - 11/08/26 06:06:58 - 0:01:45 - Epoch 0 | step 31 | data loss = 0.05998001
+INFO - 11/08/26 06:06:59 - 0:01:45 - Epoch 0 | step 32 | data loss = 0.03080430
+INFO - 11/08/26 06:06:59 - 0:01:46 - Epoch 0 | step 33 | data loss = 0.05952163
+INFO - 11/08/26 06:06:59 - 0:01:46 - Epoch 0 | step 34 | data loss = 0.03907201
+INFO - 11/08/26 06:07:00 - 0:01:47 - Epoch 0 | step 35 | data loss = 0.11894868
+INFO - 11/08/26 06:07:00 - 0:01:47 - Epoch 0 | step 36 | data loss = 0.05047632
+INFO - 11/08/26 06:07:01 - 0:01:47 - Epoch 0 | step 37 | data loss = 0.11927617
+INFO - 11/08/26 06:07:01 - 0:01:48 - Epoch 0 | step 38 | data loss = 0.08739375
+INFO - 11/08/26 06:07:02 - 0:01:48 - Epoch 0 | step 39 | data loss = 0.06715155
+INFO - 11/08/26 06:07:02 - 0:01:49 - Epoch 0 | step 40 | data loss = 0.03635230
+INFO - 11/08/26 06:07:03 - 0:01:49 - Epoch 0 | step 41 | data loss = 0.02763056
+INFO - 11/08/26 06:07:03 - 0:01:50 - Epoch 0 | step 42 | data loss = 0.03116351
+INFO - 11/08/26 06:07:04 - 0:01:50 - Epoch 0 | step 43 | data loss = 0.10208733
+INFO - 11/08/26 06:07:04 - 0:01:51 - Epoch 0 | step 44 | data loss = 0.01893234
+INFO - 11/08/26 06:07:05 - 0:01:51 - Epoch 0 | step 45 | data loss = 0.02968856
+INFO - 11/08/26 06:07:05 - 0:01:52 - Epoch 0 | step 46 | data loss = 0.01240734
+INFO - 11/08/26 06:07:06 - 0:01:52 - Epoch 0 | step 47 | data loss = 0.01723145
+INFO - 11/08/26 06:07:06 - 0:01:53 - Epoch 0 | step 48 | data loss = 0.02961168
+INFO - 11/08/26 06:07:07 - 0:01:53 - Epoch 0 | step 49 | data loss = 0.05792548
+INFO - 11/08/26 06:07:07 - 0:01:54 - Epoch 0 | step 50 | data loss = 0.03129725
+INFO - 11/08/26 06:07:07 - 0:01:54 - Epoch 0 | step 51 | data loss = 0.02126663
+INFO - 11/08/26 06:07:08 - 0:01:55 - Epoch 0 | step 52 | data loss = 0.10707965
+INFO - 11/08/26 06:07:08 - 0:01:55 - Epoch 0 | step 53 | data loss = 0.03613128
+INFO - 11/08/26 06:07:09 - 0:01:56 - Epoch 0 | step 54 | data loss = 0.02732851
+INFO - 11/08/26 06:07:09 - 0:01:56 - Epoch 0 | step 55 | data loss = 0.02371272
+INFO - 11/08/26 06:07:10 - 0:01:56 - Epoch 0 | step 56 | data loss = 0.04117860
+INFO - 11/08/26 06:07:10 - 0:01:57 - Epoch 0 | step 57 | data loss = 0.02193556
+INFO - 11/08/26 06:07:11 - 0:01:57 - Epoch 0 | step 58 | data loss = 0.05307510
+INFO - 11/08/26 06:07:11 - 0:01:58 - Epoch 0 | step 59 | data loss = 0.02323355
+INFO - 11/08/26 06:07:12 - 0:01:58 - Epoch 0 | step 60 | data loss = 0.02683502
+INFO - 11/08/26 06:07:12 - 0:01:59 - Epoch 0 | step 61 | data loss = 0.09046654
+INFO - 11/08/26 06:07:13 - 0:01:59 - Epoch 0 | step 62 | data loss = 0.02998726
+INFO - 11/08/26 06:07:13 - 0:02:00 - Epoch 0 | step 63 | data loss = 0.01944802
+INFO - 11/08/26 06:07:14 - 0:02:00 - Epoch 0 | step 64 | data loss = 0.04884062
+INFO - 11/08/26 06:07:14 - 0:02:01 - Epoch 0 | step 65 | data loss = 0.18060374
+INFO - 11/08/26 06:07:14 - 0:02:01 - Epoch 0 | step 66 | data loss = 0.06205910
+INFO - 11/08/26 06:07:15 - 0:02:02 - Epoch 0 | step 67 | data loss = 0.06912474
+INFO - 11/08/26 06:07:15 - 0:02:02 - Epoch 0 | step 68 | data loss = 0.06906749
+INFO - 11/08/26 06:07:16 - 0:02:02 - Epoch 0 | step 69 | data loss = 0.10175921
+INFO - 11/08/26 06:07:16 - 0:02:03 - Epoch 0 | step 70 | data loss = 0.03350601
+INFO - 11/08/26 06:07:17 - 0:02:03 - Epoch 0 | step 71 | data loss = 0.07531993
+INFO - 11/08/26 06:07:17 - 0:02:04 - Epoch 0 | step 72 | data loss = 0.06867562
+INFO - 11/08/26 06:07:18 - 0:02:04 - Epoch 0 | step 73 | data loss = 0.06172650
+INFO - 11/08/26 06:07:18 - 0:02:05 - Epoch 0 | step 74 | data loss = 0.06460480
+INFO - 11/08/26 06:07:19 - 0:02:05 - Epoch 0 | step 75 | data loss = 0.06958596
+INFO - 11/08/26 06:07:19 - 0:02:06 - Epoch 0 | step 76 | data loss = 0.04706524
+INFO - 11/08/26 06:07:19 - 0:02:06 - Epoch 0 | step 77 | data loss = 0.04731161
+INFO - 11/08/26 06:07:20 - 0:02:07 - Epoch 0 | step 78 | data loss = 0.04194866
+INFO - 11/08/26 06:07:20 - 0:02:07 - Epoch 0 | step 79 | data loss = 0.07947516
+INFO - 11/08/26 06:07:21 - 0:02:07 - Epoch 0 | step 80 | data loss = 0.02705743
+INFO - 11/08/26 06:07:21 - 0:02:08 - Epoch 0 | step 81 | data loss = 0.04800191
+INFO - 11/08/26 06:07:22 - 0:02:08 - Epoch 0 | step 82 | data loss = 0.04838675
+INFO - 11/08/26 06:07:22 - 0:02:09 - Epoch 0 | step 83 | data loss = 0.03243846
+INFO - 11/08/26 06:07:23 - 0:02:09 - Epoch 0 | step 84 | data loss = 0.03335531
+INFO - 11/08/26 06:07:23 - 0:02:10 - Epoch 0 | step 85 | data loss = 0.02539477
+INFO - 11/08/26 06:07:24 - 0:02:10 - Epoch 0 | step 86 | data loss = 0.02778657
+INFO - 11/08/26 06:07:24 - 0:02:11 - Epoch 0 | step 87 | data loss = 0.02862700
+INFO - 11/08/26 06:07:24 - 0:02:11 - Epoch 0 | step 88 | data loss = 0.05071481
+INFO - 11/08/26 06:07:25 - 0:02:12 - Epoch 0 | step 89 | data loss = 0.04907310
+INFO - 11/08/26 06:07:25 - 0:02:12 - Epoch 0 | step 90 | data loss = 0.05405580
+INFO - 11/08/26 06:07:26 - 0:02:12 - Epoch 0 | step 91 | data loss = 0.02618445
+INFO - 11/08/26 06:07:26 - 0:02:13 - Epoch 0 | step 92 | data loss = 0.02985545
+INFO - 11/08/26 06:07:27 - 0:02:13 - Epoch 0 | step 93 | data loss = 0.03447880
+INFO - 11/08/26 06:07:27 - 0:02:14 - Epoch 0 | step 94 | data loss = 0.01990927
+INFO - 11/08/26 06:07:28 - 0:02:14 - Epoch 0 | step 95 | data loss = 0.02505248
+INFO - 11/08/26 06:07:28 - 0:02:15 - Epoch 0 | step 96 | data loss = 0.04798906
+INFO - 11/08/26 06:07:29 - 0:02:15 - Epoch 0 | step 97 | data loss = 0.03682422
+INFO - 11/08/26 06:07:29 - 0:02:16 - Epoch 0 | step 98 | data loss = 0.02571103
+INFO - 11/08/26 06:07:30 - 0:02:16 - Epoch 0 | step 99 | data loss = 0.02485786
+INFO - 11/08/26 06:07:30 - 0:02:17 - Epoch 0 | step 100 | data loss = 0.02958593
+INFO - 11/08/26 06:07:30 - 0:02:17 - Epoch 0 | step 101 | data loss = 0.02083125
+INFO - 11/08/26 06:07:31 - 0:02:18 - Epoch 0 | step 102 | data loss = 0.02010807
+INFO - 11/08/26 06:07:31 - 0:02:18 - Epoch 0 | step 103 | data loss = 0.03054326
+INFO - 11/08/26 06:07:32 - 0:02:18 - Epoch 0 | step 104 | data loss = 0.01581377
+INFO - 11/08/26 06:07:32 - 0:02:19 - Epoch 0 | step 105 | data loss = 0.03825449
+INFO - 11/08/26 06:07:33 - 0:02:19 - Epoch 0 | step 106 | data loss = 0.01797650
+INFO - 11/08/26 06:07:33 - 0:02:20 - Epoch 0 | step 107 | data loss = 0.02230506
+INFO - 11/08/26 06:07:34 - 0:02:20 - Epoch 0 | step 108 | data loss = 0.06750058
+INFO - 11/08/26 06:07:34 - 0:02:21 - Epoch 0 | step 109 | data loss = 0.02143911
+INFO - 11/08/26 06:07:35 - 0:02:21 - Epoch 0 | step 110 | data loss = 0.03182796
+INFO - 11/08/26 06:07:35 - 0:02:22 - Epoch 0 | step 111 | data loss = 0.03709310
+INFO - 11/08/26 06:07:35 - 0:02:22 - Epoch 0 | step 112 | data loss = 0.06393625
+INFO - 11/08/26 06:07:36 - 0:02:23 - Epoch 0 | step 113 | data loss = 0.03550492
+INFO - 11/08/26 06:07:36 - 0:02:23 - Epoch 0 | step 114 | data loss = 0.04494170
+INFO - 11/08/26 06:07:37 - 0:02:23 - Epoch 0 | step 115 | data loss = 0.02166350
+INFO - 11/08/26 06:07:37 - 0:02:24 - Epoch 0 | step 116 | data loss = 0.03584492
+INFO - 11/08/26 06:07:38 - 0:02:24 - Epoch 0 | step 117 | data loss = 0.02719225
+INFO - 11/08/26 06:07:38 - 0:02:25 - Epoch 0 | step 118 | data loss = 0.06367942
+INFO - 11/08/26 06:07:39 - 0:02:25 - Epoch 0 | step 119 | data loss = 0.02601563
+INFO - 11/08/26 06:07:39 - 0:02:26 - Epoch 0 | step 120 | data loss = 0.01426889
+INFO - 11/08/26 06:07:40 - 0:02:26 - Epoch 0 | step 121 | data loss = 0.03686832
+INFO - 11/08/26 06:07:40 - 0:02:27 - Epoch 0 | step 122 | data loss = 0.01852407
+INFO - 11/08/26 06:07:40 - 0:02:27 - Epoch 0 | step 123 | data loss = 0.04720252
+INFO - 11/08/26 06:07:41 - 0:02:28 - Epoch 0 | step 124 | data loss = 0.08799078
+INFO - 11/08/26 06:07:41 - 0:02:28 - Epoch 0 | step 125 | data loss = 0.05393976
+INFO - 11/08/26 06:07:42 - 0:02:28 - Epoch 0 | step 126 | data loss = 0.01938843
+INFO - 11/08/26 06:07:42 - 0:02:29 - Epoch 0 | step 127 | data loss = 0.05043239
+INFO - 11/08/26 06:07:43 - 0:02:29 - Epoch 0 | step 128 | data loss = 0.03965517
+INFO - 11/08/26 06:07:43 - 0:02:30 - Epoch 0 | step 129 | data loss = 0.04311411
+INFO - 11/08/26 06:07:44 - 0:02:30 - Epoch 0 | step 130 | data loss = 0.02164994
+INFO - 11/08/26 06:07:44 - 0:02:31 - Epoch 0 | step 131 | data loss = 0.03217627
+INFO - 11/08/26 06:07:45 - 0:02:31 - Epoch 0 | step 132 | data loss = 0.04271039
+INFO - 11/08/26 06:07:45 - 0:02:32 - Epoch 0 | step 133 | data loss = 0.02633650
+INFO - 11/08/26 06:07:46 - 0:02:32 - Epoch 0 | step 134 | data loss = 0.02979029
+INFO - 11/08/26 06:07:46 - 0:02:33 - Epoch 0 | step 135 | data loss = 0.01605333
+INFO - 11/08/26 06:07:46 - 0:02:33 - Epoch 0 | step 136 | data loss = 0.03043203
+INFO - 11/08/26 06:07:47 - 0:02:34 - Epoch 0 | step 137 | data loss = 0.02657619
+INFO - 11/08/26 06:07:47 - 0:02:34 - Epoch 0 | step 138 | data loss = 0.01966825
+INFO - 11/08/26 06:07:48 - 0:02:34 - Epoch 0 | step 139 | data loss = 0.02082360
+INFO - 11/08/26 06:07:48 - 0:02:35 - Epoch 0 | step 140 | data loss = 0.05564419
+INFO - 11/08/26 06:07:49 - 0:02:35 - Epoch 0 | step 141 | data loss = 0.05134797
+INFO - 11/08/26 06:07:49 - 0:02:36 - Epoch 0 | step 142 | data loss = 0.01316603
+INFO - 11/08/26 06:07:50 - 0:02:36 - Epoch 0 | step 143 | data loss = 0.02258069
+INFO - 11/08/26 06:07:50 - 0:02:37 - Epoch 0 | step 144 | data loss = 0.02920932
+INFO - 11/08/26 06:07:51 - 0:02:37 - Epoch 0 | step 145 | data loss = 0.01768536
+INFO - 11/08/26 06:07:51 - 0:02:38 - Epoch 0 | step 146 | data loss = 0.01822125
+INFO - 11/08/26 06:07:52 - 0:02:38 - Epoch 0 | step 147 | data loss = 0.02560339
+INFO - 11/08/26 06:07:52 - 0:02:39 - Epoch 0 | step 148 | data loss = 0.01730179
+INFO - 11/08/26 06:07:53 - 0:02:39 - Epoch 0 | step 149 | data loss = 0.02320366
+INFO - 11/08/26 06:07:53 - 0:02:40 - Epoch 0 | step 150 | data loss = 0.01363144
+INFO - 11/08/26 06:07:54 - 0:02:40 - Epoch 0 | step 151 | data loss = 0.04337785
+INFO - 11/08/26 06:07:54 - 0:02:41 - Epoch 0 | step 152 | data loss = 0.02032589
+INFO - 11/08/26 06:07:55 - 0:02:41 - Epoch 0 | step 153 | data loss = 0.01638096
+INFO - 11/08/26 06:07:55 - 0:02:42 - Epoch 0 | step 154 | data loss = 0.01971848
+INFO - 11/08/26 06:07:56 - 0:02:43 - Epoch 0 | step 155 | data loss = 0.02056528
+INFO - 11/08/26 06:07:56 - 0:02:43 - Epoch 0 | step 156 | data loss = 0.02254518
+INFO - 11/08/26 06:07:57 - 0:02:44 - Epoch 0 | step 157 | data loss = 0.04855334
+INFO - 11/08/26 06:07:57 - 0:02:44 - Epoch 0 | step 158 | data loss = 0.01433432
+INFO - 11/08/26 06:07:58 - 0:02:45 - Epoch 0 | step 159 | data loss = 0.01624287
+INFO - 11/08/26 06:07:58 - 0:02:45 - Epoch 0 | step 160 | data loss = 0.05845500
+INFO - 11/08/26 06:07:59 - 0:02:46 - Epoch 0 | step 161 | data loss = 0.02503228
+INFO - 11/08/26 06:07:59 - 0:02:46 - Epoch 0 | step 162 | data loss = 0.01438779
+INFO - 11/08/26 06:08:00 - 0:02:47 - Epoch 0 | step 163 | data loss = 0.01822999
+INFO - 11/08/26 06:08:01 - 0:02:47 - Epoch 0 | step 164 | data loss = 0.03743820
+INFO - 11/08/26 06:08:01 - 0:02:48 - Epoch 0 | step 165 | data loss = 0.01425622
+INFO - 11/08/26 06:08:02 - 0:02:48 - Epoch 0 | step 166 | data loss = 0.04392222
+INFO - 11/08/26 06:08:02 - 0:02:49 - Epoch 0 | step 167 | data loss = 0.01831042
+INFO - 11/08/26 06:08:03 - 0:02:49 - Epoch 0 | step 168 | data loss = 0.02859697
+INFO - 11/08/26 06:08:03 - 0:02:50 - Epoch 0 | step 169 | data loss = 0.02312688
+INFO - 11/08/26 06:08:04 - 0:02:50 - Epoch 0 | step 170 | data loss = 0.02857564
+INFO - 11/08/26 06:08:04 - 0:02:51 - Epoch 0 | step 171 | data loss = 0.02238812
+INFO - 11/08/26 06:08:05 - 0:02:51 - Epoch 0 | step 172 | data loss = 0.01942514
+INFO - 11/08/26 06:08:05 - 0:02:52 - Epoch 0 | step 173 | data loss = 0.02709727
+INFO - 11/08/26 06:08:06 - 0:02:52 - Epoch 0 | step 174 | data loss = 0.02153423
+INFO - 11/08/26 06:08:06 - 0:02:53 - Epoch 0 | step 175 | data loss = 0.02124112
+INFO - 11/08/26 06:08:07 - 0:02:53 - Epoch 0 | step 176 | data loss = 0.01980298
+INFO - 11/08/26 06:08:07 - 0:02:54 - Epoch 0 | step 177 | data loss = 0.01473796
+INFO - 11/08/26 06:08:08 - 0:02:54 - Epoch 0 | step 178 | data loss = 0.02591345
+INFO - 11/08/26 06:08:08 - 0:02:55 - Epoch 0 | step 179 | data loss = 0.01725047
+INFO - 11/08/26 06:08:09 - 0:02:55 - Epoch 0 | step 180 | data loss = 0.01264273
+INFO - 11/08/26 06:08:09 - 0:02:56 - Epoch 0 | step 181 | data loss = 0.01913352
+INFO - 11/08/26 06:08:10 - 0:02:56 - Epoch 0 | step 182 | data loss = 0.03093477
+INFO - 11/08/26 06:08:10 - 0:02:57 - Epoch 0 | step 183 | data loss = 0.01683172
+INFO - 11/08/26 06:08:11 - 0:02:57 - Epoch 0 | step 184 | data loss = 0.01003833
+INFO - 11/08/26 06:08:11 - 0:02:58 - Epoch 0 | step 185 | data loss = 0.01745083
+INFO - 11/08/26 06:08:12 - 0:02:58 - Epoch 0 | step 186 | data loss = 0.00720800
+INFO - 11/08/26 06:08:12 - 0:02:59 - Epoch 0 | step 187 | data loss = 0.01816582
+INFO - 11/08/26 06:08:13 - 0:02:59 - Epoch 0 | step 188 | data loss = 0.01262488
+INFO - 11/08/26 06:08:13 - 0:03:00 - Epoch 0 | step 189 | data loss = 0.01499534
+INFO - 11/08/26 06:08:14 - 0:03:00 - Epoch 0 | step 190 | data loss = 0.01633549
+INFO - 11/08/26 06:08:14 - 0:03:01 - Epoch 0 | step 191 | data loss = 0.01813115
+INFO - 11/08/26 06:08:15 - 0:03:01 - Epoch 0 | step 192 | data loss = 0.01236189
+INFO - 11/08/26 06:08:15 - 0:03:02 - Epoch 0 | step 193 | data loss = 0.01367947
+INFO - 11/08/26 06:08:16 - 0:03:02 - Epoch 0 | step 194 | data loss = 0.01990636
+INFO - 11/08/26 06:08:16 - 0:03:03 - Epoch 0 | step 195 | data loss = 0.01240449
+INFO - 11/08/26 06:08:17 - 0:03:03 - Epoch 0 | step 196 | data loss = 0.01440247
+INFO - 11/08/26 06:08:17 - 0:03:04 - Epoch 0 | step 197 | data loss = 0.00998586
+INFO - 11/08/26 06:08:17 - 0:03:04 - Epoch 0 | step 198 | data loss = 0.01413105
+INFO - 11/08/26 06:08:18 - 0:03:05 - Epoch 0 | step 199 | data loss = 0.01362235
+INFO - 11/08/26 06:08:18 - 0:03:05 - Epoch 0 | step 200 | data loss = 0.02515966
+INFO - 11/08/26 06:08:19 - 0:03:06 - Epoch 0 | step 201 | data loss = 0.00815773
+INFO - 11/08/26 06:08:19 - 0:03:06 - Epoch 0 | step 202 | data loss = 0.00620540
+INFO - 11/08/26 06:08:20 - 0:03:06 - Epoch 0 | step 203 | data loss = 0.00967656
+INFO - 11/08/26 06:08:20 - 0:03:07 - Epoch 0 | step 204 | data loss = 0.02076545
+INFO - 11/08/26 06:08:21 - 0:03:07 - Epoch 0 | step 205 | data loss = 0.02999310
+INFO - 11/08/26 06:08:21 - 0:03:08 - Epoch 0 | step 206 | data loss = 0.00685718
+INFO - 11/08/26 06:08:22 - 0:03:08 - Epoch 0 | step 207 | data loss = 0.02996746
+INFO - 11/08/26 06:08:22 - 0:03:09 - Epoch 0 | step 208 | data loss = 0.00715341
+INFO - 11/08/26 06:08:23 - 0:03:09 - Epoch 0 | step 209 | data loss = 0.01216483
+INFO - 11/08/26 06:08:23 - 0:03:10 - Epoch 0 | step 210 | data loss = 0.01182642
+INFO - 11/08/26 06:08:23 - 0:03:10 - Epoch 0 | step 211 | data loss = 0.00961124
+INFO - 11/08/26 06:08:24 - 0:03:11 - Epoch 0 | step 212 | data loss = 0.00903617
+INFO - 11/08/26 06:08:24 - 0:03:11 - Epoch 0 | step 213 | data loss = 0.00969675
+INFO - 11/08/26 06:08:25 - 0:03:11 - Epoch 0 | step 214 | data loss = 0.01439724
+INFO - 11/08/26 06:08:25 - 0:03:12 - Epoch 0 | step 215 | data loss = 0.00878673
+INFO - 11/08/26 06:08:26 - 0:03:12 - Epoch 0 | step 216 | data loss = 0.00724411
+INFO - 11/08/26 06:08:26 - 0:03:13 - Epoch 0 | step 217 | data loss = 0.01279411
+INFO - 11/08/26 06:08:27 - 0:03:13 - Epoch 0 | step 218 | data loss = 0.00661244
+INFO - 11/08/26 06:08:27 - 0:03:14 - Epoch 0 | step 219 | data loss = 0.02292855
+INFO - 11/08/26 06:08:28 - 0:03:14 - Epoch 0 | step 220 | data loss = 0.01068400
+INFO - 11/08/26 06:08:28 - 0:03:15 - Epoch 0 | step 221 | data loss = 0.01048470
+INFO - 11/08/26 06:08:29 - 0:03:15 - Epoch 0 | step 222 | data loss = 0.00912534
+INFO - 11/08/26 06:08:29 - 0:03:16 - Epoch 0 | step 223 | data loss = 0.01720491
+INFO - 11/08/26 06:08:29 - 0:03:16 - Epoch 0 | step 224 | data loss = 0.01233502
+INFO - 11/08/26 06:08:30 - 0:03:17 - Epoch 0 | step 225 | data loss = 0.00980699
+INFO - 11/08/26 06:08:30 - 0:03:17 - Epoch 0 | step 226 | data loss = 0.00931805
+INFO - 11/08/26 06:08:31 - 0:03:17 - Epoch 0 | step 227 | data loss = 0.00862200
+INFO - 11/08/26 06:08:31 - 0:03:18 - Epoch 0 | step 228 | data loss = 0.00843191
+INFO - 11/08/26 06:08:32 - 0:03:18 - Epoch 0 | step 229 | data loss = 0.00549796
+INFO - 11/08/26 06:08:32 - 0:03:19 - Epoch 0 | step 230 | data loss = 0.00671220
+INFO - 11/08/26 06:08:33 - 0:03:19 - Epoch 0 | step 231 | data loss = 0.02922820
+INFO - 11/08/26 06:08:33 - 0:03:20 - Epoch 0 | step 232 | data loss = 0.00586974
+INFO - 11/08/26 06:08:34 - 0:03:20 - Epoch 0 | step 233 | data loss = 0.01290399
+INFO - 11/08/26 06:08:34 - 0:03:21 - Epoch 0 | step 234 | data loss = 0.00549345
+INFO - 11/08/26 06:08:34 - 0:03:21 - Epoch 0 | step 235 | data loss = 0.00684206
+INFO - 11/08/26 06:08:35 - 0:03:22 - Epoch 0 | step 236 | data loss = 0.01202580
+INFO - 11/08/26 06:08:35 - 0:03:22 - Epoch 0 | step 237 | data loss = 0.00535909
+INFO - 11/08/26 06:08:36 - 0:03:22 - Epoch 0 | step 238 | data loss = 0.01427574
+INFO - 11/08/26 06:08:36 - 0:03:23 - Epoch 0 | step 239 | data loss = 0.00923298
+INFO - 11/08/26 06:08:37 - 0:03:23 - Epoch 0 | step 240 | data loss = 0.00774716
+INFO - 11/08/26 06:08:37 - 0:03:24 - Epoch 0 | step 241 | data loss = 0.01597020
+INFO - 11/08/26 06:08:38 - 0:03:24 - Epoch 0 | step 242 | data loss = 0.00712320
+INFO - 11/08/26 06:08:38 - 0:03:25 - Epoch 0 | step 243 | data loss = 0.00853065
+INFO - 11/08/26 06:08:39 - 0:03:25 - Epoch 0 | step 244 | data loss = 0.01550316
+INFO - 11/08/26 06:08:39 - 0:03:26 - Epoch 0 | step 245 | data loss = 0.02116180
+INFO - 11/08/26 06:08:40 - 0:03:26 - Epoch 0 | step 246 | data loss = 0.00826546
+INFO - 11/08/26 06:08:40 - 0:03:27 - Epoch 0 | step 247 | data loss = 0.00805558
+INFO - 11/08/26 06:08:40 - 0:03:27 - Epoch 0 | step 248 | data loss = 0.01224559
+INFO - 11/08/26 06:08:41 - 0:03:28 - Epoch 0 | step 249 | data loss = 0.02172443
+INFO - 11/08/26 06:08:41 - 0:03:28 - Epoch 0 | step 250 | data loss = 0.00919664
+INFO - 11/08/26 06:08:42 - 0:03:28 - Epoch 0 | step 251 | data loss = 0.01292125
+INFO - 11/08/26 06:08:42 - 0:03:29 - Epoch 0 | step 252 | data loss = 0.00517400
+INFO - 11/08/26 06:08:43 - 0:03:29 - Epoch 0 | step 253 | data loss = 0.00468165
+INFO - 11/08/26 06:08:43 - 0:03:30 - Epoch 0 | step 254 | data loss = 0.00868300
+INFO - 11/08/26 06:08:44 - 0:03:30 - Epoch 0 | step 255 | data loss = 0.00593851
+INFO - 11/08/26 06:08:44 - 0:03:31 - Epoch 0 | step 256 | data loss = 0.01219447
+INFO - 11/08/26 06:08:45 - 0:03:31 - Epoch 0 | step 257 | data loss = 0.01802666
+INFO - 11/08/26 06:08:45 - 0:03:32 - Epoch 0 | step 258 | data loss = 0.00976800
+INFO - 11/08/26 06:08:45 - 0:03:32 - Epoch 0 | step 259 | data loss = 0.01052329
+INFO - 11/08/26 06:08:46 - 0:03:33 - Epoch 0 | step 260 | data loss = 0.00792846
+INFO - 11/08/26 06:08:46 - 0:03:33 - Epoch 0 | step 261 | data loss = 0.01623251
+INFO - 11/08/26 06:08:47 - 0:03:33 - Epoch 0 | step 262 | data loss = 0.01062923
+INFO - 11/08/26 06:08:47 - 0:03:34 - Epoch 0 | step 263 | data loss = 0.02159386
+INFO - 11/08/26 06:08:48 - 0:03:34 - Epoch 0 | step 264 | data loss = 0.01114316
+INFO - 11/08/26 06:08:48 - 0:03:35 - Epoch 0 | step 265 | data loss = 0.01641845
+INFO - 11/08/26 06:08:49 - 0:03:35 - Epoch 0 | step 266 | data loss = 0.01048958
+INFO - 11/08/26 06:08:49 - 0:03:36 - Epoch 0 | step 267 | data loss = 0.00764250
+INFO - 11/08/26 06:08:50 - 0:03:36 - Epoch 0 | step 268 | data loss = 0.00760140
+INFO - 11/08/26 06:08:50 - 0:03:37 - Epoch 0 | step 269 | data loss = 0.02438164
+INFO - 11/08/26 06:08:51 - 0:03:37 - Epoch 0 | step 270 | data loss = 0.00802676
+INFO - 11/08/26 06:08:51 - 0:03:38 - Epoch 0 | step 271 | data loss = 0.01118266
+INFO - 11/08/26 06:08:51 - 0:03:38 - Epoch 0 | step 272 | data loss = 0.01081802
+INFO - 11/08/26 06:08:52 - 0:03:39 - Epoch 0 | step 273 | data loss = 0.00931933
+INFO - 11/08/26 06:08:52 - 0:03:39 - Epoch 0 | step 274 | data loss = 0.00886823
+INFO - 11/08/26 06:08:53 - 0:03:39 - Epoch 0 | step 275 | data loss = 0.00511172
+INFO - 11/08/26 06:08:53 - 0:03:40 - Epoch 0 | step 276 | data loss = 0.01399446
+INFO - 11/08/26 06:08:54 - 0:03:40 - Epoch 0 | step 277 | data loss = 0.00424093
+INFO - 11/08/26 06:08:54 - 0:03:41 - Epoch 0 | step 278 | data loss = 0.01434222
+INFO - 11/08/26 06:08:55 - 0:03:41 - Epoch 0 | step 279 | data loss = 0.00854170
+INFO - 11/08/26 06:08:55 - 0:03:42 - Epoch 0 | step 280 | data loss = 0.00443051
+INFO - 11/08/26 06:08:56 - 0:03:42 - Epoch 0 | step 281 | data loss = 0.00636332
+INFO - 11/08/26 06:08:56 - 0:03:43 - Epoch 0 | step 282 | data loss = 0.00607901
+INFO - 11/08/26 06:08:57 - 0:03:43 - Epoch 0 | step 283 | data loss = 0.00891040
+INFO - 11/08/26 06:08:57 - 0:03:44 - Epoch 0 | step 284 | data loss = 0.00966337
+INFO - 11/08/26 06:08:57 - 0:03:44 - Epoch 0 | step 285 | data loss = 0.00619502
+INFO - 11/08/26 06:08:58 - 0:03:44 - Epoch 0 | step 286 | data loss = 0.00843095
+INFO - 11/08/26 06:08:58 - 0:03:45 - Epoch 0 | step 287 | data loss = 0.00395990
+INFO - 11/08/26 06:08:59 - 0:03:45 - Epoch 0 | step 288 | data loss = 0.00568190
+INFO - 11/08/26 06:08:59 - 0:03:46 - Epoch 0 | step 289 | data loss = 0.00428291
+INFO - 11/08/26 06:09:00 - 0:03:46 - Epoch 0 | step 290 | data loss = 0.01792811
+INFO - 11/08/26 06:09:00 - 0:03:47 - Epoch 0 | step 291 | data loss = 0.00805508
+INFO - 11/08/26 06:09:01 - 0:03:47 - Epoch 0 | step 292 | data loss = 0.00373518
+INFO - 11/08/26 06:09:01 - 0:03:48 - Epoch 0 | step 293 | data loss = 0.00541319
+INFO - 11/08/26 06:09:02 - 0:03:48 - Epoch 0 | step 294 | data loss = 0.00294064
+INFO - 11/08/26 06:09:02 - 0:03:49 - Epoch 0 | step 295 | data loss = 0.00221386
+INFO - 11/08/26 06:09:02 - 0:03:49 - Epoch 0 | step 296 | data loss = 0.00887618
+INFO - 11/08/26 06:09:03 - 0:03:50 - Epoch 0 | step 297 | data loss = 0.00540267
+INFO - 11/08/26 06:09:03 - 0:03:50 - Epoch 0 | step 298 | data loss = 0.01484567
+INFO - 11/08/26 06:09:04 - 0:03:50 - Epoch 0 | step 299 | data loss = 0.00404316
+INFO - 11/08/26 06:09:04 - 0:03:51 - Epoch 0 | step 300 | data loss = 0.00573395
+INFO - 11/08/26 06:09:05 - 0:03:51 - Epoch 0 | step 301 | data loss = 0.00556439
+INFO - 11/08/26 06:09:05 - 0:03:52 - Epoch 0 | step 302 | data loss = 0.00568386
+INFO - 11/08/26 06:09:06 - 0:03:52 - Epoch 0 | step 303 | data loss = 0.00587887
+INFO - 11/08/26 06:09:06 - 0:03:53 - Epoch 0 | step 304 | data loss = 0.00390349
+INFO - 11/08/26 06:09:07 - 0:03:53 - Epoch 0 | step 305 | data loss = 0.00270069
+INFO - 11/08/26 06:09:07 - 0:03:54 - Epoch 0 | step 306 | data loss = 0.00336328
+INFO - 11/08/26 06:09:08 - 0:03:54 - Epoch 0 | step 307 | data loss = 0.01165465
+INFO - 11/08/26 06:09:08 - 0:03:55 - Epoch 0 | step 308 | data loss = 0.00410948
+INFO - 11/08/26 06:09:08 - 0:03:55 - Epoch 0 | step 309 | data loss = 0.01191511
+INFO - 11/08/26 06:09:09 - 0:03:55 - Epoch 0 | step 310 | data loss = 0.00466236
+INFO - 11/08/26 06:09:09 - 0:03:56 - Epoch 0 | step 311 | data loss = 0.00675000
+INFO - 11/08/26 06:09:10 - 0:03:56 - Epoch 0 | step 312 | data loss = 0.00681185
+INFO - 11/08/26 06:09:10 - 0:03:57 - Epoch 0 | step 313 | data loss = 0.00894834
+INFO - 11/08/26 06:09:11 - 0:03:57 - Epoch 0 | step 314 | data loss = 0.00309356
+INFO - 11/08/26 06:09:11 - 0:03:58 - Epoch 0 | step 315 | data loss = 0.00430441
+INFO - 11/08/26 06:09:12 - 0:03:58 - Epoch 0 | step 316 | data loss = 0.00237222
+INFO - 11/08/26 06:09:12 - 0:03:59 - Epoch 0 | step 317 | data loss = 0.00369028
+INFO - 11/08/26 06:09:13 - 0:03:59 - Epoch 0 | step 318 | data loss = 0.01056818
+INFO - 11/08/26 06:09:13 - 0:04:00 - Epoch 0 | step 319 | data loss = 0.00771206
+INFO - 11/08/26 06:09:13 - 0:04:00 - Epoch 0 | step 320 | data loss = 0.00457415
+INFO - 11/08/26 06:09:14 - 0:04:01 - Epoch 0 | step 321 | data loss = 0.00530320
+INFO - 11/08/26 06:09:14 - 0:04:01 - Epoch 0 | step 322 | data loss = 0.00500706
+INFO - 11/08/26 06:09:15 - 0:04:01 - Epoch 0 | step 323 | data loss = 0.00346060
+INFO - 11/08/26 06:09:15 - 0:04:02 - Epoch 0 | step 324 | data loss = 0.00658552
+INFO - 11/08/26 06:09:16 - 0:04:02 - Epoch 0 | step 325 | data loss = 0.00237478
+INFO - 11/08/26 06:09:16 - 0:04:03 - Epoch 0 | step 326 | data loss = 0.00374084
+INFO - 11/08/26 06:09:17 - 0:04:03 - Epoch 0 | step 327 | data loss = 0.00627268
+INFO - 11/08/26 06:09:17 - 0:04:04 - Epoch 0 | step 328 | data loss = 0.00638242
+INFO - 11/08/26 06:09:18 - 0:04:04 - Epoch 0 | step 329 | data loss = 0.00479714
+INFO - 11/08/26 06:09:18 - 0:04:05 - Epoch 0 | step 330 | data loss = 0.00451678
+INFO - 11/08/26 06:09:19 - 0:04:05 - Epoch 0 | step 331 | data loss = 0.00481721
+INFO - 11/08/26 06:09:19 - 0:04:06 - Epoch 0 | step 332 | data loss = 0.00335425
+INFO - 11/08/26 06:09:19 - 0:04:06 - Epoch 0 | step 333 | data loss = 0.00650129
+INFO - 11/08/26 06:09:20 - 0:04:07 - Epoch 0 | step 334 | data loss = 0.00379697
+INFO - 11/08/26 06:09:20 - 0:04:07 - Epoch 0 | step 335 | data loss = 0.00334146
+INFO - 11/08/26 06:09:21 - 0:04:07 - Epoch 0 | step 336 | data loss = 0.00369152
+INFO - 11/08/26 06:09:21 - 0:04:08 - Epoch 0 | step 337 | data loss = 0.00279238
+INFO - 11/08/26 06:09:22 - 0:04:08 - Epoch 0 | step 338 | data loss = 0.00323972
+INFO - 11/08/26 06:09:22 - 0:04:09 - Epoch 0 | step 339 | data loss = 0.00187451
+INFO - 11/08/26 06:09:23 - 0:04:09 - Epoch 0 | step 340 | data loss = 0.00519770
+INFO - 11/08/26 06:09:23 - 0:04:10 - Epoch 0 | step 341 | data loss = 0.00260159
+INFO - 11/08/26 06:09:24 - 0:04:10 - Epoch 0 | step 342 | data loss = 0.00188192
+INFO - 11/08/26 06:09:24 - 0:04:11 - Epoch 0 | step 343 | data loss = 0.00268775
+INFO - 11/08/26 06:09:24 - 0:04:11 - Epoch 0 | step 344 | data loss = 0.00435321
+INFO - 11/08/26 06:09:25 - 0:04:12 - Epoch 0 | step 345 | data loss = 0.00205540
+INFO - 11/08/26 06:09:25 - 0:04:12 - Epoch 0 | step 346 | data loss = 0.00256491
+INFO - 11/08/26 06:09:26 - 0:04:12 - Epoch 0 | step 347 | data loss = 0.00730490
+INFO - 11/08/26 06:09:26 - 0:04:13 - Epoch 0 | step 348 | data loss = 0.00287377
+INFO - 11/08/26 06:09:27 - 0:04:13 - Epoch 0 | step 349 | data loss = 0.00400690
+INFO - 11/08/26 06:09:27 - 0:04:14 - Epoch 0 | step 350 | data loss = 0.00382854
+INFO - 11/08/26 06:09:28 - 0:04:14 - Epoch 0 | step 351 | data loss = 0.00247673
+INFO - 11/08/26 06:09:28 - 0:04:15 - Epoch 0 | step 352 | data loss = 0.00328583
+INFO - 11/08/26 06:09:29 - 0:04:15 - Epoch 0 | step 353 | data loss = 0.00202230
+INFO - 11/08/26 06:09:29 - 0:04:16 - Epoch 0 | step 354 | data loss = 0.00185630
+INFO - 11/08/26 06:09:30 - 0:04:16 - Epoch 0 | step 355 | data loss = 0.00144197
+INFO - 11/08/26 06:09:30 - 0:04:17 - Epoch 0 | step 356 | data loss = 0.00744396
+INFO - 11/08/26 06:09:30 - 0:04:17 - Epoch 0 | step 357 | data loss = 0.00916726
+INFO - 11/08/26 06:09:31 - 0:04:18 - Epoch 0 | step 358 | data loss = 0.00331613
+INFO - 11/08/26 06:09:31 - 0:04:18 - Epoch 0 | step 359 | data loss = 0.00230753
+INFO - 11/08/26 06:09:32 - 0:04:18 - Epoch 0 | step 360 | data loss = 0.00215362
+INFO - 11/08/26 06:09:32 - 0:04:19 - Epoch 0 | step 361 | data loss = 0.00163603
+INFO - 11/08/26 06:09:33 - 0:04:19 - Epoch 0 | step 362 | data loss = 0.00110679
+INFO - 11/08/26 06:09:33 - 0:04:20 - Epoch 0 | step 363 | data loss = 0.00242583
+INFO - 11/08/26 06:09:34 - 0:04:20 - Epoch 0 | step 364 | data loss = 0.00543130
+INFO - 11/08/26 06:09:34 - 0:04:21 - Epoch 0 | step 365 | data loss = 0.00188649
+INFO - 11/08/26 06:09:35 - 0:04:21 - Epoch 0 | step 366 | data loss = 0.00385149
+INFO - 11/08/26 06:09:35 - 0:04:22 - Epoch 0 | step 367 | data loss = 0.00359070
+INFO - 11/08/26 06:09:35 - 0:04:22 - Epoch 0 | step 368 | data loss = 0.00440022
+INFO - 11/08/26 06:09:36 - 0:04:23 - Epoch 0 | step 369 | data loss = 0.00155916
+INFO - 11/08/26 06:09:36 - 0:04:23 - Epoch 0 | step 370 | data loss = 0.00152694
+INFO - 11/08/26 06:09:37 - 0:04:23 - Epoch 0 | step 371 | data loss = 0.00209411
+INFO - 11/08/26 06:09:37 - 0:04:24 - Epoch 0 | step 372 | data loss = 0.00198915
+INFO - 11/08/26 06:09:38 - 0:04:24 - Epoch 0 | step 373 | data loss = 0.00377562
+INFO - 11/08/26 06:09:38 - 0:04:25 - Epoch 0 | step 374 | data loss = 0.00270847
+INFO - 11/08/26 06:09:39 - 0:04:25 - Epoch 0 | step 375 | data loss = 0.00104661
+INFO - 11/08/26 06:09:39 - 0:04:26 - Epoch 0 | step 376 | data loss = 0.00111960
+INFO - 11/08/26 06:09:40 - 0:04:26 - Epoch 0 | step 377 | data loss = 0.00329367
+INFO - 11/08/26 06:09:40 - 0:04:27 - Epoch 0 | step 378 | data loss = 0.00259852
+INFO - 11/08/26 06:09:41 - 0:04:27 - Epoch 0 | step 379 | data loss = 0.00163743
+INFO - 11/08/26 06:09:41 - 0:04:28 - Epoch 0 | step 380 | data loss = 0.00486534
+INFO - 11/08/26 06:09:41 - 0:04:28 - Epoch 0 | step 381 | data loss = 0.00209909
+INFO - 11/08/26 06:09:42 - 0:04:29 - Epoch 0 | step 382 | data loss = 0.00819470
+INFO - 11/08/26 06:09:42 - 0:04:29 - Epoch 0 | step 383 | data loss = 0.00584984
+INFO - 11/08/26 06:09:43 - 0:04:29 - Epoch 0 | step 384 | data loss = 0.00172555
+INFO - 11/08/26 06:09:43 - 0:04:30 - Epoch 0 | step 385 | data loss = 0.00103825
+INFO - 11/08/26 06:09:44 - 0:04:30 - Epoch 0 | step 386 | data loss = 0.00290348
+INFO - 11/08/26 06:09:44 - 0:04:31 - Epoch 0 | step 387 | data loss = 0.00162294
+INFO - 11/08/26 06:09:45 - 0:04:31 - Epoch 0 | step 388 | data loss = 0.00148188
+INFO - 11/08/26 06:09:45 - 0:04:32 - Epoch 0 | step 389 | data loss = 0.00315105
+INFO - 11/08/26 06:09:46 - 0:04:32 - Epoch 0 | step 390 | data loss = 0.00268847
+INFO - 11/08/26 06:09:46 - 0:04:33 - Epoch 0 | step 391 | data loss = 0.00233763
+INFO - 11/08/26 06:09:47 - 0:04:33 - Epoch 0 | step 392 | data loss = 0.00124607
+INFO - 11/08/26 06:09:47 - 0:04:34 - Epoch 0 | step 393 | data loss = 0.00141892
+INFO - 11/08/26 06:09:47 - 0:04:34 - Epoch 0 | step 394 | data loss = 0.00512582
+INFO - 11/08/26 06:09:48 - 0:04:34 - Epoch 0 | step 395 | data loss = 0.00110080
+INFO - 11/08/26 06:09:48 - 0:04:35 - Epoch 0 | step 396 | data loss = 0.00106815
+INFO - 11/08/26 06:09:49 - 0:04:35 - Epoch 0 | step 397 | data loss = 0.00149036
+INFO - 11/08/26 06:09:49 - 0:04:36 - Epoch 0 | step 398 | data loss = 0.00137728
+INFO - 11/08/26 06:09:50 - 0:04:36 - Epoch 0 | step 399 | data loss = 0.00148322
+INFO - 11/08/26 06:09:50 - 0:04:37 - Epoch 0 | step 400 | data loss = 0.00552762
+INFO - 11/08/26 06:09:51 - 0:04:37 - Epoch 0 | step 401 | data loss = 0.00144854
+INFO - 11/08/26 06:09:51 - 0:04:38 - Epoch 0 | step 402 | data loss = 0.00125162
+INFO - 11/08/26 06:09:52 - 0:04:38 - Epoch 0 | step 403 | data loss = 0.00125997
+INFO - 11/08/26 06:09:52 - 0:04:39 - Epoch 0 | step 404 | data loss = 0.00225502
+INFO - 11/08/26 06:09:52 - 0:04:39 - Epoch 0 | step 405 | data loss = 0.00132335
+INFO - 11/08/26 06:09:53 - 0:04:40 - Epoch 0 | step 406 | data loss = 0.00247996
+INFO - 11/08/26 06:09:53 - 0:04:40 - Epoch 0 | step 407 | data loss = 0.00134083
+INFO - 11/08/26 06:09:54 - 0:04:40 - Epoch 0 | step 408 | data loss = 0.00160213
+INFO - 11/08/26 06:09:54 - 0:04:41 - Epoch 0 | step 409 | data loss = 0.00221693
+INFO - 11/08/26 06:09:55 - 0:04:41 - Epoch 0 | step 410 | data loss = 0.00089325
+INFO - 11/08/26 06:09:55 - 0:04:42 - Epoch 0 | step 411 | data loss = 0.00159530
+INFO - 11/08/26 06:09:56 - 0:04:42 - Epoch 0 | step 412 | data loss = 0.00177274
+INFO - 11/08/26 06:09:56 - 0:04:43 - Epoch 0 | step 413 | data loss = 0.00147418
+INFO - 11/08/26 06:09:57 - 0:04:43 - Epoch 0 | step 414 | data loss = 0.00128349
+INFO - 11/08/26 06:09:57 - 0:04:44 - Epoch 0 | step 415 | data loss = 0.00129315
+INFO - 11/08/26 06:09:58 - 0:04:44 - Epoch 0 | step 416 | data loss = 0.00110270
+INFO - 11/08/26 06:09:58 - 0:04:45 - Epoch 0 | step 417 | data loss = 0.00154114
+INFO - 11/08/26 06:09:58 - 0:04:45 - Epoch 0 | step 418 | data loss = 0.00097164
+INFO - 11/08/26 06:09:59 - 0:04:46 - Epoch 0 | step 419 | data loss = 0.00147173
+INFO - 11/08/26 06:09:59 - 0:04:46 - Epoch 0 | step 420 | data loss = 0.00200971
+INFO - 11/08/26 06:10:00 - 0:04:46 - Epoch 0 | step 421 | data loss = 0.00158287
+INFO - 11/08/26 06:10:00 - 0:04:47 - Epoch 0 | step 422 | data loss = 0.00195649
+INFO - 11/08/26 06:10:01 - 0:04:47 - Epoch 0 | step 423 | data loss = 0.00140798
+INFO - 11/08/26 06:10:01 - 0:04:48 - Epoch 0 | step 424 | data loss = 0.00154249
+INFO - 11/08/26 06:10:02 - 0:04:48 - Epoch 0 | step 425 | data loss = 0.00209434
+INFO - 11/08/26 06:10:02 - 0:04:49 - Epoch 0 | step 426 | data loss = 0.00133391
+INFO - 11/08/26 06:10:03 - 0:04:49 - Epoch 0 | step 427 | data loss = 0.00150271
+INFO - 11/08/26 06:10:03 - 0:04:50 - Epoch 0 | step 428 | data loss = 0.00111117
+INFO - 11/08/26 06:10:03 - 0:04:50 - Epoch 0 | step 429 | data loss = 0.00085332
+INFO - 11/08/26 06:10:04 - 0:04:51 - Epoch 0 | step 430 | data loss = 0.00215982
+INFO - 11/08/26 06:10:04 - 0:04:51 - Epoch 0 | step 431 | data loss = 0.00108600
+INFO - 11/08/26 06:10:05 - 0:04:51 - Epoch 0 | step 432 | data loss = 0.00100884
+INFO - 11/08/26 06:10:05 - 0:04:52 - Epoch 0 | step 433 | data loss = 0.00151553
+INFO - 11/08/26 06:10:06 - 0:04:52 - Epoch 0 | step 434 | data loss = 0.00125603
+INFO - 11/08/26 06:10:06 - 0:04:53 - Epoch 0 | step 435 | data loss = 0.00114028
+INFO - 11/08/26 06:10:07 - 0:04:53 - Epoch 0 | step 436 | data loss = 0.00107081
+INFO - 11/08/26 06:10:07 - 0:04:54 - Epoch 0 | step 437 | data loss = 0.00138118
+INFO - 11/08/26 06:10:08 - 0:04:54 - Epoch 0 | step 438 | data loss = 0.00116723
+INFO - 11/08/26 06:10:08 - 0:04:55 - Epoch 0 | step 439 | data loss = 0.00174909
+INFO - 11/08/26 06:10:09 - 0:04:55 - Epoch 0 | step 440 | data loss = 0.00151747
+INFO - 11/08/26 06:10:09 - 0:04:56 - Epoch 0 | step 441 | data loss = 0.00315291
+INFO - 11/08/26 06:10:09 - 0:04:56 - Epoch 0 | step 442 | data loss = 0.00112239
+INFO - 11/08/26 06:10:10 - 0:04:57 - Epoch 0 | step 443 | data loss = 0.00085531
+INFO - 11/08/26 06:10:10 - 0:04:57 - Epoch 0 | step 444 | data loss = 0.00194988
+INFO - 11/08/26 06:10:11 - 0:04:57 - Epoch 0 | step 445 | data loss = 0.00154810
+INFO - 11/08/26 06:10:11 - 0:04:58 - Epoch 0 | step 446 | data loss = 0.00280353
+INFO - 11/08/26 06:10:12 - 0:04:58 - Epoch 0 | step 447 | data loss = 0.00111722
+INFO - 11/08/26 06:10:12 - 0:04:59 - Epoch 0 | step 448 | data loss = 0.00079312
+INFO - 11/08/26 06:10:13 - 0:04:59 - Epoch 0 | step 449 | data loss = 0.00113044
+INFO - 11/08/26 06:10:13 - 0:05:00 - Epoch 0 | step 450 | data loss = 0.00103941
+INFO - 11/08/26 06:10:14 - 0:05:00 - Epoch 0 | step 451 | data loss = 0.00077510
+INFO - 11/08/26 06:10:14 - 0:05:01 - Epoch 0 | step 452 | data loss = 0.00172643
+INFO - 11/08/26 06:10:14 - 0:05:01 - Epoch 0 | step 453 | data loss = 0.00156278
+INFO - 11/08/26 06:10:15 - 0:05:02 - Epoch 0 | step 454 | data loss = 0.00135454
+INFO - 11/08/26 06:10:15 - 0:05:02 - Epoch 0 | step 455 | data loss = 0.00110118
+INFO - 11/08/26 06:10:16 - 0:05:02 - Epoch 0 | step 456 | data loss = 0.00200912
+INFO - 11/08/26 06:10:16 - 0:05:03 - Epoch 0 | step 457 | data loss = 0.00103130
+INFO - 11/08/26 06:10:17 - 0:05:03 - Epoch 0 | step 458 | data loss = 0.00077489
+INFO - 11/08/26 06:10:17 - 0:05:04 - Epoch 0 | step 459 | data loss = 0.00165473
+INFO - 11/08/26 06:10:18 - 0:05:04 - Epoch 0 | step 460 | data loss = 0.00105390
+INFO - 11/08/26 06:10:18 - 0:05:05 - Epoch 0 | step 461 | data loss = 0.00089910
+INFO - 11/08/26 06:10:19 - 0:05:05 - Epoch 0 | step 462 | data loss = 0.00152332
+INFO - 11/08/26 06:10:19 - 0:05:06 - Epoch 0 | step 463 | data loss = 0.00122634
+INFO - 11/08/26 06:10:20 - 0:05:06 - Epoch 0 | step 464 | data loss = 0.00111382
+INFO - 11/08/26 06:10:20 - 0:05:07 - Epoch 0 | step 465 | data loss = 0.00098853
+INFO - 11/08/26 06:10:21 - 0:05:07 - Epoch 0 | step 466 | data loss = 0.00086132
+INFO - 11/08/26 06:10:21 - 0:05:08 - Epoch 0 | step 467 | data loss = 0.00117201
+INFO - 11/08/26 06:10:22 - 0:05:08 - Epoch 0 | step 468 | data loss = 0.00125170
+INFO - 11/08/26 06:10:22 - 0:05:09 - Epoch 0 | step 469 | data loss = 0.00102188
+INFO - 11/08/26 06:10:23 - 0:05:09 - Epoch 0 | step 470 | data loss = 0.00298809
+INFO - 11/08/26 06:10:23 - 0:05:10 - Epoch 0 | step 471 | data loss = 0.00126583
+INFO - 11/08/26 06:10:23 - 0:05:10 - Epoch 0 | step 472 | data loss = 0.00248283
+INFO - 11/08/26 06:10:24 - 0:05:11 - Epoch 0 | step 473 | data loss = 0.00081732
+INFO - 11/08/26 06:10:24 - 0:05:11 - Epoch 0 | step 474 | data loss = 0.00119789
+INFO - 11/08/26 06:10:25 - 0:05:11 - Epoch 0 | step 475 | data loss = 0.00124336
+INFO - 11/08/26 06:10:25 - 0:05:12 - Epoch 0 | step 476 | data loss = 0.00178858
+INFO - 11/08/26 06:10:26 - 0:05:12 - Epoch 0 | step 477 | data loss = 0.00195139
+INFO - 11/08/26 06:10:26 - 0:05:13 - Epoch 0 | step 478 | data loss = 0.00157726
+INFO - 11/08/26 06:10:27 - 0:05:13 - Epoch 0 | step 479 | data loss = 0.00097619
+INFO - 11/08/26 06:10:27 - 0:05:14 - Epoch 0 | step 480 | data loss = 0.00097682
+INFO - 11/08/26 06:10:28 - 0:05:14 - Epoch 0 | step 481 | data loss = 0.00066628
+INFO - 11/08/26 06:10:28 - 0:05:15 - Epoch 0 | step 482 | data loss = 0.00095590
+INFO - 11/08/26 06:10:29 - 0:05:15 - Epoch 0 | step 483 | data loss = 0.00156560
+INFO - 11/08/26 06:10:29 - 0:05:16 - Epoch 0 | step 484 | data loss = 0.00087705
+INFO - 11/08/26 06:10:29 - 0:05:16 - Epoch 0 | step 485 | data loss = 0.00084583
+INFO - 11/08/26 06:10:30 - 0:05:17 - Epoch 0 | step 486 | data loss = 0.00128903
+INFO - 11/08/26 06:10:30 - 0:05:17 - Epoch 0 | step 487 | data loss = 0.00096635
+INFO - 11/08/26 06:10:31 - 0:05:17 - Epoch 0 | step 488 | data loss = 0.00132704
+INFO - 11/08/26 06:10:31 - 0:05:18 - Epoch 0 | step 489 | data loss = 0.00084194
+INFO - 11/08/26 06:10:32 - 0:05:18 - Epoch 0 | step 490 | data loss = 0.00081716
+INFO - 11/08/26 06:10:32 - 0:05:19 - Epoch 0 | step 491 | data loss = 0.00093264
+INFO - 11/08/26 06:10:33 - 0:05:19 - Epoch 0 | step 492 | data loss = 0.00085635
+INFO - 11/08/26 06:10:33 - 0:05:20 - Epoch 0 | step 493 | data loss = 0.00150790
+INFO - 11/08/26 06:10:34 - 0:05:20 - Epoch 0 | step 494 | data loss = 0.00062690
+INFO - 11/08/26 06:10:34 - 0:05:21 - Epoch 0 | step 495 | data loss = 0.00141145
+INFO - 11/08/26 06:10:35 - 0:05:21 - Epoch 0 | step 496 | data loss = 0.00070639
+INFO - 11/08/26 06:10:35 - 0:05:22 - Epoch 0 | step 497 | data loss = 0.00074455
+INFO - 11/08/26 06:10:35 - 0:05:22 - Epoch 0 | step 498 | data loss = 0.00080963
+INFO - 11/08/26 06:10:36 - 0:05:23 - Epoch 0 | step 499 | data loss = 0.00125503
+INFO - 11/08/26 06:10:36 - 0:05:23 - Epoch 0 | step 500 | data loss = 0.00102790
+INFO - 11/08/26 06:10:36 - 0:05:23 - ============ End of epoch 0 ============
+INFO - 11/08/26 06:10:36 - 0:05:23 - ====== STARTING EVALUATION (multi-gpu: False) =======
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+W1108 06:10:38.611122 220509 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+W1108 06:10:38.617007 220509 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+INFO - 11/08/26 06:11:26 - 0:06:12 - Evaluation Stats (total size = 21)
+                                     +---------------+-------+--------+-------------+----------+-----------------+-----------------+------------------+-------------------+
+                                     | type          | dim   | size   |   data_loss |   rel l2 |   rel l2 step 1 |   rel l2 step 5 |   rel l2 step 10 |   rel l2 interior |
+                                     +===============+=======+========+=============+==========+=================+=================+==================+===================+
+                                     | shallow_water | 1     | 21     |    0.004004 |   0.0079 |          0.0095 |          0.0084 |           0.0079 |            0.0073 |
+                                     +---------------+-------+--------+-------------+----------+-----------------+-----------------+------------------+-------------------+
+                                     | AVE_BY_CLASS  | -     | -      |    0.004004 |   0.0079 |          0.0095 |          0.0084 |           0.0079 |            0.0073 |
+                                     +---------------+-------+--------+-------------+----------+-----------------+-----------------+------------------+-------------------+
+INFO - 11/08/26 06:11:26 - 0:06:12 - Additional Stats for Rel L2 Error:
+                                     +---------------+--------+--------+--------+--------+--------+----------+
+                                     | type          |   size |   mean |    std |    min |    max |   median |
+                                     +===============+========+========+========+========+========+==========+
+                                     | shallow_water |     21 | 0.0079 | 0.0027 | 0.0047 | 0.0158 |   0.0071 |
+                                     +---------------+--------+--------+--------+--------+--------+----------+
+INFO - 11/08/26 06:11:26 - 0:06:12 - Epoch 0 Eval | data loss = 0.004004 | rel l2 = 0.007909 | rel l2 step 1 = 0.009489 | rel l2 step 5 = 0.008358 | rel l2 step 10 = 0.007909 | rel l2 interior = 0.007339
+INFO - 11/08/26 06:11:26 - 0:06:12 - New best score for _l2_error: 0.007909
+INFO - 11/08/26 06:11:26 - 0:06:12 - Saving best-_l2_error to /home/lkyu/prose_fd_cinn_acceptance/acc/cinn/best-_l2_error.pth ...
+WARNING - 11/08/26 06:11:26 - 0:06:12 - Saving model and optimizer parameters ...
+INFO - 11/08/26 06:11:28 - 0:06:15 - Saving checkpoint to /home/lkyu/prose_fd_cinn_acceptance/acc/cinn/checkpoint.pth ...
+WARNING - 11/08/26 06:11:28 - 0:06:15 - Saving model and optimizer parameters ...
+INFO - 11/08/26 06:11:29 - 0:06:16 -  MEM: 5873.43 MB 
+all prim enabled:  True

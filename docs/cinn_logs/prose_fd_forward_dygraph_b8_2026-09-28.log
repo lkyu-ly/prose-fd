@@ -1,0 +1,77 @@
+[2026-09-28 13:59:20,037] [    INFO] utils.py:148 - Note: NumExpr detected 12 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2026-09-28 13:59:20,401] [    INFO] environment.py:41 - vocabulary: 1027 float words, 1126 equation words
+W0928 13:59:20.533332 456328 dynamic_loader.cc:423] The third-party dynamic library (libcuda.so) that Paddle depends on is not configured correctly. (error code is libcuda.so: cannot open shared object file: No such file or directory)
+  Suggestions:
+  1. Check if the third-party dynamic library (e.g. CUDA, CUDNN) is installed correctly and its version is matched with paddlepaddle you installed.
+  2. Configure third-party dynamic library environment variables as follows:
+  - Linux: set LD_LIBRARY_PATH by `export LD_LIBRARY_PATH=...`
+  - Windows: set PATH by `set PATH=XXX;%PATH%`
+  - Mac: set  DYLD_LIBRARY_PATH by `export DYLD_LIBRARY_PATH=...` [Note: After Mac OS 10.11, using the DYLD_LIBRARY_PATH is impossible unless System Integrity Protection (SIP) is disabled.]
+W0928 13:59:20.539322 456328 gpu_resources.cc:116] Please NOTE: device: 0, GPU Compute Capability: 8.9, Driver API Version: 13.1, Runtime API Version: 13.0
+all prim enabled:  False
+weights: /home/lkyu/baidu/prose-fd/models/prose_fd_paddle/prose_fd_converted.pdparams
+state tensors: 287 (unexpected dropped: 0), model tensors: 287, missing: 0
+set_state_dict: ([], [])
+params: 165,267,652
+symbol_len: 40
+/home/lkyu/baidu/PaddleCFD/examples/prose_fd/bench_forward_cinn.py:169: VisibleDeprecationWarning: [93m
+Warning:
+API "paddle.device.cuda.synchronize" is deprecated since 2.5.0, and will be removed in future versions. Please use "paddle.device.synchronize" instead.
+    Reason: synchronize in paddle.device.cuda will be removed in future [0m
+  paddle.device.cuda.synchronize()
+warmup 0:      736.8 ms
+warmup 1:      487.6 ms
+warmup 2:      488.2 ms
+warmup 3:      493.2 ms
+warmup 4:      516.3 ms
+/home/lkyu/baidu/PaddleCFD/examples/prose_fd/bench_forward_cinn.py:179: VisibleDeprecationWarning: [93m
+Warning:
+API "paddle.device.cuda.synchronize" is deprecated since 2.5.0, and will be removed in future versions. Please use "paddle.device.synchronize" instead.
+    Reason: synchronize in paddle.device.cuda will be removed in future [0m
+  paddle.device.cuda.synchronize()
+run 0:      524.5 ms
+run 1:      492.4 ms
+run 2:      487.9 ms
+run 3:      494.1 ms
+run 4:      492.1 ms
+run 5:      489.2 ms
+run 6:      487.3 ms
+run 7:      488.5 ms
+run 8:      489.3 ms
+run 9:      488.7 ms
+{
+  "mode": "dygraph",
+  "batch": 8,
+  "input_shape": [
+    8,
+    10,
+    128,
+    128,
+    4
+  ],
+  "weights": "/home/lkyu/baidu/prose-fd/models/prose_fd_paddle/prose_fd_converted.pdparams",
+  "params": 165267652,
+  "symbol_len": 40,
+  "warmup_ms": [
+    736.8,
+    487.6,
+    488.2,
+    493.2,
+    516.3
+  ],
+  "timed_ms": [
+    524.5,
+    492.4,
+    487.9,
+    494.1,
+    492.1,
+    489.2,
+    487.3,
+    488.5,
+    489.3,
+    488.7
+  ],
+  "mean_ms": 493.41,
+  "median_ms": 489.27,
+  "checksum": 535491.875
+}

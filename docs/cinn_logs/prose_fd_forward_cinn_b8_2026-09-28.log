@@ -1,0 +1,159 @@
+[2026-09-28 14:00:22,205] [    INFO] utils.py:148 - Note: NumExpr detected 12 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2026-09-28 14:00:22,573] [    INFO] environment.py:41 - vocabulary: 1027 float words, 1126 equation words
+W0928 14:00:22.712325 457220 dynamic_loader.cc:423] The third-party dynamic library (libcuda.so) that Paddle depends on is not configured correctly. (error code is libcuda.so: cannot open shared object file: No such file or directory)
+  Suggestions:
+  1. Check if the third-party dynamic library (e.g. CUDA, CUDNN) is installed correctly and its version is matched with paddlepaddle you installed.
+  2. Configure third-party dynamic library environment variables as follows:
+  - Linux: set LD_LIBRARY_PATH by `export LD_LIBRARY_PATH=...`
+  - Windows: set PATH by `set PATH=XXX;%PATH%`
+  - Mac: set  DYLD_LIBRARY_PATH by `export DYLD_LIBRARY_PATH=...` [Note: After Mac OS 10.11, using the DYLD_LIBRARY_PATH is impossible unless System Integrity Protection (SIP) is disabled.]
+W0928 14:00:22.719676 457220 gpu_resources.cc:116] Please NOTE: device: 0, GPU Compute Capability: 8.9, Driver API Version: 13.1, Runtime API Version: 13.0
+all prim enabled:  True
+weights: /home/lkyu/baidu/prose-fd/models/prose_fd_paddle/prose_fd_converted.pdparams
+state tensors: 287 (unexpected dropped: 0), model tensors: 287, missing: 0
+set_state_dict: ([], [])
+params: 165,267,652
+symbol_len: 40
+W0928 14:00:23.856088 457220 eager_utils.cc:3618] Paddle static graph(PIR) not support input out tensor for now!!!!!
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+/home/lkyu/miniconda3/envs/paddletorch/lib/python3.10/site-packages/paddle/pir/math_op_patch.py:282: UserWarning: Tensor do not have 'contiguous' interface for static graph mode, try not to use it. self will be returned.
+  warnings.warn(
+I0928 14:00:25.639637 457220 add_cinn_pass.cc:334] Compiling subgraph with CINN backend ...
+W0928 14:00:25.744777 457220 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+W0928 14:00:25.750746 457220 pattern_rewrite_driver.cc:235] The pattern rewrite did not converge after scanning 10 times
+I0928 14:01:05.784042 457220 pir_interpreter.cc:1605] New Executor is Running ...
+I0928 14:01:05.802341 457220 pir_interpreter.cc:1629] pir interpreter is running by multi-thread mode ...
+/home/lkyu/baidu/PaddleCFD/examples/prose_fd/bench_forward_cinn.py:169: VisibleDeprecationWarning: [93m
+Warning:
+API "paddle.device.cuda.synchronize" is deprecated since 2.5.0, and will be removed in future versions. Please use "paddle.device.synchronize" instead.
+    Reason: synchronize in paddle.device.cuda will be removed in future [0m
+  paddle.device.cuda.synchronize()
+warmup 0:    43177.4 ms
+warmup 1:      591.7 ms
+warmup 2:      462.6 ms
+warmup 3:      460.5 ms
+warmup 4:      461.2 ms
+/home/lkyu/baidu/PaddleCFD/examples/prose_fd/bench_forward_cinn.py:179: VisibleDeprecationWarning: [93m
+Warning:
+API "paddle.device.cuda.synchronize" is deprecated since 2.5.0, and will be removed in future versions. Please use "paddle.device.synchronize" instead.
+    Reason: synchronize in paddle.device.cuda will be removed in future [0m
+  paddle.device.cuda.synchronize()
+run 0:      463.1 ms
+run 1:      468.6 ms
+run 2:      679.8 ms
+run 3:      466.1 ms
+run 4:      461.7 ms
+run 5:      466.5 ms
+run 6:      467.8 ms
+run 7:      463.9 ms
+run 8:      470.3 ms
+run 9:      468.3 ms
+{
+  "mode": "cinn",
+  "batch": 8,
+  "input_shape": [
+    8,
+    10,
+    128,
+    128,
+    4
+  ],
+  "weights": "/home/lkyu/baidu/prose-fd/models/prose_fd_paddle/prose_fd_converted.pdparams",
+  "params": 165267652,
+  "symbol_len": 40,
+  "warmup_ms": [
+    43177.4,
+    591.7,
+    462.6,
+    460.5,
+    461.2
+  ],
+  "timed_ms": [
+    463.1,
+    468.6,
+    679.8,
+    466.1,
+    461.7,
+    466.5,
+    467.8,
+    463.9,
+    470.3,
+    468.3
+  ],
+  "mean_ms": 487.62,
+  "median_ms": 467.16,
+  "checksum": 535492.0
+}
